@@ -5,19 +5,21 @@
 IPPM Working Group                                          C. Pignataro
 Internet-Draft                                       NC State University
 Intended status: Standards Track                                R. Jacob
-Expires: 18 June 2024                                         ETH Zürich
+Expires: 20 July 2024                                         ETH Zürich
                                                              G. Fioccola
                                                                   Huawei
-                                                        16 December 2023
+                                                         17 January 2024
 
 
- Characterization and Benchmarkign Methodology for Power in Networking
+ Characterization and Benchmarking Methodology for Power in Networking
                                 Devices
                     draft-cprjgf-ippm-powerbench-00
 
 Abstract
 
-   Abstract.
+   This document aims to define a standard mechanism to measure, report
+   and compare power usage of different networking devices under
+   different network configuration and conditions.
 
 Status of This Memo
 
@@ -34,12 +36,27 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 June 2024.
+   This Internet-Draft will expire on 20 July 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
+
+
+
+
+
+
+
+
+
+
+
+Pignataro, et al.         Expires 20 July 2024                  [Page 1]
+
+Internet-Draft                 PowerBench                   January 2024
+
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents (https://trustee.ietf.org/
@@ -50,76 +67,283 @@ Copyright Notice
    described in Section 4.e of the Trust Legal Provisions and are
    provided without warranty as described in the Revised BSD License.
 
-
-
-
-Pignataro, et al.         Expires 18 June 2024                  [Page 1]
-
-Internet-Draft                 PowerBench                  December 2023
-
-
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-   2.  Definition of Terms . . . . . . . . . . . . . . . . . . . . .   2
-   3.  'Section' . . . . . . . . . . . . . . . . . . . . . . . . . .   2
-     3.1.  Subsection  . . . . . . . . . . . . . . . . . . . . . . .   2
-   4.  Security Considerations . . . . . . . . . . . . . . . . . . .   2
-   5.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   2
-   6.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   2
-     6.1.  Normative References  . . . . . . . . . . . . . . . . . .   2
-     6.2.  Informative References  . . . . . . . . . . . . . . . . .   3
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   3
+     1.1.  Requirements Language . . . . . . . . . . . . . . . . . .   3
+   2.  Power consumption benchmarks  . . . . . . . . . . . . . . . .   3
+   3.  Test Methodology  . . . . . . . . . . . . . . . . . . . . . .   3
+     3.1.  Test Setup  . . . . . . . . . . . . . . . . . . . . . . .   3
+     3.2.  Traffic and Device characteristics  . . . . . . . . . . .   4
+   4.  Reporting Format  . . . . . . . . . . . . . . . . . . . . . .   5
+   5.  Benchmarking Tests  . . . . . . . . . . . . . . . . . . . . .   5
+     5.1.  Base Power  . . . . . . . . . . . . . . . . . . . . . . .   5
+     5.2.  Power Consumption with traffic load . . . . . . . . . . .   6
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
+   7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   6
+   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   6
+     8.1.  Normative References  . . . . . . . . . . . . . . . . . .   6
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .   6
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   7
 
 1.  Introduction
 
-   Introduction.  [RFC2119].
+   Energy Efficiency is becoming increasingly important in the operation
+   of network infrastructure.  Network devices are typically always on,
+   but in some cases they run at very low average utilization rates.
+   Network utilization of these devices can be improved and their power
+   consumption as well.  The metrics defined here will help operators to
+   get a more accurate idea of the power consumed by their network and
+   will also help vendors to test the energy efficiency on their
+   devices.
 
-2.  Definition of Terms
-
-   Terms.
-
-   One:
-      Blah blah.
-
-   Two:
-      Blah blah.
-
-3.  'Section'
-
-   Paragraph.
-
-3.1.  Subsection
-
-   Paragraph.
-
-4.  Security Considerations
-
-   TBC.
-
-5.  Acknowledgements
-
-   TBC.
-
-6.  References
-
-6.1.  Normative References
+   There is no standard mechanism to benchmark power utilization of
+   networking devices like routers or switches.
+   [I-D.manral-bmwg-power-usage] started to analyze the issue.  This
+   document defines the mechanism to correctly characterize and
+   benchmark the power consumption of networking devices in order to be
+   able to correctly estimate and compare their power usage.
 
 
 
 
 
-Pignataro, et al.         Expires 18 June 2024                  [Page 2]
+
+Pignataro, et al.         Expires 20 July 2024                  [Page 2]
 
-Internet-Draft                 PowerBench                  December 2023
+Internet-Draft                 PowerBench                   January 2024
 
+
+   The benchmarking methodology of the energy efficiency may enable
+   intelligent decisions to optimize the power consumption for
+   individual devices and the network as a whole.  Benchmarks are also
+   required to compare effectiveness of various energy optimization
+   techniques.
+
+1.1.  Requirements Language
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in BCP
+   14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+2.  Power consumption benchmarks
+
+   The maximum power that be can consumed by the device does not
+   accurately reflect the actual power consumed under a normal work
+   load.  Indeed, power consumption of a networking device is dependent
+   on the device configuration and traffic load.  Relying merely on the
+   maximum rated power can overestimate the total energy consumed by
+   networking devices.
+
+   A network device consists of a lot of components, each of which
+   consumes power (for example, it is possible to mention the power
+   consumption of the CPU, data forwarding ASIC, memory, fan etc.).
+   Therefore, it is important to formulate a consistent benchmarking
+   method for network devices and consider the variation of the workload
+   and test conditions.
+
+3.  Test Methodology
+
+3.1.  Test Setup
+
+   The test setup in general is compliant with [RFC2544].  The Device
+   Under Test (DUT) is connected to a Tester and to a Power Meter.  The
+   Power Meter allows to measure the power consumption of the device and
+   can be used to measure power under a variety of configurations and
+   conditions.  Tests SHOULD be done with bidirectional traffic that
+   better reflects the real environment.  The Tester is also a traffic
+   generator which enables to change the traffic conditions.  It is
+   OPTIONAL to choose a non-equal proportion for upstream and downstream
+   traffic.
+
+
+
+
+
+
+
+
+Pignataro, et al.         Expires 20 July 2024                  [Page 3]
+
+Internet-Draft                 PowerBench                   January 2024
+
+
+                              +----------+
+                      +-------|  Tester  |<-------+
+                      | +-----|          |<-----+ |
+                      | |     +----------+      | |
+                      | |                       | |
+                      | |      +--------+       | |
+                      | +----->|        |-------+ |
+                      +------->|  DUT   |---------+
+                               |        |
+                               +--------+
+                                   |
+                                   |
+                              +----------+
+                              |  Power   |
+                              |  Meter   |
+                              +----------+
+
+                            Figure 1: Test setup
+
+   It is worth mentioning that the DUT also dissipates significant heat.
+   That means that part of the power is used for actual work while the
+   rest is dissipated as heat.  This heating can lead to more power
+   consumed by fan/ compressor for cooling the devices.  The
+   benchmarking methodology does not measure the power consumed by
+   external cooling infrastructure.  The Power Meter only measures the
+   internal power consumption of the device.  It is OPTIONAL to measure
+   also the temperature change of the device which can be correlated to
+   the amount of external power consumed to cool the device.
+
+3.2.  Traffic and Device characteristics
+
+   An important factor that impacts the power consumption is the offered
+   traffic load.  Therefore, power measurements must be performed with
+   different traffic loads to the network device.
+
+   There are different interface type on a network device and the power
+   usage can also depends on the kind of connector/transceiver used.
+   The interface type used needs to be specified as well.
+
+   In addition, it is necessary to indicate the number of ports used per
+   linecard as well as the aggregate bandwidth that each linecard can
+   accommodate.
+
+   The traffic load also needs to be specified because different packet
+   sizes may not effect power consumption but the inter-packet delay may
+   affect it.
+
+
+
+
+
+Pignataro, et al.         Expires 20 July 2024                  [Page 4]
+
+Internet-Draft                 PowerBench                   January 2024
+
+
+4.  Reporting Format
+
+ 
+      Network Device Hardware and Software versions: for the
+      benchmarking tests, it must be specified.
+
+ 
+      Number and type of line cards: for each test the total number of
+      line cards and their types can be varied and must be specified.
+
+ 
+      Number of enabled ports: for each test the number of enabled and
+      disabled ports must be specified.
+
+ 
+      Number of active ports: for each test the number of active and
+      inactive ports must be specified.
+
+ 
+      Port settings and interface types: for each test the port
+      configuration and settings need to be specified.
+
+ 
+      Port Utilization: for each test the port utilization of each port
+      must be specified.  The actual traffic load can use the
+      information defined in [RFC2544].
+
+ 
+      Traffic attributes (packet size, packet rate, etc.): for each test
+      it must be specified.
+
+ 
+      CPU load: for each test it must be specified.
+
+ 
+      Power measurement: for each test it must be specified.  All power
+      measurements are done in Watts.
+
+5.  Benchmarking Tests
+
+5.1.  Base Power
+
+   Objective: To determine the base power consumed by the network
+   device, which tipically consists of processors, fans, memory, etc.
+
+   Procedure: the measurement is done without activating the traffic
+   generator.
+
+
+
+
+Pignataro, et al.         Expires 20 July 2024                  [Page 5]
+
+Internet-Draft                 PowerBench                   January 2024
+
+
+   Reporting format: the results of the power measurement SHOULD be
+   reported according to Section 4.
+
+   This measurement is useful since it permits to calculate the
+   additional energy consumption that will result when the traffic load
+   changes.
+
+5.2.  Power Consumption with traffic load
+
+   Objective: To determine the power consumed by a device which should
+   be proportional to its traffic load.
+
+   Procedure: a specific number of packets at a specific rate is sent to
+   specific ports/linecards of the DUT.
+
+   Reporting format: the results of the power measurement SHOULD be
+   reported according to Section 4.
+
+6.  Security Considerations
+
+   TBC.
+
+7.  Acknowledgements
+
+   TBC.
+
+8.  References
+
+8.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
-6.2.  Informative References
+   [RFC2544]  Bradner, S. and J. McQuaid, "Benchmarking Methodology for
+              Network Interconnect Devices", RFC 2544,
+              DOI 10.17487/RFC2544, March 1999,
+              <https://www.rfc-editor.org/info/rfc2544>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+8.2.  Informative References
+
+
+
+
+
+
+Pignataro, et al.         Expires 20 July 2024                  [Page 6]
+
+Internet-Draft                 PowerBench                   January 2024
+
+
+   [I-D.manral-bmwg-power-usage]
+              Manral, V., Sharma, P., Banerjee, S., and Y. Ping,
+              "Benchmarking Power usage of networking devices", Work in
+              Progress, Internet-Draft, draft-manral-bmwg-power-usage-
+              04, 12 March 2013, <https://datatracker.ietf.org/doc/html/
+              draft-manral-bmwg-power-usage-04>.
 
 Authors' Addresses
 
@@ -165,4 +389,4 @@ Authors' Addresses
 
 
 
-Pignataro, et al.         Expires 18 June 2024                  [Page 3]
+Pignataro, et al.         Expires 20 July 2024                  [Page 7]
