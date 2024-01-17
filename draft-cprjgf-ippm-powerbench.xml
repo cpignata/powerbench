@@ -2,6 +2,7 @@
 <!DOCTYPE rfc [
 
 <!ENTITY RFC2119 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC8174 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
 
 ]>
 <?rfc toc="yes"?>
@@ -19,7 +20,7 @@
   <?rfc strict="yes" ?>
 
   <front>
-    <title abbrev="PowerBench">Characterization and Benchmarkign Methodology for Power in Networking Devices</title>
+    <title abbrev="PowerBench">Characterization and Benchmarking Methodology for Power in Networking Devices</title>
 
     <author fullname="Carlos Pignataro" initials="C." surname="Pignataro">
       <organization abbrev="NC State University">North Carolina State University</organization>
@@ -64,42 +65,195 @@
 
 
     <abstract>
-      <t>
-        Abstract.
-      </t>
+
+   <t>This document aims to define a standard mechanism to measure, report and
+   compare power usage of different networking devices under different
+   network configuration and conditions.</t>
+
     </abstract>
   </front>
 
   <middle>
     <section title="Introduction">
-      <t>
-      Introduction. <xref target="RFC2119" />.
-      </t>
+	
+   <t>Energy Efficiency is becoming increasingly important in the operation
+   of network infrastructure. Network devices are typically always on, but
+   in some cases they run at very low average utilization rates. Network utilization
+   of these devices can be improved and their power consumption as well.
+   The metrics defined here will help operators to get a more accurate idea
+   of the power consumed by their network and will also help vendors to 
+   test the energy efficiency on their devices.</t>
+
+   <t>There is no standard mechanism to benchmark power utilization 
+   of networking devices like routers or switches. 
+   <xref target="I-D.manral-bmwg-power-usage" /> started to analyze the issue.
+   This document defines the mechanism to correctly characterize and benchmark 
+   the power consumption of networking devices in order to be able to correctly 
+   estimate and compare their power usage.</t>
+   
+   <t>The benchmarking methodology of the energy efficiency may enable intelligent
+   decisions to optimize the power consumption for individual devices
+   and the network as a whole. Benchmarks are also required to compare
+   effectiveness of various energy optimization techniques.</t>
+
+     <section title="Requirements Language">   
+    <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+    "OPTIONAL" in this document are to be interpreted as described in BCP 14
+	<xref target="RFC2119" /> <xref target="RFC8174" /> when, and only when,
+    they appear in all capitals, as shown here.</t>
+     </section>
+	 
     </section>
 
-      <section anchor="terms" title="Definition of Terms">
+    <section title="Power consumption benchmarks">
+	
+   <t>The maximum power that be can consumed by the device does not
+   accurately reflect the actual power consumed under a normal work load.
+   Indeed, power consumption of a networking device is dependent on the
+   device configuration and traffic load. 
+   Relying merely on the maximum rated power can overestimate the total
+   energy consumed by networking devices.</t>
 
+   <t>A network device consists of a lot of components, each of which
+   consumes power (for example, it is possible to mention the power
+   consumption of the CPU, data forwarding ASIC, memory, fan etc.).
+   Therefore, it is important to formulate a consistent benchmarking
+   method for network devices and consider the variation of the workload 
+   and test conditions.</t>
 
-        <t>Terms.</t>
+    </section>
 
+    <section title="Test Methodology">	  
+	
+     <section title="Test Setup">	 	
+   <t>The test setup in general is compliant with <xref target="RFC2544" />.
+   The Device Under Test (DUT) is connected to a Tester and to a Power Meter.
+   The Power Meter allows to measure the power consumption of the device and
+   can be used to measure power under a variety of configurations and conditions.
+   Tests SHOULD be done with bidirectional traffic that better reflects the real environment.
+   The Tester is also a traffic generator which enables to change the traffic conditions.    
+   It is OPTIONAL to choose a non-equal proportion for upstream and downstream traffic.</t>
+   
+      <figure title="Test setup">
+        <artwork><![CDATA[
+                           +----------+
+                   +-------|  Tester  |<-------+
+                   | +-----|          |<-----+ |
+                   | |     +----------+      | |
+                   | |                       | |
+                   | |      +--------+       | |
+                   | +----->|        |-------+ |
+                   +------->|  DUT   |---------+
+                            |        |
+                            +--------+
+                                |
+                                |								
+                           +----------+
+                           |  Power   |
+                           |  Meter   |
+                           +----------+
+]]></artwork>
+      </figure>
 
-        <t>
+	 
+   <t>It is worth mentioning that the DUT also dissipates significant heat.
+   That means that part of the power is used for actual work while the rest
+   is dissipated as heat. This heating can lead to more power consumed
+   by fan/ compressor for cooling the devices. The benchmarking methodology
+   does not measure the power consumed by external cooling infrastructure.
+   The Power Meter only measures the internal power consumption of the device.
+   It is OPTIONAL to measure also the temperature change of the device which
+   can be correlated to the amount of external power consumed to cool the device.</t>
+     </section>  
+	 
+     <section title="Traffic and Device characteristics">
+
+   <t>An important factor that impacts the power consumption is the 
+   offered traffic load. Therefore, power measurements must be performed
+   with different traffic loads to the network device.</t>
+
+   <t>There are different interface type on a network device and the power usage 
+   can also depends on the kind of connector/transceiver used. 
+   The interface type used needs to be specified as well.</t>
+   
+   <t>In addition, it is necessary to indicate the number of ports used per linecard 
+   as well as the aggregate bandwidth that each linecard can accommodate.</t>
+   
+   <t>The traffic load also needs to be specified because different packet sizes 
+   may not effect power consumption but the inter-packet delay may affect it.</t>
+   
+     </section>
+
+    </section>
+
+	<section anchor="report" title="Reporting Format">
+
           <list style="hanging">
-<t hangText="One:"><br /> Blah blah.</t>
-<t hangText="Two:"><br /> Blah blah.</t>
-          </list>
-        </t>
+		  
+      <t hangText=""><br /> Network Device Hardware and Software versions: for the benchmarking tests,
+      it must be specified.</t>
+   
+      <t hangText=""><br /> Number and type of line cards: for each test the total
+      number of line cards and their types can be varied and must be specified.</t>
+	  
+	  <t hangText=""><br /> Number of enabled ports: for each test the number of enabled and 
+	  disabled ports must be specified.</t>
+	  
+	  <t hangText=""><br /> Number of active ports: for each test the number of active and 
+	  inactive ports must be specified.</t>
+	  
+	  <t hangText=""><br /> Port settings and interface types: for each test the port configuration
+	  and settings need to be specified.</t>
+	  
+	  <t hangText=""><br /> Port Utilization: for each test the port utilization of each port 
+	  must be specified.  The actual traffic load can use the information 
+	  defined in <xref target="RFC2544" />.</t>
+	  
+	  <t hangText=""><br /> Traffic attributes (packet size, packet rate, etc.): for each test
+	  it must be specified.</t>
+	  
+	  <t hangText=""><br /> CPU load: for each test it must be specified.</t>
+	  
+	  <t hangText=""><br /> Power measurement: for each test it must be specified.
+	  All power measurements are done in Watts.</t>
+      
+	  </list>
 
-      </section>
-
-
-
-    <section title="'Section'">
-            <t>Paragraph.</t>
-
-    <section title="Subsection">
-            <t>Paragraph.</t>
     </section>
+	 
+
+	<section title="Benchmarking Tests">
+	
+	 <section title="Base Power">
+	 
+	 <t>Objective: To determine the  base power consumed by the network device,
+	 which tipically consists of processors, fans, memory, etc.</t>
+	 
+	 <t>Procedure: the measurement is done without activating the traffic generator.</t>
+
+     <t>Reporting format: the results of the power measurement SHOULD be
+     reported according to <xref target="report" />.</t>
+	 
+	 <t>This measurement is useful since it permits to calculate the 
+	 additional energy consumption that will result when the 
+	 traffic load changes.</t>
+	 
+	 </section>
+
+	 <section title="Power Consumption with traffic load">
+	 
+	 <t>Objective: To determine the power consumed by a device which should be proportional 
+	 to its traffic load.</t>
+
+	 <t>Procedure: a specific number of packets at a specific rate is sent to specific ports/linecards
+	 of the DUT.</t>
+
+     <t>Reporting format: the results of the power measurement SHOULD be
+     reported according to <xref target="report" />.</t>
+	 
+	 </section>
+	 
     </section>
 
 
@@ -119,11 +273,17 @@
    <references title="Normative References">
 
       &RFC2119;
+	  
+	  &RFC8174;
+	  
+      <?rfc include='reference.RFC.2544'?>
 
     </references>
     
     <references title="Informative References">
 
+      <?rfc include='reference.I-D.manral-bmwg-power-usage'?>
+	  
     </references>
 
   </back>
