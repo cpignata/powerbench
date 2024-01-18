@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE rfc [
 
-<!ENTITY RFC2119 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
-<!ENTITY RFC8174 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
+<!ENTITY RFC.2119 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC.2544 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2544.xml">
+<!ENTITY RFC.8174 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
+<!ENTITY I-D.manral-bmwg-power-usage SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.manral-bmwg-power-usage.xml">
 
 ]>
 <?rfc toc="yes"?>
@@ -66,9 +68,9 @@
 
     <abstract>
 
-   <t>This document aims to define a standard mechanism to measure, report and
-   compare power usage of different networking devices under different
-   network configuration and conditions.</t>
+   <t>This document defines a standard mechanism to measure, report, and
+   compare power usage of different networking devices and under different
+   network configurations and conditions.</t>
 
     </abstract>
   </front>
@@ -78,10 +80,11 @@
 	
    <t>Energy Efficiency is becoming increasingly important in the operation
    of network infrastructure. Network devices are typically always on, but
-   in some cases they run at very low average utilization rates. Network utilization
-   of these devices can be improved and their power consumption as well.
+   in some cases they run at very low average utilization rates. Both Network
+   utilization and power consumption
+   of these devices can be improved, and that starts with a normalized characterization.
    The metrics defined here will help operators to get a more accurate idea
-   of the power consumed by their network and will also help vendors to 
+   of the power consumed by their network, and will also help vendors to 
    test the energy efficiency on their devices.</t>
 
    <t>There is no standard mechanism to benchmark power utilization 
@@ -106,7 +109,7 @@
 	 
     </section>
 
-    <section title="Power consumption benchmarks">
+    <section title="Power Consumption Benchmarking">
 	
    <t>The maximum power that be can consumed by the device does not
    accurately reflect the actual power consumed under a normal work load.
@@ -135,24 +138,24 @@
    The Tester is also a traffic generator which enables to change the traffic conditions.    
    It is OPTIONAL to choose a non-equal proportion for upstream and downstream traffic.</t>
    
-      <figure title="Test setup">
+      <figure title="Test Setup" align="center">
         <artwork><![CDATA[
-                           +----------+
-                   +-------|  Tester  |<-------+
-                   | +-----|          |<-----+ |
-                   | |     +----------+      | |
-                   | |                       | |
-                   | |      +--------+       | |
-                   | +----->|        |-------+ |
-                   +------->|  DUT   |---------+
-                            |        |
-                            +--------+
-                                |
-                                |								
-                           +----------+
-                           |  Power   |
-                           |  Meter   |
-                           +----------+
+        +----------+
++-------|  Tester  |<-------+
+| +-----|          |<-----+ |
+| |     +----------+      | |
+| |                       | |
+| |      +--------+       | |
+| +----->|        |-------+ |
++------->|  DUT   |---------+
+         |        |
+         +--------+
+             |
+             |								
+        +----------+
+        |  Power   |
+        |  Meter   |
+        +----------+
 ]]></artwork>
       </figure>
 
@@ -167,7 +170,7 @@
    can be correlated to the amount of external power consumed to cool the device.</t>
      </section>  
 	 
-     <section title="Traffic and Device characteristics">
+     <section title="Traffic and Device Characterization">
 
    <t>An important factor that impacts the power consumption is the 
    offered traffic load. Therefore, power measurements must be performed
@@ -241,7 +244,7 @@
 	 
 	 </section>
 
-	 <section title="Power Consumption with traffic load">
+	 <section title="Power Consumption with Traffic Load">
 	 
 	 <t>Objective: To determine the power consumed by a device which should be proportional 
 	 to its traffic load.</t>
@@ -258,11 +261,18 @@
 
 
     <section title="Security Considerations">
-      <t>TBC.</t>
+      <t>
+           The benchmarking characterization described in this document is constrained to a controlled environment (as a laboratory), and includes controlled stimuly. The  network under benchmarking MUST NOT be connected to production networks.
+         </t>
+         <t>
+          Beyond these, there are no specific security considerations within the scope of this document.
+      </t>
     </section>
 
     <section title="Acknowledgements">
-      <t>TBC.</t>
+      <t>
+        We wish to thank the authors of <xref target="I-D.manral-bmwg-power-usage" /> for their analysis and start on this topic.
+      </t>
     </section>
   </middle>
 
@@ -271,18 +281,15 @@
 
 
    <references title="Normative References">
-
-      &RFC2119;
+    &RFC.2119;
+	  &RFC.8174;
+    &RFC.2544;
 	  
-	  &RFC8174;
-	  
-      <?rfc include='reference.RFC.2544'?>
-
-    </references>
+   </references>
     
     <references title="Informative References">
 
-      <?rfc include='reference.I-D.manral-bmwg-power-usage'?>
+      &I-D.manral-bmwg-power-usage;
 	  
     </references>
 

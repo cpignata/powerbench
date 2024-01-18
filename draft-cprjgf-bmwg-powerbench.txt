@@ -5,10 +5,10 @@
 Benchmarking Methodology Working Group                      C. Pignataro
 Internet-Draft                                       NC State University
 Intended status: Standards Track                                R. Jacob
-Expires: 20 July 2024                                         ETH Zürich
+Expires: 21 July 2024                                         ETH Zürich
                                                              G. Fioccola
                                                                   Huawei
-                                                         17 January 2024
+                                                         18 January 2024
 
 
  Characterization and Benchmarking Methodology for Power in Networking
@@ -17,9 +17,9 @@ Expires: 20 July 2024                                         ETH Zürich
 
 Abstract
 
-   This document aims to define a standard mechanism to measure, report
-   and compare power usage of different networking devices under
-   different network configuration and conditions.
+   This document defines a standard mechanism to measure, report, and
+   compare power usage of different networking devices and under
+   different network configurations and conditions.
 
 Status of This Memo
 
@@ -36,7 +36,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 July 2024.
+   This Internet-Draft will expire on 21 July 2024.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Pignataro, et al.         Expires 20 July 2024                  [Page 1]
+Pignataro, et al.         Expires 21 July 2024                  [Page 1]
 
 Internet-Draft                 PowerBench                   January 2024
 
@@ -71,19 +71,19 @@ Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Requirements Language . . . . . . . . . . . . . . . . . .   3
-   2.  Power consumption benchmarks  . . . . . . . . . . . . . . . .   3
+   2.  Power Consumption Benchmarking  . . . . . . . . . . . . . . .   3
    3.  Test Methodology  . . . . . . . . . . . . . . . . . . . . . .   3
      3.1.  Test Setup  . . . . . . . . . . . . . . . . . . . . . . .   3
-     3.2.  Traffic and Device characteristics  . . . . . . . . . . .   4
+     3.2.  Traffic and Device Characterization . . . . . . . . . . .   4
    4.  Reporting Format  . . . . . . . . . . . . . . . . . . . . . .   5
    5.  Benchmarking Tests  . . . . . . . . . . . . . . . . . . . . .   5
      5.1.  Base Power  . . . . . . . . . . . . . . . . . . . . . . .   5
-     5.2.  Power Consumption with traffic load . . . . . . . . . . .   6
+     5.2.  Power Consumption with Traffic Load . . . . . . . . . . .   6
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
    7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   6
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   6
      8.1.  Normative References  . . . . . . . . . . . . . . . . . .   6
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .   6
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .   7
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   7
 
 1.  Introduction
@@ -91,11 +91,11 @@ Table of Contents
    Energy Efficiency is becoming increasingly important in the operation
    of network infrastructure.  Network devices are typically always on,
    but in some cases they run at very low average utilization rates.
-   Network utilization of these devices can be improved and their power
-   consumption as well.  The metrics defined here will help operators to
-   get a more accurate idea of the power consumed by their network and
-   will also help vendors to test the energy efficiency on their
-   devices.
+   Both Network utilization and power consumption of these devices can
+   be improved, and that starts with a normalized characterization.  The
+   metrics defined here will help operators to get a more accurate idea
+   of the power consumed by their network, and will also help vendors to
+   test the energy efficiency on their devices.
 
    There is no standard mechanism to benchmark power utilization of
    networking devices like routers or switches.
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Pignataro, et al.         Expires 20 July 2024                  [Page 2]
+Pignataro, et al.         Expires 21 July 2024                  [Page 2]
 
 Internet-Draft                 PowerBench                   January 2024
 
@@ -128,7 +128,7 @@ Internet-Draft                 PowerBench                   January 2024
    14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-2.  Power consumption benchmarks
+2.  Power Consumption Benchmarking
 
    The maximum power that be can consumed by the device does not
    accurately reflect the actual power consumed under a normal work
@@ -165,29 +165,29 @@ Internet-Draft                 PowerBench                   January 2024
 
 
 
-Pignataro, et al.         Expires 20 July 2024                  [Page 3]
+Pignataro, et al.         Expires 21 July 2024                  [Page 3]
 
 Internet-Draft                 PowerBench                   January 2024
 
 
-                              +----------+
-                      +-------|  Tester  |<-------+
-                      | +-----|          |<-----+ |
-                      | |     +----------+      | |
-                      | |                       | |
-                      | |      +--------+       | |
-                      | +----->|        |-------+ |
-                      +------->|  DUT   |---------+
-                               |        |
-                               +--------+
-                                   |
-                                   |
-                              +----------+
-                              |  Power   |
-                              |  Meter   |
-                              +----------+
+                               +----------+
+                       +-------|  Tester  |<-------+
+                       | +-----|          |<-----+ |
+                       | |     +----------+      | |
+                       | |                       | |
+                       | |      +--------+       | |
+                       | +----->|        |-------+ |
+                       +------->|  DUT   |---------+
+                                |        |
+                                +--------+
+                                    |
+                                    |
+                               +----------+
+                               |  Power   |
+                               |  Meter   |
+                               +----------+
 
-                            Figure 1: Test setup
+                            Figure 1: Test Setup
 
    It is worth mentioning that the DUT also dissipates significant heat.
    That means that part of the power is used for actual work while the
@@ -199,7 +199,7 @@ Internet-Draft                 PowerBench                   January 2024
    also the temperature change of the device which can be correlated to
    the amount of external power consumed to cool the device.
 
-3.2.  Traffic and Device characteristics
+3.2.  Traffic and Device Characterization
 
    An important factor that impacts the power consumption is the offered
    traffic load.  Therefore, power measurements must be performed with
@@ -221,7 +221,7 @@ Internet-Draft                 PowerBench                   January 2024
 
 
 
-Pignataro, et al.         Expires 20 July 2024                  [Page 4]
+Pignataro, et al.         Expires 21 July 2024                  [Page 4]
 
 Internet-Draft                 PowerBench                   January 2024
 
@@ -277,7 +277,7 @@ Internet-Draft                 PowerBench                   January 2024
 
 
 
-Pignataro, et al.         Expires 20 July 2024                  [Page 5]
+Pignataro, et al.         Expires 21 July 2024                  [Page 5]
 
 Internet-Draft                 PowerBench                   January 2024
 
@@ -289,7 +289,7 @@ Internet-Draft                 PowerBench                   January 2024
    additional energy consumption that will result when the traffic load
    changes.
 
-5.2.  Power Consumption with traffic load
+5.2.  Power Consumption with Traffic Load
 
    Objective: To determine the power consumed by a device which should
    be proportional to its traffic load.
@@ -302,11 +302,18 @@ Internet-Draft                 PowerBench                   January 2024
 
 6.  Security Considerations
 
-   TBC.
+   The benchmarking characterization described in this document is
+   constrained to a controlled environment (as a laboratory), and
+   includes controlled stimuly.  The network under benchmarking MUST NOT
+   be connected to production networks.
+
+   Beyond these, there are no specific security considerations within
+   the scope of this document.
 
 7.  Acknowledgements
 
-   TBC.
+   We wish to thank the authors of [I-D.manral-bmwg-power-usage] for
+   their analysis and start on this topic.
 
 8.  References
 
@@ -322,21 +329,20 @@ Internet-Draft                 PowerBench                   January 2024
               DOI 10.17487/RFC2544, March 1999,
               <https://www.rfc-editor.org/info/rfc2544>.
 
+
+
+
+
+Pignataro, et al.         Expires 21 July 2024                  [Page 6]
+
+Internet-Draft                 PowerBench                   January 2024
+
+
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
 8.2.  Informative References
-
-
-
-
-
-
-Pignataro, et al.         Expires 20 July 2024                  [Page 6]
-
-Internet-Draft                 PowerBench                   January 2024
-
 
    [I-D.manral-bmwg-power-usage]
               Manral, V., Sharma, P., Banerjee, S., and Y. Ping,
@@ -383,10 +389,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-Pignataro, et al.         Expires 20 July 2024                  [Page 7]
+Pignataro, et al.         Expires 21 July 2024                  [Page 7]
