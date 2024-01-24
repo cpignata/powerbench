@@ -78,26 +78,25 @@
   <middle>
     <section title="Introduction">
 	
-   <t>Energy Efficiency is becoming increasingly important in the operation
+   <t>Energy efficiency is becoming increasingly important in the operation
    of network infrastructure. Network devices are typically always on, but
-   in some cases they run at very low average utilization rates. Both Network
-   utilization and power consumption
-   of these devices can be improved, and that starts with a normalized characterization.
+   in some cases, they run at very low average utilization rates. Both network
+   utilization and power consumption of these devices can be improved, and that starts with a normalized characterization.
    The metrics defined here will help operators to get a more accurate idea
-   of the power consumed by their network, and will also help vendors to 
-   test the energy efficiency on their devices.</t>
+   of the power consumed by their network and will also help vendors to 
+   test the energy efficiency of their devices.</t>
 
-   <t>There is no standard mechanism to benchmark power utilization 
+   <t>There is no standard mechanism to benchmark the power utilization 
    of networking devices like routers or switches. 
    <xref target="I-D.manral-bmwg-power-usage" /> started to analyze the issue.
    This document defines the mechanism to correctly characterize and benchmark 
-   the power consumption of networking devices in order to be able to correctly 
+   the power consumption of networking devices to better 
    estimate and compare their power usage.</t>
    
-   <t>The benchmarking methodology of the energy efficiency may enable intelligent
+   <t>The benchmarking methodology of energy efficiency may enable intelligent
    decisions to optimize the power consumption for individual devices
    and the network as a whole. Benchmarks are also required to compare
-   effectiveness of various energy optimization techniques.</t>
+   the effectiveness of various energy optimization techniques.</t>
 
      <section title="Requirements Language">   
     <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -111,18 +110,18 @@
 
     <section title="Power Consumption Benchmarking">
 	
-   <t>The maximum power that be can consumed by the device does not
-   accurately reflect the actual power consumed under a normal work load.
-   Indeed, power consumption of a networking device is dependent on the
-   device configuration and traffic load. 
+   <t>The maximum power a device can consume does not accurately 
+   reflect the power consumed under a normal workload.
+   Indeed, the power consumption of a networking device depends on its 
+   configuration, connected transceivers, and traffic load. 
    Relying merely on the maximum rated power can overestimate the total
-   energy consumed by networking devices.</t>
+   energy networking devices consume.</t>
 
-   <t>A network device consists of a lot of components, each of which
+   <t>A network device consists of many components, each of which
    consumes power (for example, it is possible to mention the power
-   consumption of the CPU, data forwarding ASIC, memory, fan etc.).
+   consumption of the CPU, data forwarding ASIC, memory, fan, etc.).
    Therefore, it is important to formulate a consistent benchmarking
-   method for network devices and consider the variation of the workload 
+   method for network devices and consider the workload variation 
    and test conditions.</t>
 
     </section>
@@ -131,11 +130,11 @@
 	
      <section title="Test Setup">	 	
    <t>The test setup in general is compliant with <xref target="RFC2544" />.
-   The Device Under Test (DUT) is connected to a Tester and to a Power Meter.
+   The Device Under Test (DUT) is connected to a Tester and a Power Meter.
    The Power Meter allows to measure the power consumption of the device and
-   can be used to measure power under a variety of configurations and conditions.
+   can be used to measure power under various configurations and conditions.
    Tests SHOULD be done with bidirectional traffic that better reflects the real environment.
-   The Tester is also a traffic generator which enables to change the traffic conditions.    
+   The Tester is also a traffic generator that enables changing traffic conditions.    
    It is OPTIONAL to choose a non-equal proportion for upstream and downstream traffic.</t>
    
       <figure title="Test Setup" align="center">
@@ -163,28 +162,28 @@
    <t>It is worth mentioning that the DUT also dissipates significant heat.
    That means that part of the power is used for actual work while the rest
    is dissipated as heat. This heating can lead to more power consumed
-   by fan/ compressor for cooling the devices. The benchmarking methodology
+   by fans/ compressor for cooling the devices. The benchmarking methodology
    does not measure the power consumed by external cooling infrastructure.
    The Power Meter only measures the internal power consumption of the device.
-   It is OPTIONAL to measure also the temperature change of the device which
+   It is OPTIONAL to measure the device's temperature change, which
    can be correlated to the amount of external power consumed to cool the device.</t>
      </section>  
 	 
      <section title="Traffic and Device Characterization">
 
-   <t>An important factor that impacts the power consumption is the 
+   <t>An important factor that impacts power consumption is the 
    offered traffic load. Therefore, power measurements must be performed
    with different traffic loads to the network device.</t>
 
-   <t>There are different interface type on a network device and the power usage 
-   can also depends on the kind of connector/transceiver used. 
+   <t>There are different interface types on a network device and the power usage 
+   also depends on the kind of connector/transceiver used. 
    The interface type used needs to be specified as well.</t>
    
    <t>In addition, it is necessary to indicate the number of ports used per linecard 
    as well as the aggregate bandwidth that each linecard can accommodate.</t>
    
    <t>The traffic load also needs to be specified because different packet sizes 
-   may not effect power consumption but the inter-packet delay may affect it.</t>
+   may not affect power consumption, but the inter-packet delay may affect it.</t>
    
      </section>
 
@@ -231,7 +230,7 @@
 	 <section title="Base Power">
 	 
 	 <t>Objective: To determine the  base power consumed by the network device,
-	 which tipically consists of processors, fans, memory, etc.</t>
+	 which typically consists of processors, fans, memory, etc.</t>
 	 
 	 <t>Procedure: the measurement is done without activating the traffic generator.</t>
 
@@ -262,7 +261,9 @@
 
     <section title="Security Considerations">
       <t>
-           The benchmarking characterization described in this document is constrained to a controlled environment (as a laboratory), and includes controlled stimuly. The  network under benchmarking MUST NOT be connected to production networks.
+	The benchmarking characterization described in this document is constrained 
+	to a controlled environment (as a laboratory) and includes controlled stimuli. 
+      	The  network under benchmarking MUST NOT be connected to production networks.
          </t>
          <t>
           Beyond these, there are no specific security considerations within the scope of this document.
@@ -271,7 +272,8 @@
 
     <section title="Acknowledgements">
       <t>
-        We wish to thank the authors of <xref target="I-D.manral-bmwg-power-usage" /> for their analysis and start on this topic.
+        We wish to thank the authors of <xref target="I-D.manral-bmwg-power-usage" /> 
+	for their analysis and start on this topic.
       </t>
     </section>
   </middle>
