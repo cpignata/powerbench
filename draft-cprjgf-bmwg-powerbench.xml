@@ -81,10 +81,11 @@
    <t>Energy efficiency is becoming increasingly important in the operation
    of network infrastructure. Network devices are typically always on, but
    in some cases, they run at very low average utilization rates. Both network
-   utilization and power consumption of these devices can be improved, and that starts with a normalized characterization.
-   The metrics defined here will help operators to get a more accurate idea
-   of the power consumed by their network and will also help vendors to 
-   test the energy efficiency of their devices.</t>
+   utilization and power consumption of these devices can be improved, 
+   and that starts with a normalized characterization.
+   The benchmarking methodology defined here will help operators to get
+   a more accurate idea of the power drawn by their network and 
+   will also help vendors to test the energy efficiency of their devices.</t>
 
    <t>There is no standard mechanism to benchmark the power utilization 
    of networking devices like routers or switches. 
@@ -108,17 +109,86 @@
 	 
     </section>
 
+    <section anchor="terms" title="Terminology">
+
+    <section title="Total Weighted Capacity of the interfaces">	
+     <t>The total weighted capacity of the interfaces (T) is the weighted sum of all interface throughputs.</t>
+	 
+     <t>Definition:<list>
+				<t>T = B1*T1 +...+ Bi*Ti +...+ Bm*Tm</t>
+	 </list></t>
+
+     <t>Discussion:<list>
+				<t>Ti is the total capacity of the interfaces for a fixed configuration model and traffic load
+				(the sum of the interface bandwidths)</t>
+				<t>Bi is the weighted multiplier for different traffic levels (note that B1+...+Bj+...+Bm = 1)</t>
+				<t>m is the number of traffic load levels (if it is considered 100%, 30%, 0%; m = 3)</t>
+     </list></t>
+    
+	 <t>Measurement units: Gbps.</t>
+
+     <t>Issues: The traffic loads and the weighted multipliers need to be clearly established a priori.</t>
+
+     <t>See Also: <xref target="ETSI-ES-203-136" />.</t>
+
+    </section>
+
+    <section title="Total Weighted Power">	
+     <t>The total weighted power (P) is the weighted sum of all power calculated for different traffic loads.</t>
+	 
+	 <t>Definition:<list>
+				<t>P = B1*P1 +...+ Bi*Pi +...+ Bm*Pm</t>
+	 </list></t>
+
+     <t>Discussion:<list>
+				<t>Pi is the Power of the equipment in each traffic load level (e.g. 100%, 30%, 0%)</t>
+				<t>Bi is the weighted multiplier for different traffic levels (note that B1+...+Bj+...+Bm = 1)</t>
+				<t>m is the number of traffic load levels (if it is considered 100%, 30%, 0%; m = 3)</t>
+     </list></t>
+    
+	 <t>Measurement units: Watt.</t>
+
+     <t>Issues: The traffic loads and the weighted multipliers need to be clearly established a priori.</t>
+
+     <t>See Also: <xref target="ETSI-ES-203-136" />.</t>
+
+    </section>
+	
+    <section title="Energy Efficiency Ratio">	
+     <t>Energy Efficiency Ratio (EER) is defined as the throughput forwarded by 1 watt
+	 and it is introduced in <xref target="ETSI-ES-203-136" />. A higher EER corresponds
+	 to a better the energy efficiency.</t>
+	 
+	 <t>Definition:<list>
+                <t>EER = T/P</t>
+	 </list></t>
+
+     <t>Discussion:<list>
+                <t>T is the total weighted sum of all interface throughputs</t>
+				<t>P is the weighted power for different traffic loads</t>
+     </list></t>
+    
+	 <t>Measurement units: Gbps/Watt.</t>
+
+     <t>Issues: The traffic loads  and the weighted multipliers need to be clearly established a priori.</t>
+
+     <t>See Also: <xref target="ETSI-ES-203-136" />.</t>
+
+    </section>
+	
+    </section>
+	
     <section title="Power Consumption Benchmarking">
 	
-   <t>The maximum power a device can consume does not accurately 
-   reflect the power consumed under a normal workload.
+   <t>The maximum power drawn by a device does not accurately 
+   reflect the power under a normal workload.
    Indeed, the power consumption of a networking device depends on its 
    configuration, connected transceivers, and traffic load. 
    Relying merely on the maximum rated power can overestimate the total
-   energy networking devices consume.</t>
+   energy of the networking devices.</t>
 
    <t>A network device consists of many components, each of which
-   consumes power (for example, it is possible to mention the power
+   draws power (for example, it is possible to mention the power
    consumption of the CPU, data forwarding ASIC, memory, fan, etc.).
    Therefore, it is important to formulate a consistent benchmarking
    method for network devices and consider the workload variation 
@@ -161,12 +231,12 @@
 	 
    <t>It is worth mentioning that the DUT also dissipates significant heat.
    That means that part of the power is used for actual work while the rest
-   is dissipated as heat. This heating can lead to more power consumed
+   is dissipated as heat. This heating can lead to more power drawn
    by fans/ compressor for cooling the devices. The benchmarking methodology
-   does not measure the power consumed by external cooling infrastructure.
+   does not measure the power drawn by external cooling infrastructure.
    The Power Meter only measures the internal power consumption of the device.
    It is OPTIONAL to measure the device's temperature change, which
-   can be correlated to the amount of external power consumed to cool the device.</t>
+   can be correlated to the amount of external power drawn to cool the device.</t>
      </section>  
 	 
      <section title="Traffic and Device Characterization">
@@ -226,10 +296,22 @@
 	 
 
 	<section title="Benchmarking Tests">
-	
+
+	 <section title="Throughput">
+	 
+	 <t>Objective: To determine the DUT throughput according to <xref target="RFC2544" />.</t>
+
+	 <t>Procedure: the test is done using a multi-port setup as specified in Section 16 and Section 26.1
+	 of <xref target="RFC2544" />.</t>
+
+     <t>Reporting format: the results of the throughput SHOULD be
+     reported according to <xref target="report" />.</t>
+	 
+	 </section>
+	 
 	 <section title="Base Power">
 	 
-	 <t>Objective: To determine the  base power consumed by the network device,
+	 <t>Objective: To determine the base power drawn by the network device,
 	 which typically consists of processors, fans, memory, etc.</t>
 	 
 	 <t>Procedure: the measurement is done without activating the traffic generator.</t>
@@ -245,46 +327,54 @@
 
 	 <section title="Power Consumption with Traffic Load">
 	 
-	 <t>Objective: To determine the power consumed by a device which should be proportional 
-	 to its traffic load.</t>
+	 <t>Objective: To determine the power drawn by a device. The dynamic power, which is added to the base power,
+	 should be proportional to its traffic load.</t>
 
 	 <t>Procedure: a specific number of packets at a specific rate is sent to specific ports/linecards
-	 of the DUT.</t>
+	 of the DUT. All DUT ports must operate under a specific traffic load, which is a percentage of the maximum throughput.</t>
 
      <t>Reporting format: the results of the power measurement SHOULD be
      reported according to <xref target="report" />.</t>
 	 
 	 </section>
+
 	 
+	 <section title="Energy Efficiency Ratio">
+	 
+	 <t>Objective: To determine the energy efficiency of the DUT.</t>
+
+	 <t>Procedure: collect the data for all the traffic loads and apply the formula of 
+	 <xref target="terms" />. For example, with all DUT ports operating stably under a percentage
+	 of the maximum throughput (e.g. 100%, 30%, 0%), record the average input power and 
+	 calculate the total weighted power P and then the EER .</t>
+
+     <t>Reporting format: the results of the energy efficiency ratio SHOULD be
+     reported according to <xref target="report" />.</t>
+	 
+	 </section>	 
     </section>
 
 
     <section title="Security Considerations">
-      <t>
-	The benchmarking characterization described in this document is constrained 
-	to a controlled environment (as a laboratory) and includes controlled stimuli. 
-      	The  network under benchmarking MUST NOT be connected to production networks.
-         </t>
-         <t>
-          Beyond these, there are no specific security considerations within the scope of this document.
-      </t>
+      <t>The benchmarking characterization described in this document is constrained 
+	  to a controlled environment (as a laboratory) and includes controlled stimuli. 
+      The  network under benchmarking MUST NOT be connected to production networks.</t>
+	  
+	  <t>Beyond these, there are no specific security considerations within the scope of this document.</t>
     </section>
 
     <section title="Acknowledgements">
-      <t>
-        We wish to thank the authors of <xref target="I-D.manral-bmwg-power-usage" /> 
-	for their analysis and start on this topic.
-      </t>
+      <t>We wish to thank the authors of <xref target="I-D.manral-bmwg-power-usage" /> 
+	  for their analysis and start on this topic.</t>
     </section>
   </middle>
 
   <back>
 
 
-
    <references title="Normative References">
     &RFC.2119;
-	  &RFC.8174;
+	&RFC.8174;
     &RFC.2544;
 	  
    </references>
@@ -292,7 +382,17 @@
     <references title="Informative References">
 
       &I-D.manral-bmwg-power-usage;
-	  
+
+	 <reference anchor='ETSI-ES-203-136' target="https://www.etsi.org/deliver/etsi_es/203100_203199/203136/01.02.00_50/es_203136v010200m.pdf">
+     <front>
+      <title>ETSI ES 203 136: Environmental Engineering (EE); Measurement methods for energy efficiency of router and switch equipment</title>
+      <author>
+       <organization>ETSI</organization>
+      </author>
+      <date year='2017' />
+     </front>
+     </reference>
+	 
     </references>
 
   </back>
