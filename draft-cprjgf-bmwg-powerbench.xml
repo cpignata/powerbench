@@ -125,11 +125,11 @@
 				<t>m is the number of traffic load levels (if it is considered 100%, 30%, 0%; m = 3)</t>
      </list></t>
     
-	 <t>Measurement units: Gbps.</t>
+	 <t>Measurement units:<list><t>Gbps.</t></list></t>
 
-     <t>Issues: The traffic loads and the weighted multipliers need to be clearly established a priori.</t>
+     <t>Issues<list><t>The traffic loads and the weighted multipliers need to be clearly established a priori.</t></list></t>
 
-     <t>See Also: <xref target="ETSI-ES-203-136" />.</t>
+     <t>See Also:<list><t><xref target="ETSI-ES-203-136" />.</t></list></t>
 
     </section>
 
@@ -146,11 +146,11 @@
 				<t>m is the number of traffic load levels (if it is considered 100%, 30%, 0%; m = 3)</t>
      </list></t>
     
-	 <t>Measurement units: Watt.</t>
+	 <t>Measurement units:<list><t>Watt.</t></list></t>
 
-     <t>Issues: The traffic loads and the weighted multipliers need to be clearly established a priori.</t>
+     <t>Issues:<list><t>The traffic loads and the weighted multipliers need to be clearly established a priori.</t></list></t>
 
-     <t>See Also: <xref target="ETSI-ES-203-136" />.</t>
+     <t>See Also:<list><t><xref target="ETSI-ES-203-136" />.</t></list></t>
 
     </section>
 	
@@ -168,11 +168,11 @@
 				<t>P is the weighted power for different traffic loads</t>
      </list></t>
     
-	 <t>Measurement units: Gbps/Watt.</t>
+	 <t>Measurement units:<list><t>Gbps/Watt.</t></list></t>
 
-     <t>Issues: The traffic loads  and the weighted multipliers need to be clearly established a priori.</t>
+     <t>Issues:<list><t>The traffic loads  and the weighted multipliers need to be clearly established a priori.</t></list></t>
 
-     <t>See Also: <xref target="ETSI-ES-203-136" />.</t>
+     <t>See Also:<list><t><xref target="ETSI-ES-203-136" />.</t></list></t>
 
     </section>
 	
@@ -263,31 +263,31 @@
 
           <list style="hanging">
 		  
-      <t hangText=""><br /> Network Device Hardware and Software versions: for the benchmarking tests,
+      <t hangText="Network Device Hardware and Software versions:"><br />for the benchmarking tests,
       it must be specified.</t>
    
-      <t hangText=""><br /> Number and type of line cards: for each test the total
+      <t hangText="Number and type of line cards:"><br />  for each test the total
       number of line cards and their types can be varied and must be specified.</t>
 	  
-	  <t hangText=""><br /> Number of enabled ports: for each test the number of enabled and 
+	  <t hangText="Number of enabled ports:"><br />  for each test the number of enabled and 
 	  disabled ports must be specified.</t>
 	  
-	  <t hangText=""><br /> Number of active ports: for each test the number of active and 
+	  <t hangText="Number of active ports:"><br />  for each test the number of active and 
 	  inactive ports must be specified.</t>
 	  
-	  <t hangText=""><br /> Port settings and interface types: for each test the port configuration
+	  <t hangText="Port settings and interface types:"><br />  for each test the port configuration
 	  and settings need to be specified.</t>
 	  
-	  <t hangText=""><br /> Port Utilization: for each test the port utilization of each port 
+	  <t hangText="Port Utilization:"><br />  for each test the port utilization of each port 
 	  must be specified.  The actual traffic load can use the information 
 	  defined in <xref target="RFC2544" />.</t>
 	  
-	  <t hangText=""><br /> Traffic attributes (packet size, packet rate, etc.): for each test
-	  it must be specified.</t>
+	  <t hangText="Traffic attributes:"><br />  for each test
+	  they must be specified (e.g., packet size, packet rate, etc.)</t>
 	  
-	  <t hangText=""><br /> CPU load: for each test it must be specified.</t>
+	  <t hangText="CPU load:"><br />  for each test it must be specified.</t>
 	  
-	  <t hangText=""><br /> Power measurement: for each test it must be specified.
+	  <t hangText="Power measurement:"><br />  for each test it must be specified.
 	  All power measurements are done in Watts.</t>
       
 	  </list>
@@ -299,57 +299,57 @@
 
 	 <section title="Throughput">
 	 
-	 <t>Objective: To determine the DUT throughput according to <xref target="RFC2544" />.</t>
+	 <t>Objective:<list><t>To determine the DUT throughput according to <xref target="RFC2544" />.</t></list></t>
 
-	 <t>Procedure: the test is done using a multi-port setup as specified in Section 16 and Section 26.1
-	 of <xref target="RFC2544" />.</t>
+	 <t>Procedure:<list><t>the test is done using a multi-port setup as specified in Section 16 and Section 26.1
+	 of <xref target="RFC2544" />.</t></list></t>
 
-     <t>Reporting format: the results of the throughput SHOULD be
-     reported according to <xref target="report" />.</t>
+     <t>Reporting format:<list><t>the results of the throughput SHOULD be
+     reported according to <xref target="report" />.</t></list></t>
 	 
 	 </section>
 	 
 	 <section title="Base Power">
 	 
-	 <t>Objective: To determine the base power drawn by the network device,
-	 which typically consists of processors, fans, memory, etc.</t>
+	 <t>Objective:<list><t>To determine the base power drawn by the network device,
+	 which typically consists of processors, fans, memory, etc.</t></list></t>
 	 
-	 <t>Procedure: the measurement is done without activating the traffic generator.</t>
+	 <t>Procedure:<list><t>the measurement is done without activating the traffic generator.</t></list></t>
 
-     <t>Reporting format: the results of the power measurement SHOULD be
-     reported according to <xref target="report" />.</t>
+     <t>Reporting format:<list><t>the results of the power measurement SHOULD be
+     reported according to <xref target="report" />.</t></list></t>
 	 
-	 <t>This measurement is useful since it permits to calculate the 
+	 <t>Note:<list><t>This measurement is useful since it permits to calculate the 
 	 additional energy consumption that will result when the 
-	 traffic load changes.</t>
+	 traffic load changes.</t></list></t>
 	 
 	 </section>
 
 	 <section title="Power Consumption with Traffic Load">
 	 
-	 <t>Objective: To determine the power drawn by a device. The dynamic power, which is added to the base power,
-	 should be proportional to its traffic load.</t>
+	 <t>Objective:<list><t>To determine the power drawn by a device. The dynamic power, which is added to the base power,
+	 should be proportional to its traffic load.</t></list></t>
 
-	 <t>Procedure: a specific number of packets at a specific rate is sent to specific ports/linecards
-	 of the DUT. All DUT ports must operate under a specific traffic load, which is a percentage of the maximum throughput.</t>
+	 <t>Procedure:<list><t>a specific number of packets at a specific rate is sent to specific ports/linecards
+	 of the DUT. All DUT ports must operate under a specific traffic load, which is a percentage of the maximum throughput.</t></list></t>
 
-     <t>Reporting format: the results of the power measurement SHOULD be
-     reported according to <xref target="report" />.</t>
+     <t>Reporting format:<list><t>the results of the power measurement SHOULD be
+     reported according to <xref target="report" />.</t></list></t>
 	 
 	 </section>
 
 	 
 	 <section title="Energy Efficiency Ratio">
 	 
-	 <t>Objective: To determine the energy efficiency of the DUT.</t>
+	 <t>Objective:<list><t>To determine the energy efficiency of the DUT.</t></list></t>
 
-	 <t>Procedure: collect the data for all the traffic loads and apply the formula of 
+	 <t>Procedure:<list><t>collect the data for all the traffic loads and apply the formula of 
 	 <xref target="terms" />. For example, with all DUT ports operating stably under a percentage
 	 of the maximum throughput (e.g. 100%, 30%, 0%), record the average input power and 
-	 calculate the total weighted power P and then the EER .</t>
+	 calculate the total weighted power P and then the EER .</t></list></t>
 
-     <t>Reporting format: the results of the energy efficiency ratio SHOULD be
-     reported according to <xref target="report" />.</t>
+     <t>Reporting format:<list><t>the results of the energy efficiency ratio SHOULD be
+     reported according to <xref target="report" />.</t></list></t>
 	 
 	 </section>	 
     </section>

@@ -5,10 +5,10 @@
 Benchmarking Methodology Working Group                      C. Pignataro
 Internet-Draft                                       NC State University
 Intended status: Standards Track                                R. Jacob
-Expires: 2 August 2024                                        ETH Zürich
+Expires: 7 August 2024                                        ETH Zürich
                                                              G. Fioccola
                                                                   Huawei
-                                                         30 January 2024
+                                                         4 February 2024
 
 
  Characterization and Benchmarking Methodology for Power in Networking
@@ -36,7 +36,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 August 2024.
+   This Internet-Draft will expire on 7 August 2024.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Pignataro, et al.         Expires 2 August 2024                 [Page 1]
+Pignataro, et al.         Expires 7 August 2024                 [Page 1]
 
-Internet-Draft                 PowerBench                   January 2024
+Internet-Draft                 PowerBench                  February 2024
 
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -79,18 +79,18 @@ Table of Contents
    4.  Test Methodology  . . . . . . . . . . . . . . . . . . . . . .   5
      4.1.  Test Setup  . . . . . . . . . . . . . . . . . . . . . . .   5
      4.2.  Traffic and Device Characterization . . . . . . . . . . .   6
-   5.  Reporting Format  . . . . . . . . . . . . . . . . . . . . . .   6
+   5.  Reporting Format  . . . . . . . . . . . . . . . . . . . . . .   7
    6.  Benchmarking Tests  . . . . . . . . . . . . . . . . . . . . .   7
      6.1.  Throughput  . . . . . . . . . . . . . . . . . . . . . . .   7
-     6.2.  Base Power  . . . . . . . . . . . . . . . . . . . . . . .   7
+     6.2.  Base Power  . . . . . . . . . . . . . . . . . . . . . . .   8
      6.3.  Power Consumption with Traffic Load . . . . . . . . . . .   8
-     6.4.  Energy Efficiency Ratio . . . . . . . . . . . . . . . . .   8
-   7.  Security Considerations . . . . . . . . . . . . . . . . . . .   8
-   8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   8
-   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
-     9.1.  Normative References  . . . . . . . . . . . . . . . . . .   8
-     9.2.  Informative References  . . . . . . . . . . . . . . . . .   9
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   9
+     6.4.  Energy Efficiency Ratio . . . . . . . . . . . . . . . . .   9
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . .   9
+   8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   9
+   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   9
+     9.1.  Normative References  . . . . . . . . . . . . . . . . . .   9
+     9.2.  Informative References  . . . . . . . . . . . . . . . . .  10
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
 
 1.  Introduction
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Pignataro, et al.         Expires 2 August 2024                 [Page 2]
+Pignataro, et al.         Expires 7 August 2024                 [Page 2]
 
-Internet-Draft                 PowerBench                   January 2024
+Internet-Draft                 PowerBench                  February 2024
 
 
    document defines the mechanism to correctly characterize and
@@ -155,20 +155,27 @@ Internet-Draft                 PowerBench                   January 2024
       m is the number of traffic load levels (if it is considered 100%,
       30%, 0%; m = 3)
 
-   Measurement units: Gbps.
+   Measurement units:
 
-   Issues: The traffic loads and the weighted multipliers need to be
-   clearly established a priori.
+      Gbps.
 
-   See Also: [ETSI-ES-203-136].
-
+   Issues
 
 
 
-Pignataro, et al.         Expires 2 August 2024                 [Page 3]
+
+
+Pignataro, et al.         Expires 7 August 2024                 [Page 3]
 
-Internet-Draft                 PowerBench                   January 2024
+Internet-Draft                 PowerBench                  February 2024
 
+
+      The traffic loads and the weighted multipliers need to be clearly
+      established a priori.
+
+   See Also:
+
+      [ETSI-ES-203-136].
 
 2.2.  Total Weighted Power
 
@@ -190,12 +197,18 @@ Internet-Draft                 PowerBench                   January 2024
       m is the number of traffic load levels (if it is considered 100%,
       30%, 0%; m = 3)
 
-   Measurement units: Watt.
+   Measurement units:
 
-   Issues: The traffic loads and the weighted multipliers need to be
-   clearly established a priori.
+      Watt.
 
-   See Also: [ETSI-ES-203-136].
+   Issues:
+
+      The traffic loads and the weighted multipliers need to be clearly
+      established a priori.
+
+   See Also:
+
+      [ETSI-ES-203-136].
 
 2.3.  Energy Efficiency Ratio
 
@@ -205,6 +218,14 @@ Internet-Draft                 PowerBench                   January 2024
 
    Definition:
 
+
+
+
+Pignataro, et al.         Expires 7 August 2024                 [Page 4]
+
+Internet-Draft                 PowerBench                  February 2024
+
+
       EER = T/P
 
    Discussion:
@@ -213,20 +234,18 @@ Internet-Draft                 PowerBench                   January 2024
 
       P is the weighted power for different traffic loads
 
-   Measurement units: Gbps/Watt.
+   Measurement units:
 
-   Issues: The traffic loads and the weighted multipliers need to be
-   clearly established a priori.
+      Gbps/Watt.
 
+   Issues:
 
+      The traffic loads and the weighted multipliers need to be clearly
+      established a priori.
 
+   See Also:
 
-Pignataro, et al.         Expires 2 August 2024                 [Page 4]
-
-Internet-Draft                 PowerBench                   January 2024
-
-
-   See Also: [ETSI-ES-203-136].
+      [ETSI-ES-203-136].
 
 3.  Power Consumption Benchmarking
 
@@ -256,6 +275,13 @@ Internet-Draft                 PowerBench                   January 2024
    generator that enables changing traffic conditions.  It is OPTIONAL
    to choose a non-equal proportion for upstream and downstream traffic.
 
+
+
+Pignataro, et al.         Expires 7 August 2024                 [Page 5]
+
+Internet-Draft                 PowerBench                  February 2024
+
+
                                +----------+
                        +-------|  Tester  |<-------+
                        | +-----|          |<-----+ |
@@ -274,13 +300,6 @@ Internet-Draft                 PowerBench                   January 2024
                                +----------+
 
                             Figure 1: Test Setup
-
-
-
-Pignataro, et al.         Expires 2 August 2024                 [Page 5]
-
-Internet-Draft                 PowerBench                   January 2024
-
 
    It is worth mentioning that the DUT also dissipates significant heat.
    That means that part of the power is used for actual work while the
@@ -310,116 +329,148 @@ Internet-Draft                 PowerBench                   January 2024
    sizes may not affect power consumption, but the inter-packet delay
    may affect it.
 
+
+
+
+
+Pignataro, et al.         Expires 7 August 2024                 [Page 6]
+
+Internet-Draft                 PowerBench                  February 2024
+
+
 5.  Reporting Format
 
- 
-      Network Device Hardware and Software versions: for the
-      benchmarking tests, it must be specified.
+   Network Device Hardware and Software versions:
+      for the benchmarking tests, it must be specified.
 
- 
-      Number and type of line cards: for each test the total number of
-      line cards and their types can be varied and must be specified.
+   Number and type of line cards:
+      for each test the total number of line cards and their types can
+      be varied and must be specified.
 
- 
-      Number of enabled ports: for each test the number of enabled and
-      disabled ports must be specified.
+   Number of enabled ports:
+      for each test the number of enabled and disabled ports must be
+      specified.
 
- 
-      Number of active ports: for each test the number of active and
-      inactive ports must be specified.
+   Number of active ports:
+      for each test the number of active and inactive ports must be
+      specified.
 
- 
+   Port settings and interface types:
+      for each test the port configuration and settings need to be
+      specified.
 
+   Port Utilization:
+      for each test the port utilization of each port must be specified.
+      The actual traffic load can use the information defined in
+      [RFC2544].
 
+   Traffic attributes:
+      for each test they must be specified (e.g., packet size, packet
+      rate, etc.)
 
+   CPU load:
+      for each test it must be specified.
 
-Pignataro, et al.         Expires 2 August 2024                 [Page 6]
-
-Internet-Draft                 PowerBench                   January 2024
-
-
-      Port settings and interface types: for each test the port
-      configuration and settings need to be specified.
-
- 
-      Port Utilization: for each test the port utilization of each port
-      must be specified.  The actual traffic load can use the
-      information defined in [RFC2544].
-
- 
-      Traffic attributes (packet size, packet rate, etc.): for each test
-      it must be specified.
-
- 
-      CPU load: for each test it must be specified.
-
- 
-      Power measurement: for each test it must be specified.  All power
-      measurements are done in Watts.
+   Power measurement:
+      for each test it must be specified.  All power measurements are
+      done in Watts.
 
 6.  Benchmarking Tests
 
 6.1.  Throughput
 
-   Objective: To determine the DUT throughput according to [RFC2544].
+   Objective:
 
-   Procedure: the test is done using a multi-port setup as specified in
-   Section 16 and Section 26.1 of [RFC2544].
+      To determine the DUT throughput according to [RFC2544].
 
-   Reporting format: the results of the throughput SHOULD be reported
-   according to Section 5.
+   Procedure:
+
+
+
+
+
+Pignataro, et al.         Expires 7 August 2024                 [Page 7]
+
+Internet-Draft                 PowerBench                  February 2024
+
+
+      the test is done using a multi-port setup as specified in
+      Section 16 and Section 26.1 of [RFC2544].
+
+   Reporting format:
+
+      the results of the throughput SHOULD be reported according to
+      Section 5.
 
 6.2.  Base Power
 
-   Objective: To determine the base power drawn by the network device,
-   which typically consists of processors, fans, memory, etc.
+   Objective:
 
-   Procedure: the measurement is done without activating the traffic
-   generator.
+      To determine the base power drawn by the network device, which
+      typically consists of processors, fans, memory, etc.
 
-   Reporting format: the results of the power measurement SHOULD be
-   reported according to Section 5.
+   Procedure:
 
-   This measurement is useful since it permits to calculate the
-   additional energy consumption that will result when the traffic load
-   changes.
+      the measurement is done without activating the traffic generator.
 
+   Reporting format:
 
+      the results of the power measurement SHOULD be reported according
+      to Section 5.
 
+   Note:
 
-
-
-Pignataro, et al.         Expires 2 August 2024                 [Page 7]
-
-Internet-Draft                 PowerBench                   January 2024
-
+      This measurement is useful since it permits to calculate the
+      additional energy consumption that will result when the traffic
+      load changes.
 
 6.3.  Power Consumption with Traffic Load
 
-   Objective: To determine the power drawn by a device.  The dynamic
-   power, which is added to the base power, should be proportional to
-   its traffic load.
+   Objective:
 
-   Procedure: a specific number of packets at a specific rate is sent to
-   specific ports/linecards of the DUT.  All DUT ports must operate
-   under a specific traffic load, which is a percentage of the maximum
-   throughput.
+      To determine the power drawn by a device.  The dynamic power,
+      which is added to the base power, should be proportional to its
+      traffic load.
 
-   Reporting format: the results of the power measurement SHOULD be
-   reported according to Section 5.
+   Procedure:
+
+      a specific number of packets at a specific rate is sent to
+      specific ports/linecards of the DUT.  All DUT ports must operate
+      under a specific traffic load, which is a percentage of the
+      maximum throughput.
+
+   Reporting format:
+
+
+
+
+
+Pignataro, et al.         Expires 7 August 2024                 [Page 8]
+
+Internet-Draft                 PowerBench                  February 2024
+
+
+      the results of the power measurement SHOULD be reported according
+      to Section 5.
 
 6.4.  Energy Efficiency Ratio
 
-   Objective: To determine the energy efficiency of the DUT.
+   Objective:
 
-   Procedure: collect the data for all the traffic loads and apply the
-   formula of Section 2.  For example, with all DUT ports operating
-   stably under a percentage of the maximum throughput (e.g. 100%, 30%,
-   0%), record the average input power and calculate the total weighted
-   power P and then the EER .
+      To determine the energy efficiency of the DUT.
 
-   Reporting format: the results of the energy efficiency ratio SHOULD
-   be reported according to Section 5.
+   Procedure:
+
+      collect the data for all the traffic loads and apply the formula
+      of Section 2.  For example, with all DUT ports operating stably
+      under a percentage of the maximum throughput (e.g. 100%, 30%, 0%),
+      record the average input power and calculate the total weighted
+      power P and then the EER .
+
+   Reporting format:
+
+      the results of the energy efficiency ratio SHOULD be reported
+      according to Section 5.
 
 7.  Security Considerations
 
@@ -440,20 +491,20 @@ Internet-Draft                 PowerBench                   January 2024
 
 9.1.  Normative References
 
-
-
-
-
-
-Pignataro, et al.         Expires 2 August 2024                 [Page 8]
-
-Internet-Draft                 PowerBench                   January 2024
-
-
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
+
+
+
+
+
+
+Pignataro, et al.         Expires 7 August 2024                 [Page 9]
+
+Internet-Draft                 PowerBench                  February 2024
+
 
    [RFC2544]  Bradner, S. and J. McQuaid, "Benchmarking Methodology for
               Network Interconnect Devices", RFC 2544,
@@ -501,4 +552,9 @@ Authors' Addresses
 
 
 
-Pignataro, et al.         Expires 2 August 2024                 [Page 9]
+
+
+
+
+
+Pignataro, et al.         Expires 7 August 2024                [Page 10]
