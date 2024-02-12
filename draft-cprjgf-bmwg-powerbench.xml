@@ -81,7 +81,7 @@
    <t>Energy efficiency is becoming increasingly important in the operation
    of network infrastructure. Network devices are typically always on, but
    in some cases, they run at very low average utilization rates. Both network
-   utilization and power consumption of these devices can be improved, 
+   utilization and energy consumption of these devices can be improved, 
    and that starts with a normalized characterization.
    The benchmarking methodology defined here will help operators to get
    a more accurate idea of the power drawn by their network and 
@@ -91,14 +91,33 @@
    of networking devices like routers or switches. 
    <xref target="I-D.manral-bmwg-power-usage" /> started to analyze the issue.
    This document defines the mechanism to correctly characterize and benchmark 
-   the power consumption of networking devices to better 
+   the energy consumption of networking devices to better 
    estimate and compare their power usage.</t>
-   
-   <t>The benchmarking methodology of energy efficiency may enable intelligent
-   decisions to optimize the power consumption for individual devices
-   and the network as a whole. Benchmarks are also required to compare
-   the effectiveness of various energy optimization techniques.</t>
 
+   <!-- Romain: Well, not really, if we put the focus on "Assessing "who performs best" over 
+   a set of well-defined scenario" as discussed. 
+   I'd propose to have subsection to make things really crystal clear. -->
+   <!-- <t>The benchmarking methodology of energy efficiency may enable intelligent
+   decisions to optimize the energy consumption for individual devices
+   and the network as a whole. Benchmarks are also required to compare
+   the effectiveness of various energy optimization techniques.</t> -->
+   
+    <section title="Aim and Scope">
+
+    <t>Benchmarking can be understood to serve two related but different objectives:<list>
+				<t>Assessing ``which system performs best'' over a set of well-defined scenarios.</t>
+        <t>Measuring the contribution of sub-systems to the overall system's performance
+        (also known as ``micro-benchmark'').</t>
+	 </list></t>
+
+    <t>The benchmarking methodology outlined in this draft focuses on the first objective.
+    Specifically, it aims to compare the energy efficiency for individual devices 
+    (routers and switches belonging to similar device classes).
+    The benchmark aims to showcase the effectiveness of various energy optimization 
+    techniques for a given device and load type, with the objective of fostering
+    improvements in the energy efficiency of future generations of devices.</t>
+     </section>
+  
      <section title="Requirements Language">   
     <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
     "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
@@ -127,9 +146,14 @@
     
 	 <t>Measurement units:<list><t>Gbps.</t></list></t>
 
-     <t>Issues<list><t>The traffic loads and the weighted multipliers need to be clearly established a priori.</t></list></t>
+    <t>Issues<list>
+      <t>The traffic loads and the weighted multipliers need to be clearly established a priori.</t>
+      <t>It is unclear if the definition of the Ti's is/should be linked to the traffic load levels. 
+      For a given port configuration (which may result in 50% of the total capacity a device can provide), 
+      one may be interested in traffic load of e.g., 5% or 10% or the total capacity (not only 50%).</t>
+    </list></t>
 
-     <t>See Also:<list><t><xref target="ETSI-ES-203-136" />.</t></list></t>
+    <t>See Also:<list><t><xref target="ETSI-ES-203-136" />.</t></list></t>
 
     </section>
 
@@ -148,9 +172,17 @@
     
 	 <t>Measurement units:<list><t>Watt.</t></list></t>
 
-     <t>Issues:<list><t>The traffic loads and the weighted multipliers need to be clearly established a priori.</t></list></t>
+    <t>Issues:<list>
+      <t>The traffic loads and the weighted multipliers need to be clearly established a priori.</t>
+      <t>Importantly, the traffic must be forwarded of the correct port! 
+      It would be easy to cut power down by dropping all traffic, and we of course do not want that.
+      A tolerance on packet loss and/or forwarding error must be specified somehow. 
+      That tolerance could be zero for some benchmark problems, and non-zero for others.
+      Tolerating some errors may be interesting to navigate the design space of energy saving techniques, 
+      such as approximate computing/routing.</t>
+    </list></t>
 
-     <t>See Also:<list><t><xref target="ETSI-ES-203-136" />.</t></list></t>
+    <t>See Also:<list><t><xref target="ETSI-ES-203-136" />.</t></list></t>
 
     </section>
 	
@@ -178,11 +210,11 @@
 	
     </section>
 	
-    <section title="Power Consumption Benchmarking">
+    <section title="Energy Consumption Benchmarking">
 	
    <t>The maximum power drawn by a device does not accurately 
    reflect the power under a normal workload.
-   Indeed, the power consumption of a networking device depends on its 
+   Indeed, the energy consumption of a networking device depends on its 
    configuration, connected transceivers, and traffic load. 
    Relying merely on the maximum rated power can overestimate the total
    energy of the networking devices.</t>
@@ -194,6 +226,12 @@
    method for network devices and consider the workload variation 
    and test conditions.</t>
 
+   <t>Enforcing controlled conditions on test conditions (e.g., temperature)
+   may be impractical or unfeasible. At this stage it is unclear whether
+   it is more useful for the benchmark to enforce controlled conditions
+   (and if so, which ones) or only specifying how those conditions should
+   be measured and reported.</t>
+
     </section>
 
     <section title="Test Methodology">	  
@@ -201,7 +239,7 @@
      <section title="Test Setup">	 	
    <t>The test setup in general is compliant with <xref target="RFC2544" />.
    The Device Under Test (DUT) is connected to a Tester and a Power Meter.
-   The Power Meter allows to measure the power consumption of the device and
+   The Power Meter allows to measure the energy consumption of the device and
    can be used to measure power under various configurations and conditions.
    Tests SHOULD be done with bidirectional traffic that better reflects the real environment.
    The Tester is also a traffic generator that enables changing traffic conditions.    
@@ -234,26 +272,37 @@
    is dissipated as heat. This heating can lead to more power drawn
    by fans/ compressor for cooling the devices. The benchmarking methodology
    does not measure the power drawn by external cooling infrastructure.
-   The Power Meter only measures the internal power consumption of the device.
-   It is OPTIONAL to measure the device's temperature change, which
-   can be correlated to the amount of external power drawn to cool the device.</t>
+   The Power Meter only measures the internal energy consumption of the device.</t>
+   <!-- Romain: I think one way or another, temperature information must be known (if not controllled).
+   IMO, both a device's heat production and its capacity of evacuating that heat are important for energy efficiency.
+   Thus, if we are to compare devices' efficiency, it's useful to know whether heat management plays a role in 
+   the observed differences in efficiency. I am not sure how to do this best yet, but I don't think we should 
+   just say measuring this is optional. I would just comment the following sentence out for now. -->
+   <!-- It is OPTIONAL to measure the device's temperature change, which
+   can be correlated to the amount of external power drawn to cool the device.</t> -->
      </section>  
 	 
-     <section title="Traffic and Device Characterization">
+    <section title="Traffic and Device Characterization">
 
-   <t>An important factor that impacts power consumption is the 
-   offered traffic load. Therefore, power measurements must be performed
-   with different traffic loads to the network device.</t>
+    <!-- Romain: The dynamic power is too small today to emphasize it as an "important" factor IMO. I'd simply remove "important" -->
+    <!-- <t>An important factor that impacts energy consumption is the 
+    offered traffic load. Therefore, power measurements must be performed
+    with different traffic loads to the network device.</t> -->
+    <t>The traffic load supported by a device affects its energy consumption.
+    Therefore, the benchmark MUST include different traffic loads.</t>
 
-   <t>There are different interface types on a network device and the power usage 
-   also depends on the kind of connector/transceiver used. 
-   The interface type used needs to be specified as well.</t>
-   
-   <t>In addition, it is necessary to indicate the number of ports used per linecard 
-   as well as the aggregate bandwidth that each linecard can accommodate.</t>
-   
-   <t>The traffic load also needs to be specified because different packet sizes 
-   may not affect power consumption, but the inter-packet delay may affect it.</t>
+    <t>There are different interface types on a network device and the power usage 
+    also depends on the kind of connector/transceiver used. 
+    The interface type used needs to be specified as well.</t>
+    
+    <t>In addition, it is necessary to indicate the number of ports used per linecard 
+    as well as the aggregate bandwidth that each linecard can accommodate.</t>
+    
+    <!-- Romain: No need to risk wrong statement here. Everything may affect power. -->
+    <!-- <t>The traffic load also needs to be specified because different packet sizes 
+    may not affect energy consumption, but the inter-packet delay may affect it.</t> -->
+    <t>The traffic load must specify packet sizes, packet rates, and inter-packet 
+    delays, as all may affect the energy consumption of network devices.</t>
    
      </section>
 
@@ -261,79 +310,77 @@
 
 	<section anchor="report" title="Reporting Format">
 
-          <list style="hanging">
+  <list style="hanging">
 		  
-      <t hangText="Network Device Hardware and Software versions:"><br />for the benchmarking tests,
-      it must be specified.</t>
-   
-      <t hangText="Number and type of line cards:"><br />  for each test the total
-      number of line cards and their types can be varied and must be specified.</t>
-	  
-	  <t hangText="Number of enabled ports:"><br />  for each test the number of enabled and 
-	  disabled ports must be specified.</t>
-	  
-	  <t hangText="Number of active ports:"><br />  for each test the number of active and 
-	  inactive ports must be specified.</t>
-	  
-	  <t hangText="Port settings and interface types:"><br />  for each test the port configuration
-	  and settings need to be specified.</t>
-	  
-	  <t hangText="Port Utilization:"><br />  for each test the port utilization of each port 
-	  must be specified.  The actual traffic load can use the information 
-	  defined in <xref target="RFC2544" />.</t>
-	  
-	  <t hangText="Traffic attributes:"><br />  for each test
-	  they must be specified (e.g., packet size, packet rate, etc.)</t>
-	  
-	  <t hangText="CPU load:"><br />  for each test it must be specified.</t>
-	  
-	  <t hangText="Power measurement:"><br />  for each test it must be specified.
-	  All power measurements are done in Watts.</t>
+    <t hangText="Network Device Hardware and Software versions:"><br />For the benchmarking tests,
+    it must be specified.</t>
+
+    <t hangText="Number and type of line cards:"><br />  For each test the total
+    number of line cards and their types can be varied and must be specified.</t>
+
+    <t hangText="Number of enabled ports:"><br />  For each test the number of enabled and 
+    disabled ports must be specified.</t>
+
+    <t hangText="Number of active ports:"><br />  For each test the number of active and 
+    inactive ports must be specified.</t>
+
+    <t hangText="Port settings and interface types:"><br />  For each test the port configuration
+    and settings need to be specified.</t>
+
+    <t hangText="Port Utilization:"><br />  For each test the port utilization of each port 
+    must be specified.  The actual traffic load can use the information 
+    defined in <xref target="RFC2544" />.</t>
+
+    <t hangText="Traffic attributes:"><br />  For each test
+    they must be specified (e.g., packet size, packet rate, etc.)</t>
+
+    <t hangText="CPU load:"><br />  For each test it must be specified.</t>
+
+    <t hangText="Power measurement:"><br />  For each test it must be specified.
+    All power measurements are done in Watts.</t>
       
 	  </list>
 
-    </section>
-	 
+  </section>
 
 	<section title="Benchmarking Tests">
 
-	 <section title="Throughput">
-	 
-	 <t>Objective:<list><t>To determine the DUT throughput according to <xref target="RFC2544" />.</t></list></t>
+    <section title="Throughput">
 
-	 <t>Procedure:<list><t>the test is done using a multi-port setup as specified in Section 16 and Section 26.1
-	 of <xref target="RFC2544" />.</t></list></t>
+      <t>Objective:<list><t>To determine the DUT throughput according to <xref target="RFC2544" />.</t></list></t>
 
-     <t>Reporting format:<list><t>the results of the throughput SHOULD be
-     reported according to <xref target="report" />.</t></list></t>
-	 
-	 </section>
+      <t>Procedure:<list><t>The test is done using a multi-port setup as specified in Section 16 and Section 26.1
+      of <xref target="RFC2544" />.</t></list></t>
+
+      <t>Reporting format:<list><t>The results of the throughput SHOULD be
+      reported according to <xref target="report" />.</t></list></t>
+
+    </section>
 	 
 	 <section title="Base Power">
 	 
 	 <t>Objective:<list><t>To determine the base power drawn by the network device,
 	 which typically consists of processors, fans, memory, etc.</t></list></t>
 	 
-	 <t>Procedure:<list><t>the measurement is done without activating the traffic generator.</t></list></t>
+	 <t>Procedure:<list><t>The measurement is done without activating the traffic generator.</t></list></t>
 
-     <t>Reporting format:<list><t>the results of the power measurement SHOULD be
-     reported according to <xref target="report" />.</t></list></t>
+  <t>Reporting format:<list><t>The results of the power measurement SHOULD be
+  reported according to <xref target="report" />.</t></list></t>
 	 
 	 <t>Note:<list><t>This measurement is useful since it permits to calculate the 
-	 additional energy consumption that will result when the 
-	 traffic load changes.</t></list></t>
+	 additional energy consumption that will result when the traffic load changes.</t></list></t>
 	 
 	 </section>
 
-	 <section title="Power Consumption with Traffic Load">
+	 <section title="Energy Consumption with Traffic Load">
 	 
 	 <t>Objective:<list><t>To determine the power drawn by a device. The dynamic power, which is added to the base power,
 	 should be proportional to its traffic load.</t></list></t>
 
-	 <t>Procedure:<list><t>a specific number of packets at a specific rate is sent to specific ports/linecards
+	 <t>Procedure:<list><t>A specific number of packets at a specific rate is sent to specific ports/linecards
 	 of the DUT. All DUT ports must operate under a specific traffic load, which is a percentage of the maximum throughput.</t></list></t>
 
-     <t>Reporting format:<list><t>the results of the power measurement SHOULD be
+     <t>Reporting format:<list><t>The results of the power measurement SHOULD be
      reported according to <xref target="report" />.</t></list></t>
 	 
 	 </section>
@@ -343,13 +390,13 @@
 	 
 	 <t>Objective:<list><t>To determine the energy efficiency of the DUT.</t></list></t>
 
-	 <t>Procedure:<list><t>collect the data for all the traffic loads and apply the formula of 
+	 <t>Procedure:<list><t>Collect the data for all the traffic loads and apply the formula of 
 	 <xref target="terms" />. For example, with all DUT ports operating stably under a percentage
 	 of the maximum throughput (e.g. 100%, 30%, 0%), record the average input power and 
 	 calculate the total weighted power P and then the EER .</t></list></t>
 
-     <t>Reporting format:<list><t>the results of the energy efficiency ratio SHOULD be
-     reported according to <xref target="report" />.</t></list></t>
+    <t>Reporting format:<list><t>The results of the energy efficiency ratio SHOULD be
+    reported according to <xref target="report" />.</t></list></t>
 	 
 	 </section>	 
     </section>
