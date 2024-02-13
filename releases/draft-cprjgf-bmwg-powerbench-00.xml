@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE rfc [
+
+<!ENTITY RFC.2119 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC.2544 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2544.xml">
+<!ENTITY RFC.8174 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
+<!ENTITY I-D.manral-bmwg-power-usage SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.manral-bmwg-power-usage.xml">
+
+]>
+<?rfc toc="yes"?>
+<?rfc rfcedstyle="yes"?>
+<?rfc subcompact="no" ?>
+<?rfc symrefs="yes"?>
+<rfc category="std" docName="draft-cprjgf-bmwg-powerbench-00" 
+  ipr="trust200902" submissionType="IETF" consensus="true" >
+  <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
+  <?rfc toc="yes" ?>
+  <?rfc compact="yes" ?>
+  <?rfc symrefs="yes" ?>
+  <?rfc sortrefs="yes"?>
+  <?rfc iprnotified="no" ?>
+  <?rfc strict="yes" ?>
+
+  <front>
+    <title abbrev="PowerBench">Characterization and Benchmarking Methodology for Power in Networking Devices</title>
+
+    <author fullname="Carlos Pignataro" initials="C." surname="Pignataro">
+      <organization abbrev="NC State University">North Carolina State University</organization>
+
+      <address>
+        <postal>
+          <country>US</country>
+        </postal>        
+        <email>cpignata@gmail.com</email>
+        <email>cmpignat@ncsu.edu</email>
+      </address>
+    </author>
+
+    <author fullname="Romain Jacob" initials="R." surname="Jacob">
+      <organization>ETH Zürich</organization>
+
+      <address>
+        <postal>
+          <country>CH</country>
+        </postal>        
+
+        <email>jacobr@ethz.ch</email>
+      </address>
+    </author>
+
+    <author fullname="Giuseppe Fioccola" initials="G." surname="Fioccola">
+      <organization>Huawei</organization>
+
+      <address>
+        <postal>
+          <country>IT</country>
+        </postal>
+        <email>giuseppe.fioccola@huawei.com</email>
+      </address>
+    </author>
+    
+    <date />
+
+    <area>Operations and Management Area</area>
+
+    <workgroup>Benchmarking Methodology Working Group</workgroup>
+
+
+    <abstract>
+
+   <t>This document defines a standard mechanism to measure, report, and
+   compare power usage of different networking devices and under different
+   network configurations and conditions.</t>
+
+    </abstract>
+  </front>
+
+  <middle>
+    <section title="Introduction">
+	
+   <t>Energy efficiency is becoming increasingly important in the operation
+   of network infrastructure. Network devices are typically always on, but
+   in some cases, they run at very low average utilization rates. Both network
+   utilization and energy consumption of these devices can be improved, 
+   and that starts with a normalized characterization.
+   The benchmarking methodology defined here will help operators to get
+   a more accurate idea of the power drawn by their network and 
+   will also help vendors to test the energy efficiency of their devices.</t>
+
+   <t>There is no standard mechanism to benchmark the power utilization 
+   of networking devices like routers or switches. 
+   <xref target="I-D.manral-bmwg-power-usage" /> started to analyze the issue.
+   This document defines the mechanism to correctly characterize and benchmark 
+   the energy consumption of networking devices to better 
+   estimate and compare their power usage.</t>
+
+   <!-- Romain: Well, not really, if we put the focus on "Assessing "who performs best" over 
+   a set of well-defined scenario" as discussed. 
+   I'd propose to have subsection to make things really crystal clear. -->
+   <!-- <t>The benchmarking methodology of energy efficiency may enable intelligent
+   decisions to optimize the energy consumption for individual devices
+   and the network as a whole. Benchmarks are also required to compare
+   the effectiveness of various energy optimization techniques.</t> -->
+   
+    <section title="Aim and Scope">
+
+    <t>Benchmarking can be understood to serve two related but different objectives:<list>
+				<t>Assessing ``which system performs best'' over a set of well-defined scenarios.</t>
+        <t>Measuring the contribution of sub-systems to the overall system's performance
+        (also known as ``micro-benchmark'').</t>
+	 </list></t>
+
+    <t>The benchmarking methodology outlined in this draft focuses on the first objective.
+    Specifically, it aims to compare the energy efficiency for individual devices 
+    (routers and switches belonging to similar device classes).
+    The benchmark aims to showcase the effectiveness of various energy optimization 
+    techniques for a given device and load type, with the objective of fostering
+    improvements in the energy efficiency of future generations of devices.</t>
+     </section>
+  
+     <section title="Requirements Language">   
+    <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+    "OPTIONAL" in this document are to be interpreted as described in BCP 14
+	<xref target="RFC2119" /> <xref target="RFC8174" /> when, and only when,
+    they appear in all capitals, as shown here.</t>
+     </section>
+	 
+    </section>
+
+    <section anchor="terms" title="Terminology">
+
+    <section title="Total Weighted Capacity of the interfaces">	
+     <t>The total weighted capacity of the interfaces (T) is the weighted sum of all interface throughputs.</t>
+	 
+     <t>Definition:<list>
+				<t>T = B1*T1 +...+ Bi*Ti +...+ Bm*Tm</t>
+	 </list></t>
+
+     <t>Discussion:<list>
+				<t>Ti is the total capacity of the interfaces for a fixed configuration model and traffic load
+				(the sum of the interface bandwidths)</t>
+				<t>Bi is the weighted multiplier for different traffic levels (note that B1+...+Bj+...+Bm = 1)</t>
+				<t>m is the number of traffic load levels (if it is considered 100%, 30%, 0%; m = 3)</t>
+     </list></t>
+    
+	 <t>Measurement units:<list><t>Gbps.</t></list></t>
+
+    <t>Issues<list>
+      <t>The traffic loads and the weighted multipliers need to be clearly established a priori.</t>
+      <t>It is unclear if the definition of the Ti's is/should be linked to the traffic load levels. 
+      For a given port configuration (which may result in 50% of the total capacity a device can provide), 
+      one may be interested in traffic load of e.g., 5% or 10% or the total capacity (not only 50%).</t>
+    </list></t>
+
+    <t>See Also:<list><t><xref target="ETSI-ES-203-136" />.</t></list></t>
+
+    </section>
+
+    <section title="Total Weighted Power">	
+     <t>The total weighted power (P) is the weighted sum of all power calculated for different traffic loads.</t>
+	 
+	 <t>Definition:<list>
+				<t>P = B1*P1 +...+ Bi*Pi +...+ Bm*Pm</t>
+	 </list></t>
+
+     <t>Discussion:<list>
+				<t>Pi is the Power of the equipment in each traffic load level (e.g. 100%, 30%, 0%)</t>
+				<t>Bi is the weighted multiplier for different traffic levels (note that B1+...+Bj+...+Bm = 1)</t>
+				<t>m is the number of traffic load levels (if it is considered 100%, 30%, 0%; m = 3)</t>
+     </list></t>
+    
+	 <t>Measurement units:<list><t>Watt.</t></list></t>
+
+    <t>Issues:<list>
+      <t>The traffic loads and the weighted multipliers need to be clearly established a priori.</t>
+      <t>Importantly, the traffic must be forwarded of the correct port! 
+      It would be easy to cut power down by dropping all traffic, and we of course do not want that.
+      A tolerance on packet loss and/or forwarding error must be specified somehow. 
+      That tolerance could be zero for some benchmark problems, and non-zero for others.
+      Tolerating some errors may be interesting to navigate the design space of energy saving techniques, 
+      such as approximate computing/routing.</t>
+    </list></t>
+
+    <t>See Also:<list><t><xref target="ETSI-ES-203-136" />.</t></list></t>
+
+    </section>
+	
+    <section title="Energy Efficiency Ratio">	
+     <t>Energy Efficiency Ratio (EER) is defined as the throughput forwarded by 1 watt
+	 and it is introduced in <xref target="ETSI-ES-203-136" />. A higher EER corresponds
+	 to a better the energy efficiency.</t>
+	 
+	 <t>Definition:<list>
+                <t>EER = T/P</t>
+	 </list></t>
+
+     <t>Discussion:<list>
+                <t>T is the total weighted sum of all interface throughputs</t>
+				<t>P is the weighted power for different traffic loads</t>
+     </list></t>
+    
+	 <t>Measurement units:<list><t>Gbps/Watt.</t></list></t>
+
+     <t>Issues:<list><t>The traffic loads  and the weighted multipliers need to be clearly established a priori.</t></list></t>
+
+     <t>See Also:<list><t><xref target="ETSI-ES-203-136" />.</t></list></t>
+
+    </section>
+	
+    </section>
+	
+    <section title="Energy Consumption Benchmarking">
+	
+   <t>The maximum power drawn by a device does not accurately 
+   reflect the power under a normal workload.
+   Indeed, the energy consumption of a networking device depends on its 
+   configuration, connected transceivers, and traffic load. 
+   Relying merely on the maximum rated power can overestimate the total
+   energy of the networking devices.</t>
+
+   <t>A network device consists of many components, each of which
+   draws power (for example, it is possible to mention the power
+   consumption of the CPU, data forwarding ASIC, memory, fan, etc.).
+   Therefore, it is important to formulate a consistent benchmarking
+   method for network devices and consider the workload variation 
+   and test conditions.</t>
+
+   <t>Enforcing controlled conditions on test conditions (e.g., temperature)
+   may be impractical or unfeasible. At this stage it is unclear whether
+   it is more useful for the benchmark to enforce controlled conditions
+   (and if so, which ones) or only specifying how those conditions should
+   be measured and reported.</t>
+
+    </section>
+
+    <section title="Test Methodology">	  
+	
+     <section title="Test Setup">	 	
+   <t>The test setup in general is compliant with <xref target="RFC2544" />.
+   The Device Under Test (DUT) is connected to a Tester and a Power Meter.
+   The Power Meter allows to measure the energy consumption of the device and
+   can be used to measure power under various configurations and conditions.
+   Tests SHOULD be done with bidirectional traffic that better reflects the real environment.
+   The Tester is also a traffic generator that enables changing traffic conditions.    
+   It is OPTIONAL to choose a non-equal proportion for upstream and downstream traffic.</t>
+   
+      <figure title="Test Setup" align="center">
+        <artwork><![CDATA[
+        +----------+
++-------|  Tester  |<-------+
+| +-----|          |<-----+ |
+| |     +----------+      | |
+| |                       | |
+| |      +--------+       | |
+| +----->|        |-------+ |
++------->|  DUT   |---------+
+         |        |
+         +--------+
+             |
+             |								
+        +----------+
+        |  Power   |
+        |  Meter   |
+        +----------+
+]]></artwork>
+      </figure>
+
+	 
+   <t>It is worth mentioning that the DUT also dissipates significant heat.
+   That means that part of the power is used for actual work while the rest
+   is dissipated as heat. This heating can lead to more power drawn
+   by fans/ compressor for cooling the devices. The benchmarking methodology
+   does not measure the power drawn by external cooling infrastructure.
+   The Power Meter only measures the internal energy consumption of the device.</t>
+   <!-- Romain: I think one way or another, temperature information must be known (if not controllled).
+   IMO, both a device's heat production and its capacity of evacuating that heat are important for energy efficiency.
+   Thus, if we are to compare devices' efficiency, it's useful to know whether heat management plays a role in 
+   the observed differences in efficiency. I am not sure how to do this best yet, but I don't think we should 
+   just say measuring this is optional. I would just comment the following sentence out for now. -->
+   <!-- It is OPTIONAL to measure the device's temperature change, which
+   can be correlated to the amount of external power drawn to cool the device.</t> -->
+     </section>  
+	 
+    <section title="Traffic and Device Characterization">
+
+    <!-- Romain: The dynamic power is too small today to emphasize it as an "important" factor IMO. I'd simply remove "important" -->
+    <!-- <t>An important factor that impacts energy consumption is the 
+    offered traffic load. Therefore, power measurements must be performed
+    with different traffic loads to the network device.</t> -->
+    <t>The traffic load supported by a device affects its energy consumption.
+    Therefore, the benchmark MUST include different traffic loads.</t>
+
+    <t>There are different interface types on a network device and the power usage 
+    also depends on the kind of connector/transceiver used. 
+    The interface type used needs to be specified as well.</t>
+    
+    <t>In addition, it is necessary to indicate the number of ports used per linecard 
+    as well as the aggregate bandwidth that each linecard can accommodate.</t>
+    
+    <!-- Romain: No need to risk wrong statement here. Everything may affect power. -->
+    <!-- <t>The traffic load also needs to be specified because different packet sizes 
+    may not affect energy consumption, but the inter-packet delay may affect it.</t> -->
+    <t>The traffic load must specify packet sizes, packet rates, and inter-packet 
+    delays, as all may affect the energy consumption of network devices.</t>
+   
+     </section>
+
+    </section>
+
+	<section anchor="report" title="Reporting Format">
+
+  <list style="hanging">
+		  
+    <t hangText="Network Device Hardware and Software versions:"><br />For the benchmarking tests,
+    it must be specified.</t>
+
+    <t hangText="Number and type of line cards:"><br />  For each test the total
+    number of line cards and their types can be varied and must be specified.</t>
+
+    <t hangText="Number of enabled ports:"><br />  For each test the number of enabled and 
+    disabled ports must be specified.</t>
+
+    <t hangText="Number of active ports:"><br />  For each test the number of active and 
+    inactive ports must be specified.</t>
+
+    <t hangText="Port settings and interface types:"><br />  For each test the port configuration
+    and settings need to be specified.</t>
+
+    <t hangText="Port Utilization:"><br />  For each test the port utilization of each port 
+    must be specified.  The actual traffic load can use the information 
+    defined in <xref target="RFC2544" />.</t>
+
+    <t hangText="Traffic attributes:"><br />  For each test
+    they must be specified (e.g., packet size, packet rate, etc.)</t>
+
+    <t hangText="CPU load:"><br />  For each test it must be specified.</t>
+
+    <t hangText="Power measurement:"><br />  For each test it must be specified.
+    All power measurements are done in Watts.</t>
+      
+	  </list>
+
+  </section>
+
+	<section title="Benchmarking Tests">
+
+    <section title="Throughput">
+
+      <t>Objective:<list><t>To determine the DUT throughput according to <xref target="RFC2544" />.</t></list></t>
+
+      <t>Procedure:<list><t>The test is done using a multi-port setup as specified in Section 16 and Section 26.1
+      of <xref target="RFC2544" />.</t></list></t>
+
+      <t>Reporting format:<list><t>The results of the throughput SHOULD be
+      reported according to <xref target="report" />.</t></list></t>
+
+    </section>
+	 
+	 <section title="Base Power">
+	 
+	 <t>Objective:<list><t>To determine the base power drawn by the network device,
+	 which typically consists of processors, fans, memory, etc.</t></list></t>
+	 
+	 <t>Procedure:<list><t>The measurement is done without activating the traffic generator.</t></list></t>
+
+  <t>Reporting format:<list><t>The results of the power measurement SHOULD be
+  reported according to <xref target="report" />.</t></list></t>
+	 
+	 <t>Note:<list><t>This measurement is useful since it permits to calculate the 
+	 additional energy consumption that will result when the traffic load changes.</t></list></t>
+	 
+	 </section>
+
+	 <section title="Energy Consumption with Traffic Load">
+	 
+	 <t>Objective:<list><t>To determine the power drawn by a device. The dynamic power, which is added to the base power,
+	 should be proportional to its traffic load.</t></list></t>
+
+	 <t>Procedure:<list><t>A specific number of packets at a specific rate is sent to specific ports/linecards
+	 of the DUT. All DUT ports must operate under a specific traffic load, which is a percentage of the maximum throughput.</t></list></t>
+
+     <t>Reporting format:<list><t>The results of the power measurement SHOULD be
+     reported according to <xref target="report" />.</t></list></t>
+	 
+	 </section>
+
+	 
+	 <section title="Energy Efficiency Ratio">
+	 
+	 <t>Objective:<list><t>To determine the energy efficiency of the DUT.</t></list></t>
+
+	 <t>Procedure:<list><t>Collect the data for all the traffic loads and apply the formula of 
+	 <xref target="terms" />. For example, with all DUT ports operating stably under a percentage
+	 of the maximum throughput (e.g. 100%, 30%, 0%), record the average input power and 
+	 calculate the total weighted power P and then the EER .</t></list></t>
+
+    <t>Reporting format:<list><t>The results of the energy efficiency ratio SHOULD be
+    reported according to <xref target="report" />.</t></list></t>
+	 
+	 </section>	 
+    </section>
+
+
+    <section title="Security Considerations">
+      <t>The benchmarking characterization described in this document is constrained 
+	  to a controlled environment (as a laboratory) and includes controlled stimuli. 
+      The  network under benchmarking MUST NOT be connected to production networks.</t>
+	  
+	  <t>Beyond these, there are no specific security considerations within the scope of this document.</t>
+    </section>
+
+    <section title="Acknowledgements">
+      <t>We wish to thank the authors of <xref target="I-D.manral-bmwg-power-usage" /> 
+	  for their analysis and start on this topic.</t>
+    </section>
+  </middle>
+
+  <back>
+
+
+   <references title="Normative References">
+    &RFC.2119;
+	&RFC.8174;
+    &RFC.2544;
+	  
+   </references>
+    
+    <references title="Informative References">
+
+      &I-D.manral-bmwg-power-usage;
+
+	 <reference anchor='ETSI-ES-203-136' target="https://www.etsi.org/deliver/etsi_es/203100_203199/203136/01.02.00_50/es_203136v010200m.pdf">
+     <front>
+      <title>ETSI ES 203 136: Environmental Engineering (EE); Measurement methods for energy efficiency of router and switch equipment</title>
+      <author>
+       <organization>ETSI</organization>
+      </author>
+      <date year='2017' />
+     </front>
+     </reference>
+	 
+    </references>
+
+  </back>
+</rfc>
