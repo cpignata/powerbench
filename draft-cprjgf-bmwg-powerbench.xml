@@ -41,7 +41,7 @@
 
       <address>
         <postal>
-          <country>CH</country>
+          <country>Switzerland</country>
         </postal>        
 
         <email>jacobr@ethz.ch</email>
@@ -53,9 +53,20 @@
 
       <address>
         <postal>
-          <country>IT</country>
+          <country>Italy</country>
         </postal>
         <email>giuseppe.fioccola@huawei.com</email>
+      </address>
+    </author>
+
+   <author fullname="Qin Wu" initials="Q." surname="Wu">
+      <organization>Huawei</organization>
+
+      <address>
+        <postal>
+          <country>China</country>
+        </postal>
+        <email>bill.wu@huawei.com</email>
       </address>
     </author>
     
@@ -82,7 +93,9 @@
    of network infrastructure. Network devices are typically always on, but
    in some cases, they run at very low average utilization rates. Both network
    utilization and energy consumption of these devices can be improved, 
-   and that starts with a normalized characterization.
+   and that starts with a normalized characterization <xref target="RFC6988"/>
+   <xref target="RFC7460" />.
+
    The benchmarking methodology defined here will help operators to get
    a more accurate idea of the power drawn by their network and 
    will also help vendors to test the energy efficiency of their devices.</t>
@@ -421,9 +434,10 @@
 
    <references title="Normative References">
     &RFC.2119;
-	&RFC.8174;
+    &RFC.8174;
     &RFC.2544;
-	  
+    &RFC.6988;
+    &RFC.7460;	  
    </references>
     
     <references title="Informative References">
