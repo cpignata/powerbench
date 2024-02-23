@@ -93,12 +93,12 @@
    of network infrastructure. Network devices are typically always on, but
    in some cases, they run at very low average utilization rates. Both network
    utilization and energy consumption of these devices can be improved, 
-   and that starts with a normalized characterization <xref target="RFC6988"/>
-   <xref target="RFC7460" />.
+   and that starts with a normalized characterization <xref target="RFC7460" />.
 
    The benchmarking methodology defined here will help operators to get
    a more accurate idea of the power drawn by their network and 
-   will also help vendors to test the energy efficiency of their devices.</t>
+   will also help vendors to test the energy efficiency of their devices
+   <xref target="RFC6988"/>.</t>
 
    <t>There is no standard mechanism to benchmark the power utilization 
    of networking devices like routers or switches. 
@@ -118,9 +118,9 @@
     <section title="Aim and Scope">
 
     <t>Benchmarking can be understood to serve two related but different objectives:<list>
-				<t>Assessing ``which system performs best'' over a set of well-defined scenarios.</t>
+	<t>Assessing ''which system performs best'' over a set of well-defined scenarios.</t>
         <t>Measuring the contribution of sub-systems to the overall system's performance
-        (also known as ``micro-benchmark'').</t>
+        (also known as ''micro-benchmark'').</t>
 	 </list></t>
 
     <t>The benchmarking methodology outlined in this draft focuses on the first objective.
