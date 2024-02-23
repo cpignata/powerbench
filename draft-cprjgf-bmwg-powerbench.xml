@@ -153,8 +153,13 @@
      <t>Discussion:<list>
 				<t>Ti is the total capacity of the interfaces for a fixed configuration model and traffic load
 				(the sum of the interface bandwidths)</t>
-				<t>Bi is the weighted multiplier for different traffic levels (note that B1+...+Bj+...+Bm = 1)</t>
-				<t>m is the number of traffic load levels (if it is considered 100%, 30%, 0%; m = 3)</t>
+				<t>Bi is the weighted multiplier for different traffic levels (note
+                                that B1+...+Bj+...+Bm = 1, weight multipliers may be specified for router, switch differently,
+				3 typical weighted multipliers are 0.1,0.8,0.1)</t>
+				<t>m is the number of traffic load levels (if it is considered 100%, 30%, 0%; m = 3) Note that
+				traffic load levels may be specified differently for router and switch, e.g., traffic level 
+				100%,10%,0% for access router, traffic level 100%,30%,0% for core router and data center 
+				switch.</t>
      </list></t>
     
 	 <t>Measurement units:<list><t>Gbps.</t></list></t>
@@ -166,7 +171,8 @@
       one may be interested in traffic load of e.g., 5% or 10% or the total capacity (not only 50%).</t>
     </list></t>
 
-    <t>See Also:<list><t><xref target="ETSI-ES-203-136" />.</t></list></t>
+    <t>See Also:<list><t><xref target="ETSI-ES-203-136" />,<xref target="ITUT-L.1310" />
+       ,<xref target=" ATIS-0600015.03.2013" />.</t></list></t>
 
     </section>
 
@@ -189,13 +195,17 @@
       <t>The traffic loads and the weighted multipliers need to be clearly established a priori.</t>
       <t>Importantly, the traffic must be forwarded of the correct port! 
       It would be easy to cut power down by dropping all traffic, and we of course do not want that.
-      A tolerance on packet loss and/or forwarding error must be specified somehow. 
-      That tolerance could be zero for some benchmark problems, and non-zero for others.
-      Tolerating some errors may be interesting to navigate the design space of energy saving techniques, 
-      such as approximate computing/routing.</t>
+
+      A tolerance on packet loss and/or forwarding error must be specified somehow.  That tolerance could
+      be zero for some benchmark problems (e.g., Non packet loss (NDR) estimation), and non-zero for others.
+      Tolerating some errors may be interesting to navigate the design space of energy saving techniques,
+      such as approximate computing/routing. According to measurement procedure in section 6.5 of 
+      [ATIS-0600015.03.2013], the Equipment Unit Test (EUT) should be able to return to full NDR load. 
+      Failure to do so disqualifies the test results. </t>
     </list></t>
 
-    <t>See Also:<list><t><xref target="ETSI-ES-203-136" />.</t></list></t>
+    <t>See Also:<list><t><xref target="ETSI-ES-203-136" />,<xref target="ITUT-L.1310" />
+       ,<xref target=" ATIS-0600015.03.2013" />.</t></list></t>
 
     </section>
 	
@@ -217,7 +227,8 @@
 
      <t>Issues:<list><t>The traffic loads  and the weighted multipliers need to be clearly established a priori.</t></list></t>
 
-     <t>See Also:<list><t><xref target="ETSI-ES-203-136" />.</t></list></t>
+     <t>See Also:<list><t><xref target="ETSI-ES-203-136" />,<xref target="ITUT-L.1310" />
+       ,<xref target=" ATIS-0600015.03.2013" />.</t></list></t>
 
     </section>
 	
@@ -239,11 +250,12 @@
    method for network devices and consider the workload variation 
    and test conditions.</t>
 
-   <t>Enforcing controlled conditions on test conditions (e.g., temperature)
-   may be impractical or unfeasible. At this stage it is unclear whether
-   it is more useful for the benchmark to enforce controlled conditions
-   (and if so, which ones) or only specifying how those conditions should
-   be measured and reported.</t>
+   <t>Enforcing controlled conditions on test conditions (e.g.,
+   Temperature) is important for test procedure to make sure test conditions
+   repeatable [RFC6985]. The measurement condition reported in [ATIS-0600015.2009] 
+   and [ITUT-L.1310] should be applied, e.g., the power measurements shall be 
+   performed in a laboratory environment under specific range of temperature, 
+   humidity and atmosphere pressure.</t>
 
     </section>
 
@@ -314,8 +326,9 @@
     <!-- Romain: No need to risk wrong statement here. Everything may affect power. -->
     <!-- <t>The traffic load also needs to be specified because different packet sizes 
     may not affect energy consumption, but the inter-packet delay may affect it.</t> -->
-    <t>The traffic load must specify packet sizes, packet rates, and inter-packet 
-    delays, as all may affect the energy consumption of network devices.</t>
+    <t>The traffic load must specify traffic type, packet size mixtures, percentage of
+   overall traffic for each traffic type (See Annex D of [ATIS-0600015.2009] for
+   more details), as all may affect the energy consumption of network devices. </t>
    
      </section>
 
@@ -375,7 +388,8 @@
 	 <t>Objective:<list><t>To determine the base power drawn by the network device,
 	 which typically consists of processors, fans, memory, etc.</t></list></t>
 	 
-	 <t>Procedure:<list><t>The measurement is done without activating the traffic generator.</t></list></t>
+	 <t>Procedure:<list><t>The measurement is done without activating the traffic generator.
+	 In this case, the traffic load level percentage is 0.</t></list></t>
 
   <t>Reporting format:<list><t>The results of the power measurement SHOULD be
   reported according to <xref target="report" />.</t></list></t>
@@ -444,16 +458,36 @@
 
       &I-D.manral-bmwg-power-usage;
 
-	 <reference anchor='ETSI-ES-203-136' target="https://www.etsi.org/deliver/etsi_es/203100_203199/203136/01.02.00_50/es_203136v010200m.pdf">
-     <front>
-      <title>ETSI ES 203 136: Environmental Engineering (EE); Measurement methods for energy efficiency of router and switch equipment</title>
-      <author>
-       <organization>ETSI</organization>
-      </author>
-      <date year='2017' />
+      <reference anchor='ETSI-ES-203-136' target="https://www.etsi.org/deliver/etsi_es/203100_203199/203136/01.02.00_50/es_203136v010200m.pdf">
+       <front>
+        <title>ETSI ES 203 136: Environmental Engineering (EE); Measurement methods for energy efficiency of router and switch equipment</title>
+        <author>
+          <organization>ETSI</organization>
+        </author>
+        <date year='2017' />
      </front>
      </reference>
-	 
+
+      <reference anchor='ITUT-L.1310' target="https://www.itu.int/rec/T-REC-L.1310/en">
+       <front>
+        <title>L.1310 : Energy efficiency metrics and measurement methods for telecommunication equipment</title>
+        <author>
+          <organization>ITU-T</organization>
+        </author>
+        <date year='2020' />
+     </front>
+     </reference>
+
+      <reference anchor='ATIS-0600015.03.2013' target=" ">
+       <front>
+        <title>ATIS-0600015.03.2013: Energy Efficiency for Telecommunication Equipment: Methodology 
+	for Measurement and Reporting for Router and Ethernet Switch Products</title>
+        <author>
+          <organization>ATIS</organization>
+        </author>
+        <date year='2013' />
+     </front>
+     </reference>
     </references>
 
   </back>
