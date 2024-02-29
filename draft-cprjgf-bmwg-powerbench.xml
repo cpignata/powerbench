@@ -450,8 +450,8 @@
     &RFC.2119;
     &RFC.8174;
     &RFC.2544;
-    &RFC.6988;
-    &RFC.7460;	  
+    <?rfc include="reference.RFC.6988.xml"?>
+    <?rfc include="reference.RFC.7460.xml"?>  
    </references>
     
     <references title="Informative References">
