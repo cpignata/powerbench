@@ -1,14 +1,11 @@
-
-
-
-
 Benchmarking Methodology Working Group                      C. Pignataro
 Internet-Draft                                       NC State University
 Intended status: Standards Track                                R. Jacob
-Expires: 16 August 2024                                       ETH Zürich
+Expires: 1 September 2024                                     ETH Zürich
                                                              G. Fioccola
+                                                                   Q. Wu
                                                                   Huawei
-                                                        13 February 2024
+                                                        29 February 2024
 
 
  Characterization and Benchmarking Methodology for Power in Networking
@@ -36,7 +33,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 August 2024.
+   This Internet-Draft will expire on 1 September 2024.
 
 Copyright Notice
 
@@ -52,8 +49,7 @@ Copyright Notice
 
 
 
-
-Pignataro, et al.        Expires 16 August 2024                 [Page 1]
+Pignataro, et al.       Expires 1 September 2024                [Page 1]
 
 Internet-Draft                 PowerBench                  February 2024
 
@@ -80,7 +76,7 @@ Table of Contents
    4.  Test Methodology  . . . . . . . . . . . . . . . . . . . . . .   6
      4.1.  Test Setup  . . . . . . . . . . . . . . . . . . . . . . .   6
      4.2.  Traffic and Device Characterization . . . . . . . . . . .   7
-   5.  Reporting Format  . . . . . . . . . . . . . . . . . . . . . .   7
+   5.  Reporting Format  . . . . . . . . . . . . . . . . . . . . . .   8
    6.  Benchmarking Tests  . . . . . . . . . . . . . . . . . . . . .   8
      6.1.  Throughput  . . . . . . . . . . . . . . . . . . . . . . .   8
      6.2.  Base Power  . . . . . . . . . . . . . . . . . . . . . . .   9
@@ -99,17 +95,17 @@ Table of Contents
    of network infrastructure.  Network devices are typically always on,
    but in some cases, they run at very low average utilization rates.
    Both network utilization and energy consumption of these devices can
-   be improved, and that starts with a normalized characterization.  The
-   benchmarking methodology defined here will help operators to get a
-   more accurate idea of the power drawn by their network and will also
-   help vendors to test the energy efficiency of their devices.
+   be improved, and that starts with a normalized characterization
+   [RFC7460].  The benchmarking methodology defined here will help
+   operators to get a more accurate idea of the power drawn by their
+   network and will also help vendors to test the energy efficiency of
+   their devices [RFC6988].
 
 
 
 
 
-
-Pignataro, et al.        Expires 16 August 2024                 [Page 2]
+Pignataro, et al.       Expires 1 September 2024                [Page 2]
 
 Internet-Draft                 PowerBench                  February 2024
 
@@ -126,11 +122,11 @@ Internet-Draft                 PowerBench                  February 2024
    Benchmarking can be understood to serve two related but different
    objectives:
 
-      Assessing ``which system performs best'' over a set of well-
+      Assessing ''which system performs best'' over a set of well-
       defined scenarios.
 
       Measuring the contribution of sub-systems to the overall system's
-      performance (also known as ``micro-benchmark'').
+      performance (also known as ''micro-benchmark'').
 
    The benchmarking methodology outlined in this draft focuses on the
    first objective.  Specifically, it aims to compare the energy
@@ -165,7 +161,7 @@ Internet-Draft                 PowerBench                  February 2024
 
 
 
-Pignataro, et al.        Expires 16 August 2024                 [Page 3]
+Pignataro, et al.       Expires 1 September 2024                [Page 3]
 
 Internet-Draft                 PowerBench                  February 2024
 
@@ -175,10 +171,15 @@ Internet-Draft                 PowerBench                  February 2024
       bandwidths)
 
       Bi is the weighted multiplier for different traffic levels (note
-      that B1+...+Bj+...+Bm = 1)
+      that B1+...+Bj+...+Bm = 1, weight multipliers may be specified for
+      router, switch differently, 3 typical weighted multipliers are
+      0.1,0.8,0.1)
 
       m is the number of traffic load levels (if it is considered 100%,
-      30%, 0%; m = 3)
+      30%, 0%; m = 3) Note that traffic load levels may be specified
+      differently for router and switch, e.g., traffic level 100%,10%,0%
+      for access router, traffic level 100%,30%,0% for core router and
+      data center switch.
 
    Measurement units:
 
@@ -197,7 +198,7 @@ Internet-Draft                 PowerBench                  February 2024
 
    See Also:
 
-      [ETSI-ES-203-136].
+      [ETSI-ES-203-136],[ITUT-L.1310] ,[ATIS-0600015.03.2013].
 
 2.2.  Total Weighted Power
 
@@ -213,18 +214,19 @@ Internet-Draft                 PowerBench                  February 2024
       Pi is the Power of the equipment in each traffic load level (e.g.
       100%, 30%, 0%)
 
+
+
+
+Pignataro, et al.       Expires 1 September 2024                [Page 4]
+
+Internet-Draft                 PowerBench                  February 2024
+
+
       Bi is the weighted multiplier for different traffic levels (note
       that B1+...+Bj+...+Bm = 1)
 
       m is the number of traffic load levels (if it is considered 100%,
       30%, 0%; m = 3)
-
-
-
-Pignataro, et al.        Expires 16 August 2024                 [Page 4]
-
-Internet-Draft                 PowerBench                  February 2024
-
 
    Measurement units:
 
@@ -239,14 +241,17 @@ Internet-Draft                 PowerBench                  February 2024
       It would be easy to cut power down by dropping all traffic, and we
       of course do not want that.  A tolerance on packet loss and/or
       forwarding error must be specified somehow.  That tolerance could
-      be zero for some benchmark problems, and non-zero for others.
-      Tolerating some errors may be interesting to navigate the design
-      space of energy saving techniques, such as approximate computing/
-      routing.
+      be zero for some benchmark problems (e.g., Non packet loss (NDR)
+      estimation), and non-zero for others.  Tolerating some errors may
+      be interesting to navigate the design space of energy saving
+      techniques, such as approximate computing/routing.  According to
+      measurement procedure in section 6.5 of [ATIS-0600015.03.2013],
+      the Equipment Unit Test (EUT) should be able to return to full NDR
+      load.  Failure to do so disqualifies the test results.
 
    See Also:
 
-      [ETSI-ES-203-136].
+      [ETSI-ES-203-136],[ITUT-L.1310] ,[ATIS-0600015.03.2013].
 
 2.3.  Energy Efficiency Ratio
 
@@ -266,6 +271,13 @@ Internet-Draft                 PowerBench                  February 2024
 
    Measurement units:
 
+
+
+Pignataro, et al.       Expires 1 September 2024                [Page 5]
+
+Internet-Draft                 PowerBench                  February 2024
+
+
       Gbps/Watt.
 
    Issues:
@@ -275,14 +287,7 @@ Internet-Draft                 PowerBench                  February 2024
 
    See Also:
 
-
-
-Pignataro, et al.        Expires 16 August 2024                 [Page 5]
-
-Internet-Draft                 PowerBench                  February 2024
-
-
-      [ETSI-ES-203-136].
+      [ETSI-ES-203-136],[ITUT-L.1310] ,[ATIS-0600015.03.2013].
 
 3.  Energy Consumption Benchmarking
 
@@ -300,10 +305,12 @@ Internet-Draft                 PowerBench                  February 2024
    conditions.
 
    Enforcing controlled conditions on test conditions (e.g.,
-   temperature) may be impractical or unfeasible.  At this stage it is
-   unclear whether it is more useful for the benchmark to enforce
-   controlled conditions (and if so, which ones) or only specifying how
-   those conditions should be measured and reported.
+   Temperature) is important for test procedure to make sure test
+   conditions repeatable [RFC6985].  The measurement condition reported
+   in [ATIS-0600015.2009] and [ITUT-L.1310] should be applied, e.g., the
+   power measurements shall be performed in a laboratory environment
+   under specific range of temperature, humidity and atmosphere
+   pressure.
 
 4.  Test Methodology
 
@@ -322,18 +329,7 @@ Internet-Draft                 PowerBench                  February 2024
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-Pignataro, et al.        Expires 16 August 2024                 [Page 6]
+Pignataro, et al.       Expires 1 September 2024                [Page 6]
 
 Internet-Draft                 PowerBench                  February 2024
 
@@ -379,21 +375,24 @@ Internet-Draft                 PowerBench                  February 2024
    linecard as well as the aggregate bandwidth that each linecard can
    accommodate.
 
-   The traffic load must specify packet sizes, packet rates, and inter-
-   packet delays, as all may affect the energy consumption of network
-   devices.
-
-5.  Reporting Format
-
-   Network Device Hardware and Software versions:
+   The traffic load must specify traffic type, packet size mixtures,
+   percentage of overall traffic for each traffic type (See Annex D of
+   [ATIS-0600015.2009] for more details), as all may affect the energy
+   consumption of network devices.
 
 
 
-Pignataro, et al.        Expires 16 August 2024                 [Page 7]
+
+
+
+Pignataro, et al.       Expires 1 September 2024                [Page 7]
 
 Internet-Draft                 PowerBench                  February 2024
 
 
+5.  Reporting Format
+
+   Network Device Hardware and Software versions:
       For the benchmarking tests, it must be specified.
 
    Number and type of line cards:
@@ -438,17 +437,19 @@ Internet-Draft                 PowerBench                  February 2024
 
    Procedure:
 
+
+
+
+
+Pignataro, et al.       Expires 1 September 2024                [Page 8]
+
+Internet-Draft                 PowerBench                  February 2024
+
+
       The test is done using a multi-port setup as specified in
       Section 16 and Section 26.1 of [RFC2544].
 
    Reporting format:
-
-
-
-Pignataro, et al.        Expires 16 August 2024                 [Page 8]
-
-Internet-Draft                 PowerBench                  February 2024
-
 
       The results of the throughput SHOULD be reported according to
       Section 5.
@@ -463,6 +464,7 @@ Internet-Draft                 PowerBench                  February 2024
    Procedure:
 
       The measurement is done without activating the traffic generator.
+      In this case, the traffic load level percentage is 0.
 
    Reporting format:
 
@@ -492,19 +494,16 @@ Internet-Draft                 PowerBench                  February 2024
 
    Reporting format:
 
-      The results of the power measurement SHOULD be reported according
-      to Section 5.
 
 
 
-
-
-
-
-Pignataro, et al.        Expires 16 August 2024                 [Page 9]
+Pignataro, et al.       Expires 1 September 2024                [Page 9]
 
 Internet-Draft                 PowerBench                  February 2024
 
+
+      The results of the power measurement SHOULD be reported according
+      to Section 5.
 
 6.4.  Energy Efficiency Ratio
 
@@ -549,24 +548,42 @@ Internet-Draft                 PowerBench                  February 2024
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
+
+
+
+
+
+Pignataro, et al.       Expires 1 September 2024               [Page 10]
+
+Internet-Draft                 PowerBench                  February 2024
+
+
    [RFC2544]  Bradner, S. and J. McQuaid, "Benchmarking Methodology for
               Network Interconnect Devices", RFC 2544,
               DOI 10.17487/RFC2544, March 1999,
               <https://www.rfc-editor.org/info/rfc2544>.
 
+   [RFC6988]  Quittek, J., Ed., Chandramouli, M., Winter, R., Dietz, T.,
+              and B. Claise, "Requirements for Energy Management",
+              RFC 6988, DOI 10.17487/RFC6988, September 2013,
+              <https://www.rfc-editor.org/info/rfc6988>.
 
-
-
-Pignataro, et al.        Expires 16 August 2024                [Page 10]
-
-Internet-Draft                 PowerBench                  February 2024
-
+   [RFC7460]  Chandramouli, M., Claise, B., Schoening, B., Quittek, J.,
+              and T. Dietz, "Monitoring and Control MIB for Power and
+              Energy", RFC 7460, DOI 10.17487/RFC7460, March 2015,
+              <https://www.rfc-editor.org/info/rfc7460>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
 9.2.  Informative References
+
+   [ATIS-0600015.03.2013]
+              ATIS, "ATIS-0600015.03.2013: Energy Efficiency for
+              Telecommunication Equipment: Methodology for Measurement
+              and Reporting for Router and Ethernet Switch Products",
+              2013.
 
    [ETSI-ES-203-136]
               ETSI, "ETSI ES 203 136: Environmental Engineering (EE);
@@ -582,7 +599,20 @@ Internet-Draft                 PowerBench                  February 2024
               04, 12 March 2013, <https://datatracker.ietf.org/doc/html/
               draft-manral-bmwg-power-usage-04>.
 
+   [ITUT-L.1310]
+              ITU-T, "L.1310 : Energy efficiency metrics and measurement
+              methods for telecommunication equipment", 2020,
+              <https://www.itu.int/rec/T-REC-L.1310/en>.
+
 Authors' Addresses
+
+
+
+
+Pignataro, et al.       Expires 1 September 2024               [Page 11]
+
+Internet-Draft                 PowerBench                  February 2024
+
 
    Carlos Pignataro
    North Carolina State University
@@ -602,6 +632,10 @@ Authors' Addresses
    Email: giuseppe.fioccola@huawei.com
 
 
+   Qin Wu
+   Huawei
+   China
+   Email: bill.wu@huawei.com
 
 
 
@@ -613,4 +647,22 @@ Authors' Addresses
 
 
 
-Pignataro, et al.        Expires 16 August 2024                [Page 11]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pignataro, et al.       Expires 1 September 2024               [Page 12]
