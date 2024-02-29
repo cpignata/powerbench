@@ -4,6 +4,8 @@
 <!ENTITY RFC.2119 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY RFC.2544 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2544.xml">
 <!ENTITY RFC.8174 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
+<!ENTITY RFC.6988 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6988.xml">
+<!ENTITY RFC.7460 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7460.xml">
 <!ENTITY I-D.manral-bmwg-power-usage SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.manral-bmwg-power-usage.xml">
 
 ]>
@@ -11,7 +13,7 @@
 <?rfc rfcedstyle="yes"?>
 <?rfc subcompact="no" ?>
 <?rfc symrefs="yes"?>
-<rfc category="std" docName="draft-cprjgf-bmwg-powerbench-00" 
+<rfc category="std" docName="draft-cprjgf-bmwg-powerbench-01" 
   ipr="trust200902" submissionType="IETF" consensus="true" >
   <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
   <?rfc toc="yes" ?>
@@ -450,8 +452,8 @@
     &RFC.2119;
     &RFC.8174;
     &RFC.2544;
-    <?rfc include="reference.RFC.6988.xml"?>
-    <?rfc include="reference.RFC.7460.xml"?>  
+    &RFC.6988;
+    &RFC.7460;
    </references>
     
     <references title="Informative References">
