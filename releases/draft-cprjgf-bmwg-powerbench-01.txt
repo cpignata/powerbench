@@ -1,0 +1,672 @@
+
+
+
+
+Benchmarking Methodology Working Group                      C. Pignataro
+Internet-Draft                                       NC State University
+Intended status: Standards Track                                R. Jacob
+Expires: 5 September 2024                                     ETH Zürich
+                                                             G. Fioccola
+                                                                   Q. Wu
+                                                                  Huawei
+                                                            4 March 2024
+
+
+ Characterization and Benchmarking Methodology for Power in Networking
+                                Devices
+                    draft-cprjgf-bmwg-powerbench-01
+
+Abstract
+
+   This document defines a standard mechanism to measure, report, and
+   compare power usage of different networking devices and under
+   different network configurations and conditions.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 5 September 2024.
+
+Copyright Notice
+
+   Copyright (c) 2024 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+
+
+
+
+
+
+
+
+
+Pignataro, et al.       Expires 5 September 2024                [Page 1]
+
+Internet-Draft                 PowerBench                     March 2024
+
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
+     1.1.  Aim and Scope . . . . . . . . . . . . . . . . . . . . . .   3
+     1.2.  Requirements Language . . . . . . . . . . . . . . . . . .   3
+   2.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . .   3
+     2.1.  Total Weighted Capacity of the interfaces . . . . . . . .   3
+     2.2.  Total Weighted Power  . . . . . . . . . . . . . . . . . .   4
+     2.3.  Energy Efficiency Ratio . . . . . . . . . . . . . . . . .   5
+   3.  Energy Consumption Benchmarking . . . . . . . . . . . . . . .   6
+   4.  Test Methodology  . . . . . . . . . . . . . . . . . . . . . .   6
+     4.1.  Test Setup  . . . . . . . . . . . . . . . . . . . . . . .   6
+     4.2.  Traffic and Device Characterization . . . . . . . . . . .   7
+   5.  Reporting Format  . . . . . . . . . . . . . . . . . . . . . .   8
+   6.  Benchmarking Tests  . . . . . . . . . . . . . . . . . . . . .   8
+     6.1.  Throughput  . . . . . . . . . . . . . . . . . . . . . . .   8
+     6.2.  Base Power  . . . . . . . . . . . . . . . . . . . . . . .   9
+     6.3.  Energy Consumption with Traffic Load  . . . . . . . . . .   9
+     6.4.  Energy Efficiency Ratio . . . . . . . . . . . . . . . . .  10
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . .  10
+   8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  10
+   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  10
+     9.1.  Normative References  . . . . . . . . . . . . . . . . . .  10
+     9.2.  Informative References  . . . . . . . . . . . . . . . . .  11
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  11
+
+1.  Introduction
+
+   Energy efficiency is becoming increasingly important in the operation
+   of network infrastructure.  Network devices are typically always on,
+   but in some cases, they run at very low average utilization rates.
+   Both network utilization and energy consumption of these devices can
+   be improved, and that starts with a normalized characterization
+   [RFC7460].  The benchmarking methodology defined here will help
+   operators to get a more accurate idea of the power drawn by their
+   network and will also help vendors to test the energy efficiency of
+   their devices [RFC6988].
+
+
+
+
+
+Pignataro, et al.       Expires 5 September 2024                [Page 2]
+
+Internet-Draft                 PowerBench                     March 2024
+
+
+   There is no standard mechanism to benchmark the power utilization of
+   networking devices like routers or switches.
+   [I-D.manral-bmwg-power-usage] started to analyze the issue.  This
+   document defines the mechanism to correctly characterize and
+   benchmark the energy consumption of networking devices to better
+   estimate and compare their power usage.
+
+1.1.  Aim and Scope
+
+   Benchmarking can be understood to serve two related but different
+   objectives:
+
+      Assessing ''which system performs best'' over a set of well-
+      defined scenarios.
+
+      Measuring the contribution of sub-systems to the overall system's
+      performance (also known as ''micro-benchmark'').
+
+   The benchmarking methodology outlined in this draft focuses on the
+   first objective.  Specifically, it aims to compare the energy
+   efficiency for individual devices (routers and switches belonging to
+   similar device classes).  The benchmark aims to showcase the
+   effectiveness of various energy optimization techniques for a given
+   device and load type, with the objective of fostering improvements in
+   the energy efficiency of future generations of devices.
+
+1.2.  Requirements Language
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in BCP
+   14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+2.  Terminology
+
+2.1.  Total Weighted Capacity of the interfaces
+
+   The total weighted capacity of the interfaces (T) is the weighted sum
+   of all interface throughputs.
+
+   Definition:
+
+      T = B1*T1 +...+ Bi*Ti +...+ Bm*Tm
+
+   Discussion:
+
+
+
+
+
+Pignataro, et al.       Expires 5 September 2024                [Page 3]
+
+Internet-Draft                 PowerBench                     March 2024
+
+
+      Ti is the total capacity of the interfaces for a fixed
+      configuration model and traffic load (the sum of the interface
+      bandwidths)
+
+      Bi is the weighted multiplier for different traffic levels (note
+      that B1+...+Bj+...+Bm = 1, weight multipliers may be specified for
+      router, switch differently, 3 typical weighted multipliers are
+      0.1,0.8,0.1)
+
+      m is the number of traffic load levels (if it is considered 100%,
+      30%, 0%; m = 3) Note that traffic load levels may be specified
+      differently for router and switch, e.g., traffic level 100%,10%,0%
+      for access router, traffic level 100%,30%,0% for core router and
+      data center switch.
+
+   Measurement units:
+
+      Gbps.
+
+   Issues
+
+      The traffic loads and the weighted multipliers need to be clearly
+      established a priori.
+
+      It is unclear if the definition of the Ti's is/should be linked to
+      the traffic load levels.  For a given port configuration (which
+      may result in 50% of the total capacity a device can provide), one
+      may be interested in traffic load of e.g., 5% or 10% or the total
+      capacity (not only 50%).
+
+   See Also:
+
+      [ETSI-ES-203-136],[ITUT-L.1310] ,[ATIS-0600015.03.2013].
+
+2.2.  Total Weighted Power
+
+   The total weighted power (P) is the weighted sum of all power
+   calculated for different traffic loads.
+
+   Definition:
+
+      P = B1*P1 +...+ Bi*Pi +...+ Bm*Pm
+
+   Discussion:
+
+      Pi is the Power of the equipment in each traffic load level (e.g.
+      100%, 30%, 0%)
+
+
+
+
+Pignataro, et al.       Expires 5 September 2024                [Page 4]
+
+Internet-Draft                 PowerBench                     March 2024
+
+
+      Bi is the weighted multiplier for different traffic levels (note
+      that B1+...+Bj+...+Bm = 1)
+
+      m is the number of traffic load levels (if it is considered 100%,
+      30%, 0%; m = 3)
+
+   Measurement units:
+
+      Watt.
+
+   Issues:
+
+      The traffic loads and the weighted multipliers need to be clearly
+      established a priori.
+
+      Importantly, the traffic must be forwarded of the correct port!
+      It would be easy to cut power down by dropping all traffic, and we
+      of course do not want that.  A tolerance on packet loss and/or
+      forwarding error must be specified somehow.  That tolerance could
+      be zero for some benchmark problems (e.g., Non packet loss (NDR)
+      estimation), and non-zero for others.  Tolerating some errors may
+      be interesting to navigate the design space of energy saving
+      techniques, such as approximate computing/routing.  According to
+      measurement procedure in section 6.5 of [ATIS-0600015.03.2013],
+      the Equipment Unit Test (EUT) should be able to return to full NDR
+      load.  Failure to do so disqualifies the test results.
+
+   See Also:
+
+      [ETSI-ES-203-136],[ITUT-L.1310] ,[ATIS-0600015.03.2013].
+
+2.3.  Energy Efficiency Ratio
+
+   Energy Efficiency Ratio (EER) is defined as the throughput forwarded
+   by 1 watt and it is introduced in [ETSI-ES-203-136].  A higher EER
+   corresponds to a better the energy efficiency.
+
+   Definition:
+
+      EER = T/P
+
+   Discussion:
+
+      T is the total weighted sum of all interface throughputs
+
+      P is the weighted power for different traffic loads
+
+   Measurement units:
+
+
+
+Pignataro, et al.       Expires 5 September 2024                [Page 5]
+
+Internet-Draft                 PowerBench                     March 2024
+
+
+      Gbps/Watt.
+
+   Issues:
+
+      The traffic loads and the weighted multipliers need to be clearly
+      established a priori.
+
+   See Also:
+
+      [ETSI-ES-203-136],[ITUT-L.1310] ,[ATIS-0600015.03.2013].
+
+3.  Energy Consumption Benchmarking
+
+   The maximum power drawn by a device does not accurately reflect the
+   power under a normal workload.  Indeed, the energy consumption of a
+   networking device depends on its configuration, connected
+   transceivers, and traffic load.  Relying merely on the maximum rated
+   power can overestimate the total energy of the networking devices.
+
+   A network device consists of many components, each of which draws
+   power (for example, it is possible to mention the power consumption
+   of the CPU, data forwarding ASIC, memory, fan, etc.).  Therefore, it
+   is important to formulate a consistent benchmarking method for
+   network devices and consider the workload variation and test
+   conditions.
+
+   Enforcing controlled conditions on test conditions (e.g.,
+   Temperature) is important for test procedure to make sure test
+   conditions repeatable [RFC6985].  The measurement condition reported
+   in [ATIS-0600015.2009] and [ITUT-L.1310] should be applied, e.g., the
+   power measurements shall be performed in a laboratory environment
+   under specific range of temperature, humidity and atmosphere
+   pressure.
+
+4.  Test Methodology
+
+4.1.  Test Setup
+
+   The test setup in general is compliant with [RFC2544].  The Device
+   Under Test (DUT) is connected to a Tester and a Power Meter.  The
+   Power Meter allows to measure the energy consumption of the device
+   and can be used to measure power under various configurations and
+   conditions.  Tests SHOULD be done with bidirectional traffic that
+   better reflects the real environment.  The Tester is also a traffic
+   generator that enables changing traffic conditions.  It is OPTIONAL
+   to choose a non-equal proportion for upstream and downstream traffic.
+
+
+
+
+
+Pignataro, et al.       Expires 5 September 2024                [Page 6]
+
+Internet-Draft                 PowerBench                     March 2024
+
+
+                               +----------+
+                       +-------|  Tester  |<-------+
+                       | +-----|          |<-----+ |
+                       | |     +----------+      | |
+                       | |                       | |
+                       | |      +--------+       | |
+                       | +----->|        |-------+ |
+                       +------->|  DUT   |---------+
+                                |        |
+                                +--------+
+                                    |
+                                    |
+                               +----------+
+                               |  Power   |
+                               |  Meter   |
+                               +----------+
+
+                            Figure 1: Test Setup
+
+   It is worth mentioning that the DUT also dissipates significant heat.
+   That means that part of the power is used for actual work while the
+   rest is dissipated as heat.  This heating can lead to more power
+   drawn by fans/ compressor for cooling the devices.  The benchmarking
+   methodology does not measure the power drawn by external cooling
+   infrastructure.  The Power Meter only measures the internal energy
+   consumption of the device.
+
+4.2.  Traffic and Device Characterization
+
+   The traffic load supported by a device affects its energy
+   consumption.  Therefore, the benchmark MUST include different traffic
+   loads.
+
+   There are different interface types on a network device and the power
+   usage also depends on the kind of connector/transceiver used.  The
+   interface type used needs to be specified as well.
+
+   In addition, it is necessary to indicate the number of ports used per
+   linecard as well as the aggregate bandwidth that each linecard can
+   accommodate.
+
+   The traffic load must specify traffic type, packet size mixtures,
+   percentage of overall traffic for each traffic type (See Annex D of
+   [ATIS-0600015.2009] for more details), as all may affect the energy
+   consumption of network devices.
+
+
+
+
+
+
+Pignataro, et al.       Expires 5 September 2024                [Page 7]
+
+Internet-Draft                 PowerBench                     March 2024
+
+
+5.  Reporting Format
+
+   Network Device Hardware and Software versions:
+      For the benchmarking tests, it must be specified.
+
+   Number and type of line cards:
+      For each test the total number of line cards and their types can
+      be varied and must be specified.
+
+   Number of enabled ports:
+      For each test the number of enabled and disabled ports must be
+      specified.
+
+   Number of active ports:
+      For each test the number of active and inactive ports must be
+      specified.
+
+   Port settings and interface types:
+      For each test the port configuration and settings need to be
+      specified.
+
+   Port Utilization:
+      For each test the port utilization of each port must be specified.
+      The actual traffic load can use the information defined in
+      [RFC2544].
+
+   Traffic attributes:
+      For each test they must be specified (e.g., packet size, packet
+      rate, etc.)
+
+   CPU load:
+      For each test it must be specified.
+
+   Power measurement:
+      For each test it must be specified.  All power measurements are
+      done in Watts.
+
+6.  Benchmarking Tests
+
+6.1.  Throughput
+
+   Objective:
+
+      To determine the DUT throughput according to [RFC2544].
+
+   Procedure:
+
+
+
+
+
+Pignataro, et al.       Expires 5 September 2024                [Page 8]
+
+Internet-Draft                 PowerBench                     March 2024
+
+
+      The test is done using a multi-port setup as specified in
+      Section 16 and Section 26.1 of [RFC2544].
+
+   Reporting format:
+
+      The results of the throughput SHOULD be reported according to
+      Section 5.
+
+6.2.  Base Power
+
+   Objective:
+
+      To determine the base power drawn by the network device, which
+      typically consists of processors, fans, memory, etc.
+
+   Procedure:
+
+      The measurement is done without activating the traffic generator.
+      In this case, the traffic load level percentage is 0.
+
+   Reporting format:
+
+      The results of the power measurement SHOULD be reported according
+      to Section 5.
+
+   Note:
+
+      This measurement is useful since it permits to calculate the
+      additional energy consumption that will result when the traffic
+      load changes.
+
+6.3.  Energy Consumption with Traffic Load
+
+   Objective:
+
+      To determine the power drawn by a device.  The dynamic power,
+      which is added to the base power, should be proportional to its
+      traffic load.
+
+   Procedure:
+
+      A specific number of packets at a specific rate is sent to
+      specific ports/linecards of the DUT.  All DUT ports must operate
+      under a specific traffic load, which is a percentage of the
+      maximum throughput.
+
+   Reporting format:
+
+
+
+
+Pignataro, et al.       Expires 5 September 2024                [Page 9]
+
+Internet-Draft                 PowerBench                     March 2024
+
+
+      The results of the power measurement SHOULD be reported according
+      to Section 5.
+
+6.4.  Energy Efficiency Ratio
+
+   Objective:
+
+      To determine the energy efficiency of the DUT.
+
+   Procedure:
+
+      Collect the data for all the traffic loads and apply the formula
+      of Section 2.  For example, with all DUT ports operating stably
+      under a percentage of the maximum throughput (e.g. 100%, 30%, 0%),
+      record the average input power and calculate the total weighted
+      power P and then the EER .
+
+   Reporting format:
+
+      The results of the energy efficiency ratio SHOULD be reported
+      according to Section 5.
+
+7.  Security Considerations
+
+   The benchmarking characterization described in this document is
+   constrained to a controlled environment (as a laboratory) and
+   includes controlled stimuli.  The network under benchmarking MUST NOT
+   be connected to production networks.
+
+   Beyond these, there are no specific security considerations within
+   the scope of this document.
+
+8.  Acknowledgements
+
+   We wish to thank the authors of [I-D.manral-bmwg-power-usage] for
+   their analysis and start on this topic.
+
+9.  References
+
+9.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
+
+
+
+
+
+Pignataro, et al.       Expires 5 September 2024               [Page 10]
+
+Internet-Draft                 PowerBench                     March 2024
+
+
+   [RFC2544]  Bradner, S. and J. McQuaid, "Benchmarking Methodology for
+              Network Interconnect Devices", RFC 2544,
+              DOI 10.17487/RFC2544, March 1999,
+              <https://www.rfc-editor.org/info/rfc2544>.
+
+   [RFC6988]  Quittek, J., Ed., Chandramouli, M., Winter, R., Dietz, T.,
+              and B. Claise, "Requirements for Energy Management",
+              RFC 6988, DOI 10.17487/RFC6988, September 2013,
+              <https://www.rfc-editor.org/info/rfc6988>.
+
+   [RFC7460]  Chandramouli, M., Claise, B., Schoening, B., Quittek, J.,
+              and T. Dietz, "Monitoring and Control MIB for Power and
+              Energy", RFC 7460, DOI 10.17487/RFC7460, March 2015,
+              <https://www.rfc-editor.org/info/rfc7460>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+9.2.  Informative References
+
+   [ATIS-0600015.03.2013]
+              ATIS, "ATIS-0600015.03.2013: Energy Efficiency for
+              Telecommunication Equipment: Methodology for Measurement
+              and Reporting for Router and Ethernet Switch Products",
+              2013.
+
+   [ETSI-ES-203-136]
+              ETSI, "ETSI ES 203 136: Environmental Engineering (EE);
+              Measurement methods for energy efficiency of router and
+              switch equipment", 2017, <https://www.etsi.org/deliver/
+              etsi_es/203100_203199/203136/01.02.00_50/
+              es_203136v010200m.pdf>.
+
+   [I-D.manral-bmwg-power-usage]
+              Manral, V., Sharma, P., Banerjee, S., and Y. Ping,
+              "Benchmarking Power usage of networking devices", Work in
+              Progress, Internet-Draft, draft-manral-bmwg-power-usage-
+              04, 12 March 2013, <https://datatracker.ietf.org/doc/html/
+              draft-manral-bmwg-power-usage-04>.
+
+   [ITUT-L.1310]
+              ITU-T, "L.1310 : Energy efficiency metrics and measurement
+              methods for telecommunication equipment", 2020,
+              <https://www.itu.int/rec/T-REC-L.1310/en>.
+
+Authors' Addresses
+
+
+
+
+Pignataro, et al.       Expires 5 September 2024               [Page 11]
+
+Internet-Draft                 PowerBench                     March 2024
+
+
+   Carlos Pignataro
+   North Carolina State University
+   United States of America
+   Email: cpignata@gmail.com, cmpignat@ncsu.edu
+
+
+   Romain Jacob
+   ETH Zürich
+   Switzerland
+   Email: jacobr@ethz.ch
+
+
+   Giuseppe Fioccola
+   Huawei
+   Italy
+   Email: giuseppe.fioccola@huawei.com
+
+
+   Qin Wu
+   Huawei
+   China
+   Email: bill.wu@huawei.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pignataro, et al.       Expires 5 September 2024               [Page 12]
