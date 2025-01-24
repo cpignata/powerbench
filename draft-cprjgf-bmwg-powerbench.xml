@@ -110,12 +110,47 @@
         (also known as ``micro-benchmark'').</t>
 	 </list></t>
 
-    <t>The benchmarking methodology outlined in this draft focuses on the first objective.
-    Specifically, it aims to compare the energy efficiency for individual devices 
+    <t>
+    Achieving either objectives requires a well-defined set of principles prescribing
+    what must be measured, how, and how to report the results. 
+    Providing those principles is the objective of this draft.
+    These are simply called "the benchmark" in the rest of this draft.</t>
+    <!-- The benchmarking methodology outlined in this draft focuses on the first objective. -->
+    <t>
+    The benchmark aims to compare the energy efficiency for individual devices 
     (routers and switches belonging to similar device classes).
-    The benchmark aims to showcase the effectiveness of various energy optimization 
+    In addition, it aims to showcase the effectiveness of various energy optimization 
     techniques for a given device and load type, with the objective of fostering
     improvements in the energy efficiency of future generations of devices.</t>
+     </section>
+  
+     <section title="Replicability and Comparability">
+
+     <t>Replicability is defined as achieving the same results with newly collected data.
+     Formally, it is a pre-requisite for benchmarking. Benchmark results are meant to
+     be compared, and this comparison is not sound is the individual results are not replicable.</t>
+
+     <t>As discussed later in this draft, replicability in power measurements is complex
+     as power is affected by a wide range of parameters, some of which are hard to control 
+     e.g., the room temperature. Scrit</t>
+
+     <t>Striving for "perfect" replicability would lead to prescribe extremely precisely 
+     all the power-impacting factors in the test setup. We argue that this is unrealistic 
+     and counter-productive. An overly presciptive benchmark becomes more complicated to 
+     perform. Furthermore, results would then be comparable only accross benchmark results
+     obtained under the exact same test conditions, which becomes increasingly less likely
+     as we prescribe more and more.</t>
+
+     <t>Instead, the benchmark described in this draft proposes to report on a number of
+     power-impacting factors, but does not enforce specific values or settings for those.
+     The aim is to make the benchmark easier to perform. The comparison between benchmark
+     results may be somewhat less accurate or fair than with a more prescriptive benchmark, 
+     but the hope is to have many more comparison points available, which would ultimately 
+     provide a more robust image of the devices power demands and their evolution over time.</t>
+
+     <t>In short: this draft argues it is better to have many benchmark results with 
+     a higher uncertainty than a few very precise but hardly comparable ones.</t>
+     
      </section>
   
      <section title="Requirements Language">   
@@ -129,6 +164,8 @@
     </section>
 
     <section anchor="terms" title="Terminology">
+
+    <t>TODO (Romain): I am not convinced we want to keep those weighted metrics at all. Not deleting for now. Creating a new "total power" section instead.</t>
 
     <section title="Total Weighted Capacity of the interfaces">	
      <t>The total weighted capacity of the interfaces (T) is the weighted sum of all interface throughputs.</t>
@@ -183,6 +220,37 @@
     </list></t>
 
     <t>See Also:<list><t><xref target="ETSI-ES-203-136" />.</t></list></t>
+
+    </section>
+
+    <section title="Total Power">	
+    <t>The total power (P) is the power of the entire equipment, measured as the sum the power drawn 
+    by all of the equipment's power supply units.</t>
+
+    <t>Definition:<list>
+          <t>P = P1 +...+ Pi +...+ Pm</t>
+    </list></t>
+
+     <t>Discussion:<list>
+				<t>Pi is the power that is drawn by one power supply unit of the equipment</t>
+     </list></t>
+
+    <t>Measurement units:<list><t>Watt.</t></list></t>
+
+    <t>Issues:<list>
+      <t>The total power depends on many different factors, including the running configuration,
+      the number and type of transceiver connected, the forward traffic volume and pattern, 
+      the version of the operating system, the room temperature and humidity/other environmental 
+      dimensions, the aging of parts, etc. This metric does not allow to compare two equipements against 
+      each over, but it may be enough to assess the effect of a change on the same equipment; e.g.,
+      for optimizing the power draw by changing the running configuration.</t>
+      <t>Importantly, the traffic must be forwarded of the correct port! 
+      It would be easy to cut power down by dropping all traffic, and we of course do not want that.
+      A tolerance on packet loss and/or forwarding error must be specified somehow. 
+      That tolerance could be zero for some benchmark problems, and non-zero for others.
+      Tolerating some errors may be interesting to navigate the design space of energy saving techniques, 
+      such as approximate computing/routing.</t>
+    </list></t>
 
     </section>
 	
@@ -241,7 +309,9 @@
    The Device Under Test (DUT) is connected to a Tester and a Power Meter.
    The Power Meter allows to measure the energy consumption of the device and
    can be used to measure power under various configurations and conditions.
-   Tests SHOULD be done with bidirectional traffic that better reflects the real environment.
+   <!-- Old version (delete?) Tests SHOULD be done with bidirectional traffic that better reflects the real environment. -->
+   Tests SHOULD (MUST?) be done by running one or several of the predefined traffic traces, 
+   which are crafted to test different power hungry tasks related to packet processing.
    The Tester is also a traffic generator that enables changing traffic conditions.    
    It is OPTIONAL to choose a non-equal proportion for upstream and downstream traffic.</t>
    
@@ -284,31 +354,33 @@
 	 
     <section title="Traffic and Device Characterization">
 
-    <!-- Romain: The dynamic power is too small today to emphasize it as an "important" factor IMO. I'd simply remove "important" -->
-    <!-- <t>An important factor that impacts energy consumption is the 
-    offered traffic load. Therefore, power measurements must be performed
-    with different traffic loads to the network device.</t> -->
     <t>The traffic load supported by a device affects its energy consumption.
     Therefore, the benchmark MUST include different traffic loads.</t>
+    
+    <t>The traffic load must specify packet sizes, packet rates, and inter-packet 
+    delays, as all may affect the energy consumption of network devices. To enable 
+    replicable and comparable results, the benchmark specifies a set of traffic traces
+    that MUST be used. Those traces are described below and made available "ready to use".</t>
+
+    <t>TODO: Describe the benchmark traffic traces here.</t>
 
     <t>There are different interface types on a network device and the power usage 
     also depends on the kind of connector/transceiver used. 
     The interface type used needs to be specified as well.</t>
     
-    <t>In addition, it is necessary to indicate the number of ports used per linecard 
-    as well as the aggregate bandwidth that each linecard can accommodate.</t>
-    
-    <!-- Romain: No need to risk wrong statement here. Everything may affect power. -->
-    <!-- <t>The traffic load also needs to be specified because different packet sizes 
-    may not affect energy consumption, but the inter-packet delay may affect it.</t> -->
-    <t>The traffic load must specify packet sizes, packet rates, and inter-packet 
-    delays, as all may affect the energy consumption of network devices.</t>
+    <!-- <t>In addition, it is necessary to indicate the number of ports used per linecard 
+    as well as the aggregate bandwidth that each linecard can accommodate.</t> -->
    
      </section>
 
     </section>
 
 	<section anchor="report" title="Reporting Format">
+
+  <t>The benchmark focuses on data that is either controllable (e.g., the number of 
+  active ports) or that can be externally measured (e.g., the total power). 
+  Factors that are not measurable externally (e.g., CPU load, PSU efficiency) are intentionally 
+  left out.</t>
 
   <list style="hanging">
 		  
@@ -331,10 +403,11 @@
     must be specified.  The actual traffic load can use the information 
     defined in <xref target="RFC2544" />.</t>
 
-    <t hangText="Traffic attributes:"><br />  For each test
-    they must be specified (e.g., packet size, packet rate, etc.)</t>
+    <t hangText="Traffic trace:"><br />  For each test, the traffic trace used (amongst those 
+    prescribed by the benchmark) must be specified.</t>
 
-    <t hangText="CPU load:"><br />  For each test it must be specified.</t>
+    <!-- Removed because this is not directly measurable. -->
+    <!-- <t hangText="CPU load:"><br />  For each test it must be specified.</t> -->
 
     <t hangText="Power measurement:"><br />  For each test it must be specified.
     All power measurements are done in Watts.</t>
@@ -357,25 +430,62 @@
 
     </section>
 	 
-	 <section title="Base Power">
+  <section title="Base Power">
 	 
-	 <t>Objective:<list><t>To determine the base power drawn by the network device,
-	 which typically consists of processors, fans, memory, etc.</t></list></t>
+	  <t>Objective:<list><t>To determine the base power drawn by the network device in its factory 
+   settings.</t></list></t>
 	 
-	 <t>Procedure:<list><t>The measurement is done without activating the traffic generator.</t></list></t>
+	  <t>Procedure:<list><t>The measurement is done with the device in its factory settings, after 
+   it finished booting, and witout any transceiver plugged in.</t></list></t>
 
-  <t>Reporting format:<list><t>The results of the power measurement SHOULD be
+    <t>Reporting format:<list><t>The results of the power measurement SHOULD be
   reported according to <xref target="report" />.</t></list></t>
 	 
-	 <t>Note:<list><t>This measurement is useful since it permits to calculate the 
-	 additional energy consumption that will result when the traffic load changes.</t></list></t>
+    <t>Note:<list><t>This measurement is useful to assess the energy efficiency of default settings.</t></list></t>
 	 
-	 </section>
+  </section>
+  
+  <section title="Idle Power">
+	 
+	  <t>Objective:<list><t>To determine the power drawn by the network device in normal operation 
+    but without forwarding traffic.</t></list></t>
+	 
+	  <t>Procedure:<list><t>The measurement is done with the device fully configured to forward traffic
+    but without any traffic actually present. All interfaces MUST be up.</t></list></t>
+
+    <t>Reporting format:<list><t>The results of the power measurement SHOULD be
+  reported according to <xref target="report" />.</t></list></t>
+	 
+    <t>Note:<list><t>This measurement is useful to assess the energy used to activate the internal
+    components used by the device to forward traffic. It also captures the efficiency of the device
+    at activating some "low-power mode" when there is no traffic to forward.</t></list></t>
+	 
+  </section>
+
+  
+  <section title="Idle+ Power">
+	 
+    <t>TODO: Find a better name for this.</t>
+
+	  <t>Objective:<list><t>To determine the power drawn by the network device in normal operation 
+    with very small but non-zero traffic to forward.</t></list></t>
+	 
+	  <t>Procedure:<list><t>The measurement is done with the device fully configured and the "minimum" 
+    traffic trace (TODO: this would refer to the benchmark traces listed above)/</t></list></t>
+
+    <t>Reporting format:<list><t>The results of the power measurement SHOULD be
+  reported according to <xref target="report" />.</t></list></t>
+	 
+    <t>Note:<list><t>The "minimum" traffic trace creates a bidirectional flow of 1 pps on all active
+    interfaces. By comparison with the "Idle Power" measurement, this measurement captures the power 
+    cost of taking the device out of its "low-power mode."</t></list></t>
+	 
+  </section>
 
 	 <section title="Energy Consumption with Traffic Load">
 	 
-	 <t>Objective:<list><t>To determine the power drawn by a device. The dynamic power, which is added to the base power,
-	 should be proportional to its traffic load.</t></list></t>
+	 <t>Objective:<list><t>To determine the power drawn by a device. The dynamic power, which is 
+   added to the idle+ power, should be proportional to its traffic load.</t></list></t>
 
 	 <t>Procedure:<list><t>A specific number of packets at a specific rate is sent to specific ports/linecards
 	 of the DUT. All DUT ports must operate under a specific traffic load, which is a percentage of the maximum throughput.</t></list></t>
@@ -399,6 +509,7 @@
     reported according to <xref target="report" />.</t></list></t>
 	 
 	 </section>	 
+
     </section>
 
 
