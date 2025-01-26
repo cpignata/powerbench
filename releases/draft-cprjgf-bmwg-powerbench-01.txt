@@ -5,16 +5,16 @@
 Benchmarking Methodology Working Group                      C. Pignataro
 Internet-Draft                                       NC State University
 Intended status: Standards Track                                R. Jacob
-Expires: 7 January 2025                                       ETH Zürich
+Expires: 5 September 2024                                     ETH Zürich
                                                              G. Fioccola
                                                                    Q. Wu
                                                                   Huawei
-                                                             6 July 2024
+                                                            4 March 2024
 
 
  Characterization and Benchmarking Methodology for Power in Networking
                                 Devices
-                    draft-cprjgf-bmwg-powerbench-02
+                    draft-cprjgf-bmwg-powerbench-01
 
 Abstract
 
@@ -37,7 +37,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 January 2025.
+   This Internet-Draft will expire on 5 September 2024.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Pignataro, et al.        Expires 7 January 2025                 [Page 1]
+Pignataro, et al.       Expires 5 September 2024                [Page 1]
 
-Internet-Draft                 PowerBench                      July 2024
+Internet-Draft                 PowerBench                     March 2024
 
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -87,12 +87,11 @@ Table of Contents
      6.3.  Energy Consumption with Traffic Load  . . . . . . . . . .   9
      6.4.  Energy Efficiency Ratio . . . . . . . . . . . . . . . . .  10
    7.  Security Considerations . . . . . . . . . . . . . . . . . . .  10
-   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
-   9.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  10
-   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .  10
-     10.1.  Normative References . . . . . . . . . . . . . . . . . .  10
-     10.2.  Informative References . . . . . . . . . . . . . . . . .  11
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  12
+   8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  10
+   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  10
+     9.1.  Normative References  . . . . . . . . . . . . . . . . . .  10
+     9.2.  Informative References  . . . . . . . . . . . . . . . . .  11
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  11
 
 1.  Introduction
 
@@ -109,9 +108,10 @@ Table of Contents
 
 
 
-Pignataro, et al.        Expires 7 January 2025                 [Page 2]
+
+Pignataro, et al.       Expires 5 September 2024                [Page 2]
 
-Internet-Draft                 PowerBench                      July 2024
+Internet-Draft                 PowerBench                     March 2024
 
 
    There is no standard mechanism to benchmark the power utilization of
@@ -165,9 +165,9 @@ Internet-Draft                 PowerBench                      July 2024
 
 
 
-Pignataro, et al.        Expires 7 January 2025                 [Page 3]
+Pignataro, et al.       Expires 5 September 2024                [Page 3]
 
-Internet-Draft                 PowerBench                      July 2024
+Internet-Draft                 PowerBench                     March 2024
 
 
       Ti is the total capacity of the interfaces for a fixed
@@ -221,9 +221,9 @@ Internet-Draft                 PowerBench                      July 2024
 
 
 
-Pignataro, et al.        Expires 7 January 2025                 [Page 4]
+Pignataro, et al.       Expires 5 September 2024                [Page 4]
 
-Internet-Draft                 PowerBench                      July 2024
+Internet-Draft                 PowerBench                     March 2024
 
 
       Bi is the weighted multiplier for different traffic levels (note
@@ -242,8 +242,8 @@ Internet-Draft                 PowerBench                      July 2024
       established a priori.
 
       Importantly, the traffic must be forwarded of the correct port!
-      It would be easy to cut power down by dropping all traffic, and,
-      naturally, we do not want that.  A tolerance on packet loss and/or
+      It would be easy to cut power down by dropping all traffic, and we
+      of course do not want that.  A tolerance on packet loss and/or
       forwarding error must be specified somehow.  That tolerance could
       be zero for some benchmark problems (e.g., Non packet loss (NDR)
       estimation), and non-zero for others.  Tolerating some errors may
@@ -277,9 +277,9 @@ Internet-Draft                 PowerBench                      July 2024
 
 
 
-Pignataro, et al.        Expires 7 January 2025                 [Page 5]
+Pignataro, et al.       Expires 5 September 2024                [Page 5]
 
-Internet-Draft                 PowerBench                      July 2024
+Internet-Draft                 PowerBench                     March 2024
 
 
       Gbps/Watt.
@@ -302,10 +302,11 @@ Internet-Draft                 PowerBench                      July 2024
    power can overestimate the total energy of the networking devices.
 
    A network device consists of many components, each of which draws
-   power (for example, it is possible to mention the power draw of the
-   CPU, data forwarding ASIC, memory, fan, etc.).  Therefore, it is
-   important to formulate a consistent benchmarking method for network
-   devices and consider the workload variation and test conditions.
+   power (for example, it is possible to mention the power consumption
+   of the CPU, data forwarding ASIC, memory, fan, etc.).  Therefore, it
+   is important to formulate a consistent benchmarking method for
+   network devices and consider the workload variation and test
+   conditions.
 
    Enforcing controlled conditions on test conditions (e.g.,
    Temperature) is important for test procedure to make sure test
@@ -332,10 +333,9 @@ Internet-Draft                 PowerBench                      July 2024
 
 
 
-
-Pignataro, et al.        Expires 7 January 2025                 [Page 6]
+Pignataro, et al.       Expires 5 September 2024                [Page 6]
 
-Internet-Draft                 PowerBench                      July 2024
+Internet-Draft                 PowerBench                     March 2024
 
 
                                +----------+
@@ -389,9 +389,9 @@ Internet-Draft                 PowerBench                      July 2024
 
 
 
-Pignataro, et al.        Expires 7 January 2025                 [Page 7]
+Pignataro, et al.       Expires 5 September 2024                [Page 7]
 
-Internet-Draft                 PowerBench                      July 2024
+Internet-Draft                 PowerBench                     March 2024
 
 
 5.  Reporting Format
@@ -445,9 +445,9 @@ Internet-Draft                 PowerBench                      July 2024
 
 
 
-Pignataro, et al.        Expires 7 January 2025                 [Page 8]
+Pignataro, et al.       Expires 5 September 2024                [Page 8]
 
-Internet-Draft                 PowerBench                      July 2024
+Internet-Draft                 PowerBench                     March 2024
 
 
       The test is done using a multi-port setup as specified in
@@ -501,9 +501,9 @@ Internet-Draft                 PowerBench                      July 2024
 
 
 
-Pignataro, et al.        Expires 7 January 2025                 [Page 9]
+Pignataro, et al.       Expires 5 September 2024                [Page 9]
 
-Internet-Draft                 PowerBench                      July 2024
+Internet-Draft                 PowerBench                     March 2024
 
 
       The results of the power measurement SHOULD be reported according
@@ -538,34 +538,39 @@ Internet-Draft                 PowerBench                      July 2024
    Beyond these, there are no specific security considerations within
    the scope of this document.
 
-8.  IANA Considerations
-
-   This document has no IANA actions.
-
-9.  Acknowledgements
+8.  Acknowledgements
 
    We wish to thank the authors of [I-D.manral-bmwg-power-usage] for
    their analysis and start on this topic.
 
-10.  References
+9.  References
 
-10.1.  Normative References
-
-
-
-
-
-
-
-Pignataro, et al.        Expires 7 January 2025                [Page 10]
-
-Internet-Draft                 PowerBench                      July 2024
-
+9.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
+
+
+
+
+
+
+Pignataro, et al.       Expires 5 September 2024               [Page 10]
+
+Internet-Draft                 PowerBench                     March 2024
+
+
+   [RFC2544]  Bradner, S. and J. McQuaid, "Benchmarking Methodology for
+              Network Interconnect Devices", RFC 2544,
+              DOI 10.17487/RFC2544, March 1999,
+              <https://www.rfc-editor.org/info/rfc2544>.
+
+   [RFC6988]  Quittek, J., Ed., Chandramouli, M., Winter, R., Dietz, T.,
+              and B. Claise, "Requirements for Energy Management",
+              RFC 6988, DOI 10.17487/RFC6988, September 2013,
+              <https://www.rfc-editor.org/info/rfc6988>.
 
    [RFC7460]  Chandramouli, M., Claise, B., Schoening, B., Quittek, J.,
               and T. Dietz, "Monitoring and Control MIB for Power and
@@ -576,7 +581,7 @@ Internet-Draft                 PowerBench                      July 2024
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-10.2.  Informative References
+9.2.  Informative References
 
    [ATIS-0600015.03.2013]
               ATIS, "ATIS-0600015.03.2013: Energy Efficiency for
@@ -603,32 +608,15 @@ Internet-Draft                 PowerBench                      July 2024
               methods for telecommunication equipment", 2020,
               <https://www.itu.int/rec/T-REC-L.1310/en>.
 
-   [RFC2544]  Bradner, S. and J. McQuaid, "Benchmarking Methodology for
-              Network Interconnect Devices", RFC 2544,
-              DOI 10.17487/RFC2544, March 1999,
-              <https://www.rfc-editor.org/info/rfc2544>.
-
-
-
-
-
-
-Pignataro, et al.        Expires 7 January 2025                [Page 11]
-
-Internet-Draft                 PowerBench                      July 2024
-
-
-   [RFC6985]  Morton, A., "IMIX Genome: Specification of Variable Packet
-              Sizes for Additional Testing", RFC 6985,
-              DOI 10.17487/RFC6985, July 2013,
-              <https://www.rfc-editor.org/info/rfc6985>.
-
-   [RFC6988]  Quittek, J., Ed., Chandramouli, M., Winter, R., Dietz, T.,
-              and B. Claise, "Requirements for Energy Management",
-              RFC 6988, DOI 10.17487/RFC6988, September 2013,
-              <https://www.rfc-editor.org/info/rfc6988>.
-
 Authors' Addresses
+
+
+
+
+Pignataro, et al.       Expires 5 September 2024               [Page 11]
+
+Internet-Draft                 PowerBench                     March 2024
+
 
    Carlos Pignataro
    North Carolina State University
@@ -669,4 +657,16 @@ Authors' Addresses
 
 
 
-Pignataro, et al.        Expires 7 January 2025                [Page 12]
+
+
+
+
+
+
+
+
+
+
+
+
+Pignataro, et al.       Expires 5 September 2024               [Page 12]
