@@ -5,22 +5,22 @@
 Benchmarking Methodology Working Group                      C. Pignataro
 Internet-Draft                                       NC State University
 Intended status: Standards Track                                R. Jacob
-Expires: 3 August 2025                                        ETH Zürich
+Expires: 3 January 2026                                       ETH Zürich
                                                              G. Fioccola
                                                                    Q. Wu
                                                                   Huawei
-                                                         30 January 2025
+                                                             2 July 2025
 
 
  Characterization and Benchmarking Methodology for Power in Networking
                                 Devices
-                    draft-cprjgf-bmwg-powerbench-04
+                    draft-cprjgf-bmwg-powerbench-05
 
 Abstract
 
    This document defines a standard mechanism to measure, report, and
-   compare power usage of different networking devices and under
-   different network configurations and conditions.
+   compare power usage of different networking devices under different
+   network configurations and conditions.
 
 Status of This Memo
 
@@ -37,7 +37,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 August 2025.
+   This Internet-Draft will expire on 3 January 2026.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Pignataro, et al.         Expires 3 August 2025                 [Page 1]
+Pignataro, et al.        Expires 3 January 2026                 [Page 1]
 
-Internet-Draft                 PowerBench                   January 2025
+Internet-Draft                 PowerBench                      July 2025
 
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -70,32 +70,32 @@ Internet-Draft                 PowerBench                   January 2025
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-     1.1.  Aim and Scope . . . . . . . . . . . . . . . . . . . . . .   3
-     1.2.  Replicability and Comparability . . . . . . . . . . . . .   3
-     1.3.  Requirements Language . . . . . . . . . . . . . . . . . .   4
-   2.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . .   4
-     2.1.  Total Weighted Capacity of the interfaces . . . . . . . .   4
-     2.2.  Total Weighted Power  . . . . . . . . . . . . . . . . . .   5
-     2.3.  Energy Efficiency Ratio . . . . . . . . . . . . . . . . .   6
-     2.4.  Total Power . . . . . . . . . . . . . . . . . . . . . . .   7
-   3.  Energy Consumption Benchmarking . . . . . . . . . . . . . . .   8
-   4.  Test Methodology  . . . . . . . . . . . . . . . . . . . . . .   8
-     4.1.  Test Setup  . . . . . . . . . . . . . . . . . . . . . . .   8
-     4.2.  Traffic and Device Characterization . . . . . . . . . . .   9
-   5.  Reporting Format  . . . . . . . . . . . . . . . . . . . . . .  10
-   6.  Benchmarking Tests  . . . . . . . . . . . . . . . . . . . . .  10
-     6.1.  Throughput  . . . . . . . . . . . . . . . . . . . . . . .  10
-     6.2.  Base Power  . . . . . . . . . . . . . . . . . . . . . . .  11
-     6.3.  Idle Power  . . . . . . . . . . . . . . . . . . . . . . .  11
-     6.4.  Idle+ Power . . . . . . . . . . . . . . . . . . . . . . .  12
-     6.5.  Energy Consumption with Traffic Load  . . . . . . . . . .  12
-     6.6.  Energy Efficiency Ratio . . . . . . . . . . . . . . . . .  13
-   7.  Security Considerations . . . . . . . . . . . . . . . . . . .  13
-   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  13
-   9.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  13
-   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .  13
-     10.1.  Normative References . . . . . . . . . . . . . . . . . .  13
-     10.2.  Informative References . . . . . . . . . . . . . . . . .  14
+     1.1.  Requirements Language . . . . . . . . . . . . . . . . . .   3
+   2.  Aim and Scope . . . . . . . . . . . . . . . . . . . . . . . .   3
+   3.  Replicability and Comparability . . . . . . . . . . . . . . .   4
+   4.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . .   4
+     4.1.  Total Weighted Capacity of the interfaces . . . . . . . .   4
+     4.2.  Total Weighted Power  . . . . . . . . . . . . . . . . . .   5
+     4.3.  Energy Efficiency Ratio . . . . . . . . . . . . . . . . .   6
+     4.4.  Total Power . . . . . . . . . . . . . . . . . . . . . . .   7
+   5.  Energy Consumption Benchmarking . . . . . . . . . . . . . . .   8
+   6.  Test Methodology  . . . . . . . . . . . . . . . . . . . . . .   8
+     6.1.  Test Setup  . . . . . . . . . . . . . . . . . . . . . . .   8
+     6.2.  Traffic and Device Characterization . . . . . . . . . . .   9
+   7.  Reporting Format  . . . . . . . . . . . . . . . . . . . . . .  10
+   8.  Benchmarking Tests  . . . . . . . . . . . . . . . . . . . . .  10
+     8.1.  Throughput  . . . . . . . . . . . . . . . . . . . . . . .  10
+     8.2.  Base Power  . . . . . . . . . . . . . . . . . . . . . . .  11
+     8.3.  Idle Power  . . . . . . . . . . . . . . . . . . . . . . .  11
+     8.4.  Idle+ Power . . . . . . . . . . . . . . . . . . . . . . .  12
+     8.5.  Power with Traffic Load . . . . . . . . . . . . . . . . .  12
+     8.6.  Energy Efficiency Ratio . . . . . . . . . . . . . . . . .  13
+   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  13
+   10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  13
+   11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  13
+   12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  13
+     12.1.  Normative References . . . . . . . . . . . . . . . . . .  13
+     12.2.  Informative References . . . . . . . . . . . . . . . . .  14
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  15
 
 1.  Introduction
@@ -105,27 +105,38 @@ Table of Contents
    but in some cases, they run at very low average utilization rates.
    Both network utilization and energy consumption of these devices can
    be improved, and that starts with a normalized characterization
-   [RFC7460].  The benchmarking methodology defined here will help
+   [RFC7460].
 
 
 
-Pignataro, et al.         Expires 3 August 2025                 [Page 2]
+Pignataro, et al.        Expires 3 January 2026                 [Page 2]
 
-Internet-Draft                 PowerBench                   January 2025
+Internet-Draft                 PowerBench                      July 2025
 
 
-   operators to get a more accurate idea of the power drawn by their
-   network and will also help vendors to test the energy efficiency of
-   their devices [RFC6988].
+   The benchmarking methodology defined here will help operators to get
+   a more accurate idea of the power drawn by their network and will
+   also help vendors to test the energy efficiency of their devices
+   [RFC6988].
 
    There is no standard mechanism to benchmark the power utilization of
    networking devices like routers or switches.
-   [I-D.manral-bmwg-power-usage] started to analyze the issue.  This
-   document defines the mechanism to correctly characterize and
-   benchmark the energy consumption of networking devices to better
-   estimate and compare their power usage.
+   [I-D.manral-bmwg-power-usage] started to analyze the issue.
 
-1.1.  Aim and Scope
+   This document focuses on the mechanism to correctly characterize and
+   benchmark the energy consumption of networking devices to better
+   estimate and compare their power usage in order to assess the
+   performance over a set of well-defined scenario.
+
+1.1.  Requirements Language
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in BCP
+   14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+2.  Aim and Scope
 
    Benchmarking can be understood to serve two related but different
    objectives:
@@ -137,9 +148,10 @@ Internet-Draft                 PowerBench                   January 2025
       performance (also known as "micro-benchmark").
 
    Achieving either objectives requires a well-defined set of principles
-   prescribing what must be measured, how, and how to report the
-   results.  Providing those principles is the objective of this draft.
-   These are simply called "the benchmark" in the rest of this draft.
+   prescribing what must be measured, how must be measured, and which
+   results must be reported.  Providing those principles is the
+   objective of this draft.  These are simply called "the benchmark" in
+   the rest of this draft.
 
    The benchmark aims to compare the energy efficiency for individual
    devices (routers and switches belonging to similar device classes).
@@ -148,7 +160,17 @@ Internet-Draft                 PowerBench                   January 2025
    objective of fostering improvements in the energy efficiency of
    future generations of devices.
 
-1.2.  Replicability and Comparability
+
+
+
+
+
+Pignataro, et al.        Expires 3 January 2026                 [Page 3]
+
+Internet-Draft                 PowerBench                      July 2025
+
+
+3.  Replicability and Comparability
 
    Replicability is defined as achieving the same results with newly
    collected data.  Formally, it is a pre-requisite for benchmarking.
@@ -162,14 +184,6 @@ Internet-Draft                 PowerBench                   January 2025
    Striving for "perfect" replicability would lead to prescribe
    extremely precisely all the power-impacting factors in the test
    setup.  We argue that this is unrealistic and counter-productive.  An
-
-
-
-Pignataro, et al.         Expires 3 August 2025                 [Page 3]
-
-Internet-Draft                 PowerBench                   January 2025
-
-
    overly prescriptive benchmark becomes more complicated to perform.
    Furthermore, results would then be comparable only across benchmark
    results obtained under the exact same test conditions, which becomes
@@ -188,17 +202,9 @@ Internet-Draft                 PowerBench                   January 2025
    results with a higher uncertainty than a few very precise but hardly
    comparable ones.
 
-1.3.  Requirements Language
+4.  Terminology
 
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-   "OPTIONAL" in this document are to be interpreted as described in BCP
-   14 [RFC2119] [RFC8174] when, and only when, they appear in all
-   capitals, as shown here.
-
-2.  Terminology
-
-2.1.  Total Weighted Capacity of the interfaces
+4.1.  Total Weighted Capacity of the interfaces
 
    The total weighted capacity of the interfaces (T) is the weighted sum
    of all interface throughputs.
@@ -213,18 +219,17 @@ Internet-Draft                 PowerBench                   January 2025
       configuration model and traffic load (the sum of the interface
       bandwidths)
 
+
+
+Pignataro, et al.        Expires 3 January 2026                 [Page 4]
+
+Internet-Draft                 PowerBench                      July 2025
+
+
       Bi is the weighted multiplier for different traffic levels (note
       that B1+...+Bj+...+Bm = 1, weight multipliers may be specified for
       router, switch differently, 3 typical weighted multipliers are
       0.1,0.8,0.1)
-
-
-
-
-Pignataro, et al.         Expires 3 August 2025                 [Page 4]
-
-Internet-Draft                 PowerBench                   January 2025
-
 
       m is the number of traffic load levels (if it is considered 100%,
       30%, 0%; m = 3) Note that traffic load levels may be specified
@@ -251,7 +256,7 @@ Internet-Draft                 PowerBench                   January 2025
 
       [ETSI-ES-203-136],[ITUT-L.1310] ,[ATIS-0600015.03.2013].
 
-2.2.  Total Weighted Power
+4.2.  Total Weighted Power
 
    The total weighted power (P) is the weighted sum of all power
    calculated for different traffic loads.
@@ -268,19 +273,21 @@ Internet-Draft                 PowerBench                   January 2025
       Bi is the weighted multiplier for different traffic levels (note
       that B1+...+Bj+...+Bm = 1)
 
+
+
+
+
+Pignataro, et al.        Expires 3 January 2026                 [Page 5]
+
+Internet-Draft                 PowerBench                      July 2025
+
+
       m is the number of traffic load levels (if it is considered 100%,
       30%, 0%; m = 3)
 
    Measurement units:
 
       Watt.
-
-
-
-Pignataro, et al.         Expires 3 August 2025                 [Page 5]
-
-Internet-Draft                 PowerBench                   January 2025
-
 
    Issues:
 
@@ -303,7 +310,7 @@ Internet-Draft                 PowerBench                   January 2025
 
       [ETSI-ES-203-136],[ITUT-L.1310] ,[ATIS-0600015.03.2013].
 
-2.3.  Energy Efficiency Ratio
+4.3.  Energy Efficiency Ratio
 
    Energy Efficiency Ratio (EER) is defined as the throughput forwarded
    by 1 watt and it is introduced in [ETSI-ES-203-136].  A higher EER
@@ -323,6 +330,14 @@ Internet-Draft                 PowerBench                   January 2025
 
       Gbps/Watt.
 
+
+
+
+Pignataro, et al.        Expires 3 January 2026                 [Page 6]
+
+Internet-Draft                 PowerBench                      July 2025
+
+
    Issues:
 
       The traffic loads and the weighted multipliers need to be clearly
@@ -330,17 +345,9 @@ Internet-Draft                 PowerBench                   January 2025
 
    See Also:
 
-
-
-
-Pignataro, et al.         Expires 3 August 2025                 [Page 6]
-
-Internet-Draft                 PowerBench                   January 2025
-
-
       [ETSI-ES-203-136],[ITUT-L.1310] ,[ATIS-0600015.03.2013].
 
-2.4.  Total Power
+4.4.  Total Power
 
    The total power (Ptot) is the power of the entire equipment, measured
    as the sum the power drawn by all of the equipment's power supply
@@ -373,6 +380,20 @@ Internet-Draft                 PowerBench                   January 2025
       equipment; e.g., for optimizing the power draw by changing the
       running configuration.
 
+
+
+
+
+
+
+
+
+
+Pignataro, et al.        Expires 3 January 2026                 [Page 7]
+
+Internet-Draft                 PowerBench                      July 2025
+
+
       Importantly, the traffic must be forwarded of the correct port!
       It would be easy to cut power down by dropping all traffic, and we
       of course do not want that.  A tolerance on packet loss and/or
@@ -382,19 +403,7 @@ Internet-Draft                 PowerBench                   January 2025
       space of energy saving techniques, such as approximate computing/
       routing.
 
-
-
-
-
-
-
-
-Pignataro, et al.         Expires 3 August 2025                 [Page 7]
-
-Internet-Draft                 PowerBench                   January 2025
-
-
-3.  Energy Consumption Benchmarking
+5.  Energy Consumption Benchmarking
 
    The maximum power drawn by a device does not accurately reflect the
    power under a normal workload.  Indeed, the energy consumption of a
@@ -416,9 +425,9 @@ Internet-Draft                 PowerBench                   January 2025
    under specific range of temperature, humidity and atmosphere
    pressure.
 
-4.  Test Methodology
+6.  Test Methodology
 
-4.1.  Test Setup
+6.1.  Test Setup
 
    The test setup in general is compliant with [RFC2544].  The Device
    Under Test (DUT) is connected to a Tester and a Power Meter.  The
@@ -436,18 +445,9 @@ Internet-Draft                 PowerBench                   January 2025
 
 
 
-
-
-
-
-
-
-
-
-
-Pignataro, et al.         Expires 3 August 2025                 [Page 8]
+Pignataro, et al.        Expires 3 January 2026                 [Page 8]
 
-Internet-Draft                 PowerBench                   January 2025
+Internet-Draft                 PowerBench                      July 2025
 
 
                                +----------+
@@ -472,12 +472,16 @@ Internet-Draft                 PowerBench                   January 2025
    It is worth mentioning that the DUT also dissipates significant heat.
    That means that part of the power is used for actual work while the
    rest is dissipated as heat.  This heating can lead to more power
-   drawn by fans/ compressor for cooling the devices.  The benchmarking
+   drawn by fans/compressor for cooling the devices.  The benchmarking
    methodology does not measure the power drawn by external cooling
    infrastructure.  The Power Meter only measures the internal energy
-   consumption of the device.
+   consumption of the device.  Anyway, the device's temperature change
+   MUST be known.  It is useful to know whether device's heat management
+   plays a role in the observed differences in energy efficiency and can
+   be correlated to the amount of external power drawn to cool the
+   device.
 
-4.2.  Traffic and Device Characterization
+6.2.  Traffic and Device Characterization
 
    The traffic load supported by a device affects its energy
    consumption.  Therefore, the benchmark MUST include different traffic
@@ -485,9 +489,9 @@ Internet-Draft                 PowerBench                   January 2025
 
    The traffic load must specify packet sizes, packet rates, and inter-
    packet delays, as all may affect the energy consumption of network
-   devices.  To enable replicable and comparable results, the benchmark
-   specifies a set of traffic traces that MUST be used.  Those traces
-   are described below and made available "ready to use".
+   devices [ATIS-0600015.2009].  To enable replicable and comparable
+   results, the benchmark can specify a set of well-defined traffic
+   traces that MUST be used.
 
    There are different interface types on a network device and the power
    usage also depends on the kind of connector/transceiver used.  The
@@ -497,16 +501,12 @@ Internet-Draft                 PowerBench                   January 2025
 
 
 
-
-
-
-
-Pignataro, et al.         Expires 3 August 2025                 [Page 9]
+Pignataro, et al.        Expires 3 January 2026                 [Page 9]
 
-Internet-Draft                 PowerBench                   January 2025
+Internet-Draft                 PowerBench                      July 2025
 
 
-5.  Reporting Format
+7.  Reporting Format
 
    The benchmark focuses on data that is either controllable (e.g., the
    number of active ports) or that can be externally measured (e.g., the
@@ -545,9 +545,9 @@ Internet-Draft                 PowerBench                   January 2025
       For each test it must be specified.  All power measurements are
       done in Watts.
 
-6.  Benchmarking Tests
+8.  Benchmarking Tests
 
-6.1.  Throughput
+8.1.  Throughput
 
    Objective:
 
@@ -557,9 +557,9 @@ Internet-Draft                 PowerBench                   January 2025
 
 
 
-Pignataro, et al.         Expires 3 August 2025                [Page 10]
+Pignataro, et al.        Expires 3 January 2026                [Page 10]
 
-Internet-Draft                 PowerBench                   January 2025
+Internet-Draft                 PowerBench                      July 2025
 
 
       The test is done using a multi-port setup as specified in
@@ -568,9 +568,9 @@ Internet-Draft                 PowerBench                   January 2025
    Reporting format:
 
       The results of the throughput SHOULD be reported according to
-      Section 5.
+      Section 7.
 
-6.2.  Base Power
+8.2.  Base Power
 
    Objective:
 
@@ -585,14 +585,14 @@ Internet-Draft                 PowerBench                   January 2025
    Reporting format:
 
       The results of the power measurement SHOULD be reported according
-      to Section 5.
+      to Section 7.
 
    Note:
 
       This measurement is useful to assess the energy efficiency of
       default settings.
 
-6.3.  Idle Power
+8.3.  Idle Power
 
    Objective:
 
@@ -608,14 +608,14 @@ Internet-Draft                 PowerBench                   January 2025
    Reporting format:
 
       The results of the power measurement SHOULD be reported according
-      to Section 5.
+      to Section 7.
 
 
 
 
-Pignataro, et al.         Expires 3 August 2025                [Page 11]
+Pignataro, et al.        Expires 3 January 2026                [Page 11]
 
-Internet-Draft                 PowerBench                   January 2025
+Internet-Draft                 PowerBench                      July 2025
 
 
    Note:
@@ -625,7 +625,7 @@ Internet-Draft                 PowerBench                   January 2025
       also captures the efficiency of the device at activating some
       "low-power mode" when there is no traffic to forward.
 
-6.4.  Idle+ Power
+8.4.  Idle+ Power
 
    Objective:
 
@@ -635,12 +635,12 @@ Internet-Draft                 PowerBench                   January 2025
    Procedure:
 
       The measurement is done with the device fully configured and the
-      "minimum" traffic trace
+      "minimum" traffic trace.
 
    Reporting format:
 
       The results of the power measurement SHOULD be reported according
-      to Section 5.
+      to Section 7.
 
    Note:
 
@@ -649,7 +649,7 @@ Internet-Draft                 PowerBench                   January 2025
       measurement, this measurement captures the power cost of taking
       the device out of its "low-power mode."
 
-6.5.  Energy Consumption with Traffic Load
+8.5.  Power with Traffic Load
 
    Objective:
 
@@ -669,15 +669,15 @@ Internet-Draft                 PowerBench                   January 2025
 
 
 
-Pignataro, et al.         Expires 3 August 2025                [Page 12]
+Pignataro, et al.        Expires 3 January 2026                [Page 12]
 
-Internet-Draft                 PowerBench                   January 2025
+Internet-Draft                 PowerBench                      July 2025
 
 
       The results of the power measurement SHOULD be reported according
-      to Section 5.
+      to Section 7.
 
-6.6.  Energy Efficiency Ratio
+8.6.  Energy Efficiency Ratio
 
    Objective:
 
@@ -686,7 +686,7 @@ Internet-Draft                 PowerBench                   January 2025
    Procedure:
 
       Collect the data for all the traffic loads and apply the formula
-      of Section 2.  For example, with all DUT ports operating stably
+      of Section 4.  For example, with all DUT ports operating stably
       under a percentage of the maximum throughput (e.g. 100%, 30%, 0%),
       record the average input power and calculate the total weighted
       power P and then the EER .
@@ -694,9 +694,9 @@ Internet-Draft                 PowerBench                   January 2025
    Reporting format:
 
       The results of the energy efficiency ratio SHOULD be reported
-      according to Section 5.
+      according to Section 7.
 
-7.  Security Considerations
+9.  Security Considerations
 
    The benchmarking characterization described in this document is
    constrained to a controlled environment (as a laboratory) and
@@ -706,28 +706,28 @@ Internet-Draft                 PowerBench                   January 2025
    Beyond these, there are no specific security considerations within
    the scope of this document.
 
-8.  IANA Considerations
+10.  IANA Considerations
 
    This document has no IANA actions.
 
-9.  Acknowledgements
+11.  Acknowledgements
 
    We wish to thank the authors of [I-D.manral-bmwg-power-usage] for
    their analysis and start on this topic.
 
-10.  References
+12.  References
 
-10.1.  Normative References
-
-
+12.1.  Normative References
 
 
 
 
 
-Pignataro, et al.         Expires 3 August 2025                [Page 13]
+
+
+Pignataro, et al.        Expires 3 January 2026                [Page 13]
 
-Internet-Draft                 PowerBench                   January 2025
+Internet-Draft                 PowerBench                      July 2025
 
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
@@ -744,13 +744,18 @@ Internet-Draft                 PowerBench                   January 2025
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-10.2.  Informative References
+12.2.  Informative References
 
    [ATIS-0600015.03.2013]
               ATIS, "ATIS-0600015.03.2013: Energy Efficiency for
               Telecommunication Equipment: Methodology for Measurement
               and Reporting for Router and Ethernet Switch Products",
               2013.
+
+   [ATIS-0600015.2009]
+              ATIS, "ATIS-0600015.2009: Energy Efficiency for
+              Telecommunication Equipment: Methodology for Measurement
+              and Reporting - General Requirements", 2009.
 
    [ETSI-ES-203-136]
               ETSI, "ETSI ES 203 136: Environmental Engineering (EE);
@@ -771,20 +776,20 @@ Internet-Draft                 PowerBench                   January 2025
               methods for telecommunication equipment", 2020,
               <https://www.itu.int/rec/T-REC-L.1310/en>.
 
+
+
+
+
+
+Pignataro, et al.        Expires 3 January 2026                [Page 14]
+
+Internet-Draft                 PowerBench                      July 2025
+
+
    [RFC2544]  Bradner, S. and J. McQuaid, "Benchmarking Methodology for
               Network Interconnect Devices", RFC 2544,
               DOI 10.17487/RFC2544, March 1999,
               <https://www.rfc-editor.org/info/rfc2544>.
-
-
-
-
-
-
-Pignataro, et al.         Expires 3 August 2025                [Page 14]
-
-Internet-Draft                 PowerBench                   January 2025
-
 
    [RFC6985]  Morton, A., "IMIX Genome: Specification of Variable Packet
               Sizes for Additional Testing", RFC 6985,
@@ -832,9 +837,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-Pignataro, et al.         Expires 3 August 2025                [Page 15]
+Pignataro, et al.        Expires 3 January 2026                [Page 15]
