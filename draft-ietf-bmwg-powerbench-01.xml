@@ -250,13 +250,14 @@
 
     <t>Issues:<list>
       <t>The traffic loads and the weighted multipliers need to be clearly established a priori.</t>
-      <t>Importantly, the traffic MUST be forwarded of the correct port! 
+      <t>Importantly, the traffic MUST be forwarded out of the correct port!
       It would be easy to cut power down by dropping all traffic, and, naturally, we do not want that.
-      A tolerance on packet loss and/or forwarding error must be specified somehow.  That tolerance could
-      be zero for some benchmark problems (e.g., Non-Drop Rate (NDR) estimation), and non-zero for others.
-      Tolerating some errors may be interesting to navigate the design space of energy saving techniques,
-      such as approximate computing/routing. According to measurement procedure in section 6.5 of 
-      <xref target="ATIS-0600015.03.2013" />, the Equipment Under Test (EUT) should be able to return to full NDR load. Failure to do so disqualifies the test results. </t>
+      The default requirement is zero packet loss, consistent with Non-Drop Rate (NDR) as defined in
+      <xref target="RFC2544" /> and as required by <xref target="ETSI-ES-203-136" /> and
+      <xref target="ATIS-0600015.03.2013" />. Any non-zero packet loss tolerance MUST be explicitly
+      declared and justified in the test report. According to the measurement procedure in Section 6.5 of
+      <xref target="ATIS-0600015.03.2013" />, the Equipment Under Test (EUT) MUST be able to return to
+      full NDR load; failure to do so disqualifies the test results.</t>
     </list></t>
 
     <t>See Also:<list><t><xref target="ETSI-ES-203-136" />,<xref target="ITUT-L.1310" />
@@ -341,12 +342,11 @@
    method for network devices and consider the workload variation 
    and test conditions.</t>
 
-   <t>Enforcing controlled conditions on test conditions (e.g.,
-   Temperature) is important for test procedure to make sure test conditions
-   repeatable <xref target="RFC6985" />. The measurement condition reported in <xref target="ATIS-0600015.2009" /> 
-   and <xref target="ITUT-L.1310" /> SHOULD be applied, e.g., the power measurements SHALL be 
-   performed in a laboratory environment under specific range of temperature, 
-   humidity and atmosphere pressure.</t>
+   <t>Enforcing controlled conditions on test conditions is important for test procedure to make sure test conditions
+   are repeatable <xref target="RFC6985" />. The measurement conditions reported in <xref target="ATIS-0600015.2009" />
+   and <xref target="ITUT-L.1310" /> SHOULD be applied. Power measurements SHALL be performed in a laboratory
+   environment under the following conditions, consistent with Section 6.1 of <xref target="ETSI-ES-203-136" />:
+   room temperature 23°C to 27°C, relative humidity 25% to 75%, and atmospheric pressure 812 hPa to 1060 hPa.</t>
 
     </section>
 
@@ -401,10 +401,12 @@
     <t>The traffic load supported by a device affects its energy consumption.
     Therefore, the benchmark MUST include different traffic loads.</t>
     
-    <t>The traffic load MUST specify packet sizes, packet rates, and inter-packet 
-    delays, as all MAY affect the energy consumption of network devices <xref target="ATIS-0600015.2009" />.
-	To enable replicable and comparable results, the benchmark can specify a set of well-defined
-	traffic traces that MUST be used.</t>
+    <t>The traffic load MUST specify packet sizes and packet rates, as these MAY affect the energy
+    consumption of network devices <xref target="ATIS-0600015.2009" />.
+    To enable replicable and comparable results, the benchmark MUST use well-defined traffic traces.
+    A realistic mixture of packet sizes, such as the IMIX Genome distribution specified in
+    <xref target="RFC6985" />, satisfies this repeatability requirement and is consistent with
+    ATIS and ETSI traffic specifications.</t>
 
     <t>There are different interface types on a network device and the power usage 
     also depends on the kind of connector/transceiver used. 

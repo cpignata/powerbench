@@ -77,22 +77,22 @@ Table of Contents
      4.4.  Total Power . . . . . . . . . . . . . . . . . . . . . . .   7
    5.  Energy Consumption Benchmarking . . . . . . . . . . . . . . .   8
    6.  Test Methodology  . . . . . . . . . . . . . . . . . . . . . .   8
-     6.1.  Test Setup  . . . . . . . . . . . . . . . . . . . . . . .   8
-     6.2.  Traffic and Device Characterization . . . . . . . . . . .   9
+     6.1.  Test Setup  . . . . . . . . . . . . . . . . . . . . . . .   9
+     6.2.  Traffic and Device Characterization . . . . . . . . . . .  10
    7.  Reporting Format  . . . . . . . . . . . . . . . . . . . . . .  10
    8.  Benchmarking Tests  . . . . . . . . . . . . . . . . . . . . .  11
      8.1.  Throughput  . . . . . . . . . . . . . . . . . . . . . . .  11
      8.2.  Base Power  . . . . . . . . . . . . . . . . . . . . . . .  12
      8.3.  Idle Power  . . . . . . . . . . . . . . . . . . . . . . .  12
      8.4.  Idle+ Power . . . . . . . . . . . . . . . . . . . . . . .  13
-     8.5.  Typical Power . . . . . . . . . . . . . . . . . . . . . .  13
+     8.5.  Typical Power . . . . . . . . . . . . . . . . . . . . . .  14
      8.6.  Power with Traffic Load . . . . . . . . . . . . . . . . .  14
-     8.7.  Energy Efficiency Ratio . . . . . . . . . . . . . . . . .  14
+     8.7.  Energy Efficiency Ratio . . . . . . . . . . . . . . . . .  15
    9.  Security Considerations . . . . . . . . . . . . . . . . . . .  15
    10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  15
-   11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  15
-   12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  15
-     12.1.  Normative References . . . . . . . . . . . . . . . . . .  15
+   11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  16
+   12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  16
+     12.1.  Normative References . . . . . . . . . . . . . . . . . .  16
      12.2.  Informative References . . . . . . . . . . . . . . . . .  16
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  17
 
@@ -300,17 +300,17 @@ Internet-Draft                 PowerBench                      June 2026
       The traffic loads and the weighted multipliers need to be clearly
       established a priori.
 
-      Importantly, the traffic MUST be forwarded of the correct port!
-      It would be easy to cut power down by dropping all traffic, and,
-      naturally, we do not want that.  A tolerance on packet loss and/or
-      forwarding error must be specified somehow.  That tolerance could
-      be zero for some benchmark problems (e.g., Non-Drop Rate (NDR)
-      estimation), and non-zero for others.  Tolerating some errors may
-      be interesting to navigate the design space of energy saving
-      techniques, such as approximate computing/routing.  According to
-      measurement procedure in section 6.5 of [ATIS-0600015.03.2013],
-      the Equipment Under Test (EUT) should be able to return to full
-      NDR load.  Failure to do so disqualifies the test results.
+      Importantly, the traffic MUST be forwarded out of the correct
+      port!  It would be easy to cut power down by dropping all traffic,
+      and, naturally, we do not want that.  The default requirement is
+      zero packet loss, consistent with Non-Drop Rate (NDR) as defined
+      in [RFC2544] and as required by [ETSI-ES-203-136] and
+      [ATIS-0600015.03.2013].  Any non-zero packet loss tolerance MUST
+      be explicitly declared and justified in the test report.
+      According to the measurement procedure in Section 6.5 of
+      [ATIS-0600015.03.2013], the Equipment Under Test (EUT) MUST be
+      able to return to full NDR load; failure to do so disqualifies the
+      test results.
 
    See Also:
 
@@ -424,15 +424,31 @@ Internet-Draft                 PowerBench                      June 2026
    important to formulate a consistent benchmarking method for network
    devices and consider the workload variation and test conditions.
 
-   Enforcing controlled conditions on test conditions (e.g.,
-   Temperature) is important for test procedure to make sure test
-   conditions repeatable [RFC6985].  The measurement condition reported
-   in [ATIS-0600015.2009] and [ITUT-L.1310] SHOULD be applied, e.g., the
-   power measurements SHALL be performed in a laboratory environment
-   under specific range of temperature, humidity and atmosphere
-   pressure.
+   Enforcing controlled conditions on test conditions is important for
+   test procedure to make sure test conditions are repeatable [RFC6985].
+   The measurement conditions reported in [ATIS-0600015.2009] and
+   [ITUT-L.1310] SHOULD be applied.  Power measurements SHALL be
+   performed in a laboratory environment under the following conditions,
+   consistent with Section 6.1 of [ETSI-ES-203-136]: room temperature
+   23°C to 27°C, relative humidity 25% to 75%, and atmospheric pressure
+   812 hPa to 1060 hPa.
 
 6.  Test Methodology
+
+
+
+
+
+
+
+
+
+
+
+Pignataro, et al.       Expires 31 December 2026                [Page 8]
+
+Internet-Draft                 PowerBench                      June 2026
+
 
 6.1.  Test Setup
 
@@ -442,14 +458,6 @@ Internet-Draft                 PowerBench                      June 2026
    can be used to measure power under various configurations and
    conditions.  Tests MUST be done by running one or several of the
    predefined traffic traces, which are crafted to test different power-
-
-
-
-Pignataro, et al.       Expires 31 December 2026                [Page 8]
-
-Internet-Draft                 PowerBench                      June 2026
-
-
    intensive tasks related to packet processing.  The Tester is also a
    traffic generator that enables changing traffic conditions.  It is
    OPTIONAL to choose a non-equal proportion for upstream and downstream
@@ -486,17 +494,9 @@ Internet-Draft                 PowerBench                      June 2026
    be correlated to the amount of external power drawn to cool the
    device.
 
-6.2.  Traffic and Device Characterization
 
-   The traffic load supported by a device affects its energy
-   consumption.  Therefore, the benchmark MUST include different traffic
-   loads.
 
-   The traffic load MUST specify packet sizes, packet rates, and inter-
-   packet delays, as all MAY affect the energy consumption of network
-   devices [ATIS-0600015.2009].  To enable replicable and comparable
-   results, the benchmark can specify a set of well-defined traffic
-   traces that MUST be used.
+
 
 
 
@@ -505,6 +505,20 @@ Pignataro, et al.       Expires 31 December 2026                [Page 9]
 
 Internet-Draft                 PowerBench                      June 2026
 
+
+6.2.  Traffic and Device Characterization
+
+   The traffic load supported by a device affects its energy
+   consumption.  Therefore, the benchmark MUST include different traffic
+   loads.
+
+   The traffic load MUST specify packet sizes and packet rates, as these
+   MAY affect the energy consumption of network devices
+   [ATIS-0600015.2009].  To enable replicable and comparable results,
+   the benchmark MUST use well-defined traffic traces.  A realistic
+   mixture of packet sizes, such as the IMIX Genome distribution
+   specified in [RFC6985], satisfies this repeatability requirement and
+   is consistent with ATIS and ETSI traffic specifications.
 
    There are different interface types on a network device and the power
    usage also depends on the kind of connector/transceiver used.  The
@@ -540,6 +554,14 @@ Internet-Draft                 PowerBench                      June 2026
       For the benchmarking tests, it MUST be specified.
 
    Number and type of line cards:
+
+
+
+Pignataro, et al.       Expires 31 December 2026               [Page 10]
+
+Internet-Draft                 PowerBench                      June 2026
+
+
       For each test the total number of line cards and their types can
       be varied and MUST be specified.
 
@@ -554,13 +576,6 @@ Internet-Draft                 PowerBench                      June 2026
    Port settings and interface types:
       For each test the port configuration and settings need to be
       specified.
-
-
-
-Pignataro, et al.       Expires 31 December 2026               [Page 10]
-
-Internet-Draft                 PowerBench                      June 2026
-
 
    Port Utilization:
       For each test the port utilization of each port MUST be specified.
@@ -596,6 +611,13 @@ Internet-Draft                 PowerBench                      June 2026
       characterize throughput under realistic traffic patterns using
       variable packet size distributions as specified in [RFC6985].
 
+
+
+Pignataro, et al.       Expires 31 December 2026               [Page 11]
+
+Internet-Draft                 PowerBench                      June 2026
+
+
    Procedure:
 
       The test is done using a multi-port setup as specified in
@@ -608,15 +630,6 @@ Internet-Draft                 PowerBench                      June 2026
 
       The results of the throughput SHOULD be reported according to
       Section 7.
-
-
-
-
-
-Pignataro, et al.       Expires 31 December 2026               [Page 11]
-
-Internet-Draft                 PowerBench                      June 2026
-
 
 8.2.  Base Power
 
@@ -654,6 +667,13 @@ Internet-Draft                 PowerBench                      June 2026
       forward traffic but without any traffic actually present.  All
       interfaces MUST be up.
 
+
+
+Pignataro, et al.       Expires 31 December 2026               [Page 12]
+
+Internet-Draft                 PowerBench                      June 2026
+
+
       Control-plane, management-plane, and background system functions
       MAY remain active during this measurement unless explicitly
       disabled for the purpose of the test.  Examples include routing
@@ -666,13 +686,6 @@ Internet-Draft                 PowerBench                      June 2026
 
       The results of the power measurement SHOULD be reported according
       to Section 7.
-
-
-
-Pignataro, et al.       Expires 31 December 2026               [Page 12]
-
-Internet-Draft                 PowerBench                      June 2026
-
 
    Note:
 
@@ -708,6 +721,15 @@ Internet-Draft                 PowerBench                      June 2026
 
    Note:
 
+
+
+
+
+Pignataro, et al.       Expires 31 December 2026               [Page 13]
+
+Internet-Draft                 PowerBench                      June 2026
+
+
       The "minimum" traffic trace creates a bidirectional flow of 1 pps
       on all active interfaces.  The 1 pps rate is chosen to be the
       smallest non-zero traffic load that activates the forwarding plane
@@ -722,13 +744,6 @@ Internet-Draft                 PowerBench                      June 2026
 
       To determine the power drawn by the network device under a
       representative, realistic traffic load.
-
-
-
-Pignataro, et al.       Expires 31 December 2026               [Page 13]
-
-Internet-Draft                 PowerBench                      June 2026
-
 
    Procedure:
 
@@ -763,6 +778,14 @@ Internet-Draft                 PowerBench                      June 2026
       under a specific traffic load, which is a percentage of the
       maximum throughput.
 
+
+
+
+Pignataro, et al.       Expires 31 December 2026               [Page 14]
+
+Internet-Draft                 PowerBench                      June 2026
+
+
       Power SHOULD be recorded only after the DUT and the offered load
       have reached a stable operating state.  The stabilization interval
       and the measurement interval MUST be reported as described in
@@ -778,13 +801,6 @@ Internet-Draft                 PowerBench                      June 2026
    Objective:
 
       To determine the energy efficiency of the DUT.
-
-
-
-Pignataro, et al.       Expires 31 December 2026               [Page 14]
-
-Internet-Draft                 PowerBench                      June 2026
-
 
    Procedure:
 
@@ -817,6 +833,15 @@ Internet-Draft                 PowerBench                      June 2026
 
    This document has no IANA actions.
 
+
+
+
+
+Pignataro, et al.       Expires 31 December 2026               [Page 15]
+
+Internet-Draft                 PowerBench                      June 2026
+
+
 11.  Acknowledgements
 
    We wish to thank the authors of [I-D.manral-bmwg-power-usage] for
@@ -830,17 +855,6 @@ Internet-Draft                 PowerBench                      June 2026
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
-
-
-
-
-
-
-
-Pignataro, et al.       Expires 31 December 2026               [Page 15]
-
-Internet-Draft                 PowerBench                      June 2026
-
 
    [RFC7460]  Chandramouli, M., Claise, B., Schoening, B., Quittek, J.,
               and T. Dietz, "Monitoring and Control MIB for Power and
@@ -871,6 +885,19 @@ Internet-Draft                 PowerBench                      June 2026
               etsi_es/203100_203199/203136/01.02.00_50/
               es_203136v010200m.pdf>.
 
+
+
+
+
+
+
+
+
+Pignataro, et al.       Expires 31 December 2026               [Page 16]
+
+Internet-Draft                 PowerBench                      June 2026
+
+
    [I-D.manral-bmwg-power-usage]
               Manral, V., Sharma, P., Banerjee, S., and Y. Ping,
               "Benchmarking Power usage of networking devices", Work in
@@ -887,16 +914,6 @@ Internet-Draft                 PowerBench                      June 2026
               Network Interconnect Devices", RFC 2544,
               DOI 10.17487/RFC2544, March 1999,
               <https://www.rfc-editor.org/info/rfc2544>.
-
-
-
-
-
-
-Pignataro, et al.       Expires 31 December 2026               [Page 16]
-
-Internet-Draft                 PowerBench                      June 2026
-
 
    [RFC6985]  Morton, A., "IMIX Genome: Specification of Variable Packet
               Sizes for Additional Testing", RFC 6985,
@@ -928,6 +945,15 @@ Authors' Addresses
    Email: giuseppe.fioccola@huawei.com
 
 
+
+
+
+
+Pignataro, et al.       Expires 31 December 2026               [Page 17]
+
+Internet-Draft                 PowerBench                      June 2026
+
+
    Qin Wu
    Huawei
    China
@@ -949,4 +975,34 @@ Authors' Addresses
 
 
 
-Pignataro, et al.       Expires 31 December 2026               [Page 17]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pignataro, et al.       Expires 31 December 2026               [Page 18]
