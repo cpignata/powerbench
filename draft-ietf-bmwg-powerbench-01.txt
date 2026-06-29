@@ -85,15 +85,16 @@ Table of Contents
      8.2.  Base Power  . . . . . . . . . . . . . . . . . . . . . . .  12
      8.3.  Idle Power  . . . . . . . . . . . . . . . . . . . . . . .  12
      8.4.  Idle+ Power . . . . . . . . . . . . . . . . . . . . . . .  13
-     8.5.  Power with Traffic Load . . . . . . . . . . . . . . . . .  13
-     8.6.  Energy Efficiency Ratio . . . . . . . . . . . . . . . . .  14
+     8.5.  Typical Power . . . . . . . . . . . . . . . . . . . . . .  13
+     8.6.  Power with Traffic Load . . . . . . . . . . . . . . . . .  14
+     8.7.  Energy Efficiency Ratio . . . . . . . . . . . . . . . . .  14
    9.  Security Considerations . . . . . . . . . . . . . . . . . . .  15
    10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  15
    11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  15
    12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  15
      12.1.  Normative References . . . . . . . . . . . . . . . . . .  15
-     12.2.  Informative References . . . . . . . . . . . . . . . . .  15
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  16
+     12.2.  Informative References . . . . . . . . . . . . . . . . .  16
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  17
 
 1.  Introduction
 
@@ -103,7 +104,6 @@ Table of Contents
    Both network utilization and energy consumption of these devices can
    be improved, and that starts with a normalized characterization
    [RFC7460].
-
 
 
 
@@ -716,12 +716,12 @@ Internet-Draft                 PowerBench                      June 2026
       measurement, this measurement captures the power cost of taking
       the device out of its "low-power mode."
 
-8.5.  Power with Traffic Load
+8.5.  Typical Power
 
    Objective:
 
-
-
+      To determine the power drawn by the network device under a
+      representative, realistic traffic load.
 
 
 
@@ -729,6 +729,28 @@ Pignataro, et al.       Expires 31 December 2026               [Page 13]
 
 Internet-Draft                 PowerBench                      June 2026
 
+
+   Procedure:
+
+      The measurement is done with the device fully configured and a
+      bidirectional traffic load at a specified percentage of the
+      maximum throughput (e.g., 30%), using the packet size distribution
+      specified in [RFC6985].
+
+   Reporting format:
+
+      The results of the power measurement SHOULD be reported according
+      to Section 7.
+
+   Note:
+
+      This measurement complements Base, Idle, and Idle+ Power by
+      capturing power at a representative operational point, and is
+      useful for comparing devices under realistic workloads.
+
+8.6.  Power with Traffic Load
+
+   Objective:
 
       To determine the power drawn by a device.  The dynamic power,
       which is added to the idle+ power, SHOULD be proportional to its
@@ -751,11 +773,18 @@ Internet-Draft                 PowerBench                      June 2026
       The results of the power measurement SHOULD be reported according
       to Section 7.
 
-8.6.  Energy Efficiency Ratio
+8.7.  Energy Efficiency Ratio
 
    Objective:
 
       To determine the energy efficiency of the DUT.
+
+
+
+Pignataro, et al.       Expires 31 December 2026               [Page 14]
+
+Internet-Draft                 PowerBench                      June 2026
+
 
    Procedure:
 
@@ -773,18 +802,6 @@ Internet-Draft                 PowerBench                      June 2026
 
       The results of the energy efficiency ratio SHOULD be reported
       according to Section 7.
-
-
-
-
-
-
-
-
-Pignataro, et al.       Expires 31 December 2026               [Page 14]
-
-Internet-Draft                 PowerBench                      June 2026
-
 
 9.  Security Considerations
 
@@ -814,6 +831,17 @@ Internet-Draft                 PowerBench                      June 2026
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
+
+
+
+
+
+
+Pignataro, et al.       Expires 31 December 2026               [Page 15]
+
+Internet-Draft                 PowerBench                      June 2026
+
+
    [RFC7460]  Chandramouli, M., Claise, B., Schoening, B., Quittek, J.,
               and T. Dietz, "Monitoring and Control MIB for Power and
               Energy", RFC 7460, DOI 10.17487/RFC7460, March 2015,
@@ -830,17 +858,6 @@ Internet-Draft                 PowerBench                      June 2026
               Telecommunication Equipment: Methodology for Measurement
               and Reporting for Router and Ethernet Switch Products",
               2013.
-
-
-
-
-
-
-
-Pignataro, et al.       Expires 31 December 2026               [Page 15]
-
-Internet-Draft                 PowerBench                      June 2026
-
 
    [ATIS-0600015.2009]
               ATIS, "ATIS-0600015.2009: Energy Efficiency for
@@ -871,6 +888,16 @@ Internet-Draft                 PowerBench                      June 2026
               DOI 10.17487/RFC2544, March 1999,
               <https://www.rfc-editor.org/info/rfc2544>.
 
+
+
+
+
+
+Pignataro, et al.       Expires 31 December 2026               [Page 16]
+
+Internet-Draft                 PowerBench                      June 2026
+
+
    [RFC6985]  Morton, A., "IMIX Genome: Specification of Variable Packet
               Sizes for Additional Testing", RFC 6985,
               DOI 10.17487/RFC6985, July 2013,
@@ -887,15 +914,6 @@ Authors' Addresses
    North Carolina State University
    United States of America
    Email: cpignata@gmail.com, cmpignat@ncsu.edu
-
-
-
-
-
-
-Pignataro, et al.       Expires 31 December 2026               [Page 16]
-
-Internet-Draft                 PowerBench                      June 2026
 
 
    Romain Jacob
@@ -926,24 +944,6 @@ Internet-Draft                 PowerBench                      June 2026
    Nokia
    India
    Email: shailesh.prabhu@nokia.com
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
