@@ -193,9 +193,13 @@
      but the hope is to have many more comparison points available, which would ultimately 
      provide a more robust image of the devices power demands and their evolution over time.</t>
 
-     <t>In short: this draft argues it is better to have many benchmark results with 
+     <t>In short: this draft argues it is better to have many benchmark results with
      a higher uncertainty than a few very precise but hardly comparable ones.</t>
-     
+
+     <t>Environmental conditions are an exception to this approach: specific values for
+     temperature, humidity, and atmospheric pressure are prescribed in <xref target="ecb" />
+     to ensure a minimum level of comparability across results.</t>
+
      </section>
 
     <section anchor="terms" title="Terminology">
@@ -221,7 +225,7 @@
     
 	 <t>Measurement units:<list><t>Gbps.</t></list></t>
 
-    <t>Issues<list>
+    <t>Issues:<list>
       <t>The traffic loads and the weighted multipliers need to be clearly established a priori.</t>
       <t>It is unclear if the definition of the Ti is/should be linked to the traffic load levels. 
       For a given port configuration (which may result in 50% of the total capacity a device can provide), 
@@ -283,7 +287,7 @@
 
      <t>Issues:<list>
       <t>The traffic loads and the weighted multipliers need to be clearly established a priori.</t>
-      <t>Optionally the total capacity of the interfaces (T) can be used in replacement of the total weighted capacity of the interfaces. The former is the sum of all interface throughputs and is not linked to traffic load levels. This result EER is a scaled value proportional to the EER using the total weighted capacity of the interfaces (T)</t>
+      <t>Optionally the total capacity of the interfaces (T) can be used in replacement of the total weighted capacity of the interfaces. The former is the sum of all interface throughputs and is not linked to traffic load levels. This result EER is a scaled value proportional to the EER using the total weighted capacity of the interfaces (T).</t>
      </list></t>
 
      <t>See Also:<list><t><xref target="ETSI-ES-203-136" />,<xref target="ITUT-L.1310" />
@@ -314,19 +318,19 @@
       each over, but it MAY be enough to assess the effect of a change on the same equipment; e.g.,
       for optimizing the power draw by changing the running configuration.</t>
 	  
-      <t>Importantly, the traffic MUST be forwarded of the correct port! 
-      It would be easy to cut power down by dropping all traffic, and we of course do not want that.
-      A tolerance on packet loss and/or forwarding error MUST be specified somehow. 
-      That tolerance could be zero for some benchmark problems, and non-zero for others.
-      Tolerating some errors MAY be interesting to navigate the design space of energy saving techniques, 
-      such as approximate computing/routing.</t>
+      <t>Importantly, the traffic MUST be forwarded out of the correct port!
+      It would be easy to cut power down by dropping all traffic, and, naturally, we do not want that.
+      The default requirement is zero packet loss, consistent with Non-Drop Rate (NDR) as defined in
+      <xref target="RFC2544" /> and as required by <xref target="ETSI-ES-203-136" /> and
+      <xref target="ATIS-0600015.03.2013" />. Any non-zero packet loss tolerance MUST be explicitly
+      declared and justified in the test report.</t>
     </list></t>
 
     </section>
 	
     </section>
 	
-    <section title="Energy Consumption Benchmarking">
+    <section anchor="ecb" title="Energy Consumption Benchmarking">
 	
    <t>The maximum power drawn by a device does not accurately 
    reflect the power under a normal workload.
@@ -343,7 +347,7 @@
    and test conditions.</t>
 
    <t>Enforcing controlled conditions on test conditions is important for test procedure to make sure test conditions
-   are repeatable <xref target="RFC6985" />. The measurement conditions reported in <xref target="ATIS-0600015.2009" />
+   are repeatable. The measurement conditions reported in <xref target="ATIS-0600015.2009" />
    and <xref target="ITUT-L.1310" /> SHOULD be applied. Power measurements SHALL be performed in a laboratory
    environment under the following conditions, consistent with Section 6.1 of <xref target="ETSI-ES-203-136" />:
    room temperature 23°C to 27°C, relative humidity 25% to 75%, and atmospheric pressure 812 hPa to 1060 hPa.</t>
@@ -470,8 +474,8 @@
 
      <section title="Throughput">
 
-      <t>Objective:<list><t>To determine the DUT throughput according to <xref target="RFC2544" />.
-      And to characterize throughput under realistic traffic patterns using variable packet size distributions as specified in <xref target="RFC6985" />.</t></list></t>
+      <t>Objective:<list><t>To determine the DUT throughput according to <xref target="RFC2544" />,
+      and to characterize throughput under realistic traffic patterns using variable packet size distributions as specified in <xref target="RFC6985" />.</t></list></t>
 
       <t>Procedure:<list><t>The test is done using a multi-port setup as specified in Section 16 and Section 26.1 of <xref target="RFC2544" />. To assess throughput under realistic Internet traffic conditions, the test is performed using the IMIX Genome packet size distributions specified in <xref target="RFC6985" />.</t></list></t>
 
@@ -573,7 +577,7 @@
 	  <t>Procedure:<list>
     
     <t>A specific number of packets at a specific rate is sent to specific ports/linecards
-	  of the DUT. All DUT ports must operate under a specific traffic load, which is a percentage of the maximum throughput.</t>
+	  of the DUT. All DUT ports MUST operate under a specific traffic load, which is a percentage of the maximum throughput.</t>
     
     <t>Power SHOULD be recorded only after the DUT and the offered load have reached a stable operating state. The stabilization interval and the measurement interval MUST be reported as described in <xref target="report" />.</t>
     
