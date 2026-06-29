@@ -5,14 +5,14 @@
 Benchmarking Methodology Working Group                      C. Pignataro
 Internet-Draft                                       NC State University
 Intended status: Standards Track                                R. Jacob
-Expires: 16 August 2026                                       ETH Zürich
+Expires: 31 December 2026                                     ETH Zürich
                                                              G. Fioccola
                                                                    Q. Wu
                                                                  G. Chen
                                                                   Huawei
                                                                S. Prabhu
                                                                    Nokia
-                                                        12 February 2026
+                                                            29 June 2026
 
 
  Characterization and Benchmarking Methodology for Power in Networking
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 August 2026.
+   This Internet-Draft will expire on 31 December 2026.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Pignataro, et al.        Expires 16 August 2026                 [Page 1]
+Pignataro, et al.       Expires 31 December 2026                [Page 1]
 
-Internet-Draft                 PowerBench                  February 2026
+Internet-Draft                 PowerBench                      June 2026
 
 
    Please review these documents carefully, as they describe your rights
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Pignataro, et al.        Expires 16 August 2026                 [Page 2]
+Pignataro, et al.       Expires 31 December 2026                [Page 2]
 
-Internet-Draft                 PowerBench                  February 2026
+Internet-Draft                 PowerBench                      June 2026
 
 
    The benchmarking methodology defined here will help operators to get
@@ -165,9 +165,9 @@ Internet-Draft                 PowerBench                  February 2026
 
 
 
-Pignataro, et al.        Expires 16 August 2026                 [Page 3]
+Pignataro, et al.       Expires 31 December 2026                [Page 3]
 
-Internet-Draft                 PowerBench                  February 2026
+Internet-Draft                 PowerBench                      June 2026
 
 
    The benchmark aims to compare the energy efficiency for individual
@@ -221,9 +221,9 @@ Internet-Draft                 PowerBench                  February 2026
 
 
 
-Pignataro, et al.        Expires 16 August 2026                 [Page 4]
+Pignataro, et al.       Expires 31 December 2026                [Page 4]
 
-Internet-Draft                 PowerBench                  February 2026
+Internet-Draft                 PowerBench                      June 2026
 
 
       T = B1*T1 +...+ Bi*Ti +...+ Bm*Tm
@@ -277,9 +277,9 @@ Internet-Draft                 PowerBench                  February 2026
 
 
 
-Pignataro, et al.        Expires 16 August 2026                 [Page 5]
+Pignataro, et al.       Expires 31 December 2026                [Page 5]
 
-Internet-Draft                 PowerBench                  February 2026
+Internet-Draft                 PowerBench                      June 2026
 
 
       Pi is the Power of the equipment in each traffic load level (e.g.
@@ -333,9 +333,9 @@ Internet-Draft                 PowerBench                  February 2026
 
 
 
-Pignataro, et al.        Expires 16 August 2026                 [Page 6]
+Pignataro, et al.       Expires 31 December 2026                [Page 6]
 
-Internet-Draft                 PowerBench                  February 2026
+Internet-Draft                 PowerBench                      June 2026
 
 
       P is the weighted power for different traffic loads
@@ -389,9 +389,9 @@ Internet-Draft                 PowerBench                  February 2026
 
 
 
-Pignataro, et al.        Expires 16 August 2026                 [Page 7]
+Pignataro, et al.       Expires 31 December 2026                [Page 7]
 
-Internet-Draft                 PowerBench                  February 2026
+Internet-Draft                 PowerBench                      June 2026
 
 
       the operating system, the room temperature and humidity/other
@@ -445,9 +445,9 @@ Internet-Draft                 PowerBench                  February 2026
 
 
 
-Pignataro, et al.        Expires 16 August 2026                 [Page 8]
+Pignataro, et al.       Expires 31 December 2026                [Page 8]
 
-Internet-Draft                 PowerBench                  February 2026
+Internet-Draft                 PowerBench                      June 2026
 
 
    intensive tasks related to packet processing.  The Tester is also a
@@ -501,9 +501,9 @@ Internet-Draft                 PowerBench                  February 2026
 
 
 
-Pignataro, et al.        Expires 16 August 2026                 [Page 9]
+Pignataro, et al.       Expires 31 December 2026                [Page 9]
 
-Internet-Draft                 PowerBench                  February 2026
+Internet-Draft                 PowerBench                      June 2026
 
 
    There are different interface types on a network device and the power
@@ -557,9 +557,9 @@ Internet-Draft                 PowerBench                  February 2026
 
 
 
-Pignataro, et al.        Expires 16 August 2026                [Page 10]
+Pignataro, et al.       Expires 31 December 2026               [Page 10]
 
-Internet-Draft                 PowerBench                  February 2026
+Internet-Draft                 PowerBench                      June 2026
 
 
    Port Utilization:
@@ -613,9 +613,9 @@ Internet-Draft                 PowerBench                  February 2026
 
 
 
-Pignataro, et al.        Expires 16 August 2026                [Page 11]
+Pignataro, et al.       Expires 31 December 2026               [Page 11]
 
-Internet-Draft                 PowerBench                  February 2026
+Internet-Draft                 PowerBench                      June 2026
 
 
 8.2.  Base Power
@@ -669,9 +669,9 @@ Internet-Draft                 PowerBench                  February 2026
 
 
 
-Pignataro, et al.        Expires 16 August 2026                [Page 12]
+Pignataro, et al.       Expires 31 December 2026               [Page 12]
 
-Internet-Draft                 PowerBench                  February 2026
+Internet-Draft                 PowerBench                      June 2026
 
 
    Note:
@@ -725,9 +725,9 @@ Internet-Draft                 PowerBench                  February 2026
 
 
 
-Pignataro, et al.        Expires 16 August 2026                [Page 13]
+Pignataro, et al.       Expires 31 December 2026               [Page 13]
 
-Internet-Draft                 PowerBench                  February 2026
+Internet-Draft                 PowerBench                      June 2026
 
 
       A specific number of packets at a specific rate is sent to
@@ -781,9 +781,9 @@ Internet-Draft                 PowerBench                  February 2026
 
 
 
-Pignataro, et al.        Expires 16 August 2026                [Page 14]
+Pignataro, et al.       Expires 31 December 2026               [Page 14]
 
-Internet-Draft                 PowerBench                  February 2026
+Internet-Draft                 PowerBench                      June 2026
 
 
 10.  IANA Considerations
@@ -837,9 +837,9 @@ Internet-Draft                 PowerBench                  February 2026
 
 
 
-Pignataro, et al.        Expires 16 August 2026                [Page 15]
+Pignataro, et al.       Expires 31 December 2026               [Page 15]
 
-Internet-Draft                 PowerBench                  February 2026
+Internet-Draft                 PowerBench                      June 2026
 
 
    [I-D.manral-bmwg-power-usage]
@@ -893,9 +893,9 @@ Authors' Addresses
 
 
 
-Pignataro, et al.        Expires 16 August 2026                [Page 16]
+Pignataro, et al.       Expires 31 December 2026               [Page 16]
 
-Internet-Draft                 PowerBench                  February 2026
+Internet-Draft                 PowerBench                      June 2026
 
 
    Qin Wu
@@ -949,4 +949,4 @@ Internet-Draft                 PowerBench                  February 2026
 
 
 
-Pignataro, et al.        Expires 16 August 2026                [Page 17]
+Pignataro, et al.       Expires 31 December 2026               [Page 17]
