@@ -483,8 +483,8 @@
 	  <t>Objective:<list><t>To determine the base power drawn by the network device in its factory 
    settings.</t></list></t>
 	 
-	  <t>Procedure:<list><t>The measurement is done with the device in its factory settings, after 
-   it finished booting, and without any transceiver plugged in.</t></list></t>
+	  <t>Procedure:<list><t>The measurement is done with the device in its factory settings, after
+   it finished booting with all boards and components active, and without any transceiver plugged in.</t></list></t>
 
       <t>Reporting format:<list><t>The results of the power measurement SHOULD be
    reported according to <xref target="report" />.</t></list></t>
@@ -538,8 +538,10 @@
     reported according to <xref target="report" />.</t></list></t>
 	 
       <t>Note:<list><t>The "minimum" traffic trace creates a bidirectional flow of 1 pps on all active
-    interfaces. By comparison with the "Idle Power" measurement, this measurement captures the power 
-    cost of taking the device out of its "low-power mode."</t></list></t>
+    interfaces. The 1 pps rate is chosen to be the smallest non-zero traffic load that activates
+    the forwarding plane on all interfaces without introducing measurable dynamic power from
+    packet processing. By comparison with the "Idle Power" measurement, this measurement captures
+    the power cost of taking the device out of its "low-power mode."</t></list></t>
 	 
   </section>
 

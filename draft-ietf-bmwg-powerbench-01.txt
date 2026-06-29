@@ -87,7 +87,7 @@ Table of Contents
      8.4.  Idle+ Power . . . . . . . . . . . . . . . . . . . . . . .  13
      8.5.  Power with Traffic Load . . . . . . . . . . . . . . . . .  13
      8.6.  Energy Efficiency Ratio . . . . . . . . . . . . . . . . .  14
-   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  14
+   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  15
    10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  15
    11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  15
    12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  15
@@ -628,7 +628,8 @@ Internet-Draft                 PowerBench                      June 2026
    Procedure:
 
       The measurement is done with the device in its factory settings,
-      after it finished booting, and without any transceiver plugged in.
+      after it finished booting with all boards and components active,
+      and without any transceiver plugged in.
 
    Reporting format:
 
@@ -665,7 +666,6 @@ Internet-Draft                 PowerBench                      June 2026
 
       The results of the power measurement SHOULD be reported according
       to Section 7.
-
 
 
 
@@ -709,7 +709,10 @@ Internet-Draft                 PowerBench                      June 2026
    Note:
 
       The "minimum" traffic trace creates a bidirectional flow of 1 pps
-      on all active interfaces.  By comparison with the "Idle Power"
+      on all active interfaces.  The 1 pps rate is chosen to be the
+      smallest non-zero traffic load that activates the forwarding plane
+      on all interfaces without introducing measurable dynamic power
+      from packet processing.  By comparison with the "Idle Power"
       measurement, this measurement captures the power cost of taking
       the device out of its "low-power mode."
 
@@ -717,11 +720,8 @@ Internet-Draft                 PowerBench                      June 2026
 
    Objective:
 
-      To determine the power drawn by a device.  The dynamic power,
-      which is added to the idle+ power, SHOULD be proportional to its
-      traffic load.
 
-   Procedure:
+
 
 
 
@@ -729,6 +729,12 @@ Pignataro, et al.       Expires 31 December 2026               [Page 13]
 
 Internet-Draft                 PowerBench                      June 2026
 
+
+      To determine the power drawn by a device.  The dynamic power,
+      which is added to the idle+ power, SHOULD be proportional to its
+      traffic load.
+
+   Procedure:
 
       A specific number of packets at a specific rate is sent to
       specific ports/linecards of the DUT.  All DUT ports must operate
@@ -768,6 +774,18 @@ Internet-Draft                 PowerBench                      June 2026
       The results of the energy efficiency ratio SHOULD be reported
       according to Section 7.
 
+
+
+
+
+
+
+
+Pignataro, et al.       Expires 31 December 2026               [Page 14]
+
+Internet-Draft                 PowerBench                      June 2026
+
+
 9.  Security Considerations
 
    The benchmarking characterization described in this document is
@@ -777,14 +795,6 @@ Internet-Draft                 PowerBench                      June 2026
 
    Beyond these, there are no specific security considerations within
    the scope of this document.
-
-
-
-
-Pignataro, et al.       Expires 31 December 2026               [Page 14]
-
-Internet-Draft                 PowerBench                      June 2026
-
 
 10.  IANA Considerations
 
@@ -821,6 +831,17 @@ Internet-Draft                 PowerBench                      June 2026
               and Reporting for Router and Ethernet Switch Products",
               2013.
 
+
+
+
+
+
+
+Pignataro, et al.       Expires 31 December 2026               [Page 15]
+
+Internet-Draft                 PowerBench                      June 2026
+
+
    [ATIS-0600015.2009]
               ATIS, "ATIS-0600015.2009: Energy Efficiency for
               Telecommunication Equipment: Methodology for Measurement
@@ -832,15 +853,6 @@ Internet-Draft                 PowerBench                      June 2026
               switch equipment", 2017, <https://www.etsi.org/deliver/
               etsi_es/203100_203199/203136/01.02.00_50/
               es_203136v010200m.pdf>.
-
-
-
-
-
-Pignataro, et al.       Expires 31 December 2026               [Page 15]
-
-Internet-Draft                 PowerBench                      June 2026
-
 
    [I-D.manral-bmwg-power-usage]
               Manral, V., Sharma, P., Banerjee, S., and Y. Ping,
@@ -877,6 +889,15 @@ Authors' Addresses
    Email: cpignata@gmail.com, cmpignat@ncsu.edu
 
 
+
+
+
+
+Pignataro, et al.       Expires 31 December 2026               [Page 16]
+
+Internet-Draft                 PowerBench                      June 2026
+
+
    Romain Jacob
    ETH Zürich
    Switzerland
@@ -887,15 +908,6 @@ Authors' Addresses
    Huawei
    Italy
    Email: giuseppe.fioccola@huawei.com
-
-
-
-
-
-
-Pignataro, et al.       Expires 31 December 2026               [Page 16]
-
-Internet-Draft                 PowerBench                      June 2026
 
 
    Qin Wu
@@ -914,18 +926,6 @@ Internet-Draft                 PowerBench                      June 2026
    Nokia
    India
    Email: shailesh.prabhu@nokia.com
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
