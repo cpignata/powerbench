@@ -131,7 +131,7 @@
    
    <t>This document focuses on the mechanism to correctly characterize and benchmark 
    the energy consumption of networking devices to better  estimate and compare 
-   their power usage in order to assess the performance over a set of well-defined scenario.</t>
+   their power usage in order to assess the performance over a set of well-defined scenarios.</t>
 
      <section title="Requirements Language">   
     <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -158,9 +158,9 @@
 	</list></t>
 
     <t>Achieving any of these objectives requires a well-defined set of principles prescribing
-    what must be measured, how must be measured, and which results must be reported. 
-    Providing those principles is the objective of this draft.
-    These are simply called "the benchmark" in the rest of this draft.</t>
+    what must be measured, how it must be measured, and which results must be reported.
+    Providing those principles is the objective of this document.
+    These are simply called "the benchmark" in the rest of this document.</t>
 
     <t>The benchmark aims to compare the energy efficiency for individual devices 
     (routers and switches belonging to similar device classes).
@@ -172,30 +172,34 @@
      <section title="Replicability and Comparability">
 
      <t>Replicability is defined as achieving the same results with newly collected data.
-     Formally, it is a pre-requisite for benchmarking. Benchmark results are meant to
+     Formally, it is a prerequisite for benchmarking. Benchmark results are meant to
      be compared, and this comparison is not sound if the individual results are not replicable.</t>
 
-     <t>As discussed later in this draft, replicability in power measurements is complex
-     as power is affected by a wide range of parameters, some of which are hard to control 
+     <t>As discussed later in this document, replicability in power measurements is complex
+     as power is affected by a wide range of parameters, some of which are hard to control,
      e.g., the room temperature.</t>
 
-     <t>Striving for "perfect" replicability would lead to prescribe extremely precisely 
-     all the power-impacting factors in the test setup. We argue that this is unrealistic 
+     <t>Striving for "perfect" replicability would lead to prescribing extremely precisely
+     all the power-impacting factors in the test setup. We argue that this is unrealistic
      and counter-productive. An overly prescriptive benchmark becomes more complicated to 
      perform. Furthermore, results would then be comparable only across benchmark results
      obtained under the exact same test conditions, which becomes increasingly less likely
      as we prescribe more and more.</t>
 
-     <t>Instead, the benchmark described in this draft proposes to report on a number of
+     <t>Instead, the benchmark described in this document proposes to report on a number of
      power-impacting factors, but does not enforce specific values or settings for those.
      The aim is to make the benchmark easier to perform. The comparison between benchmark
      results MAY be somewhat less accurate or fair than with a more prescriptive benchmark, 
      but the hope is to have many more comparison points available, which would ultimately 
      provide a more robust image of the devices power demands and their evolution over time.</t>
 
-     <t>In short: this draft argues it is better to have many benchmark results with 
+     <t>In short: this document argues it is better to have many benchmark results with
      a higher uncertainty than a few very precise but hardly comparable ones.</t>
-     
+
+     <t>Environmental conditions are an exception to this approach: specific values for
+     temperature, humidity, and atmospheric pressure are prescribed in <xref target="ecb" />
+     to ensure a minimum level of comparability across results.</t>
+
      </section>
 
     <section anchor="terms" title="Terminology">
@@ -209,19 +213,19 @@
 
      <t>Discussion:<list>
 				<t>Ti is the total capacity of the interfaces for a fixed configuration model and traffic load
-				(the sum of the interface bandwidths)</t>
+				(the sum of the interface bandwidths).</t>
 				<t>Bi is the weighted multiplier for different traffic levels (note
-                that B1+...+Bj+...+Bm = 1, weight multipliers MAY be specified for router, switch differently,
-				3 typical weighted multipliers are 0.1,0.8,0.1)</t>
-				<t>m is the number of traffic load levels (if it is considered 100%, 30%, 0%; m = 3) Note that
-				traffic load levels MAY be specified differently for router and switch, e.g., traffic level 
-				100%,10%,0% for access router, traffic level 100%,30%,0% for core router and data center 
+                that B1+...+Bj+...+Bm = 1; weight multipliers MAY be specified for router and switch
+				differently; 3 typical weighted multipliers are 0.1, 0.8, 0.1).</t>
+				<t>m is the number of traffic load levels (if it is considered 100%, 30%, 0%; m = 3). Note that
+				traffic load levels MAY be specified differently for router and switch, e.g., traffic level
+				100%, 10%, 0% for access router, traffic level 100%, 30%, 0% for core router and data center
 				switch.</t>
      </list></t>
     
 	 <t>Measurement units:<list><t>Gbps.</t></list></t>
 
-    <t>Issues<list>
+    <t>Issues:<list>
       <t>The traffic loads and the weighted multipliers need to be clearly established a priori.</t>
       <t>It is unclear if the definition of the Ti is/should be linked to the traffic load levels. 
       For a given port configuration (which may result in 50% of the total capacity a device can provide), 
@@ -241,22 +245,23 @@
 	 </list></t>
 
      <t>Discussion:<list>
-				<t>Pi is the Power of the equipment in each traffic load level (e.g. 100%, 30%, 0%)</t>
-				<t>Bi is the weighted multiplier for different traffic levels (note that B1+...+Bj+...+Bm = 1)</t>
-				<t>m is the number of traffic load levels (if it is considered 100%, 30%, 0%; m = 3)</t>
+				<t>Pi is the power of the equipment in each traffic load level (e.g., 100%, 30%, 0%).</t>
+				<t>Bi is the weighted multiplier for different traffic levels (note that B1+...+Bj+...+Bm = 1).</t>
+				<t>m is the number of traffic load levels (if it is considered 100%, 30%, 0%; m = 3).</t>
      </list></t>
     
 	 <t>Measurement units:<list><t>Watt.</t></list></t>
 
     <t>Issues:<list>
       <t>The traffic loads and the weighted multipliers need to be clearly established a priori.</t>
-      <t>Importantly, the traffic MUST be forwarded of the correct port! 
+      <t>Importantly, the traffic MUST be forwarded out of the correct port!
       It would be easy to cut power down by dropping all traffic, and, naturally, we do not want that.
-      A tolerance on packet loss and/or forwarding error must be specified somehow.  That tolerance could
-      be zero for some benchmark problems (e.g., Non-Drop Rate (NDR) estimation), and non-zero for others.
-      Tolerating some errors may be interesting to navigate the design space of energy saving techniques,
-      such as approximate computing/routing. According to measurement procedure in section 6.5 of 
-      <xref target="ATIS-0600015.03.2013" />, the Equipment Under Test (EUT) should be able to return to full NDR load. Failure to do so disqualifies the test results. </t>
+      The default requirement is zero packet loss, consistent with Non-Drop Rate (NDR) as defined in
+      <xref target="RFC2544" /> and as required by <xref target="ETSI-ES-203-136" /> and
+      <xref target="ATIS-0600015.03.2013" />. Any non-zero packet loss tolerance MUST be explicitly
+      declared and justified in the test report. According to the measurement procedure in Section 6.5 of
+      <xref target="ATIS-0600015.03.2013" />, the Equipment Under Test (EUT) MUST be able to return to
+      full NDR load; failure to do so disqualifies the test results.</t>
     </list></t>
 
     <t>See Also:<list><t><xref target="ETSI-ES-203-136" />,<xref target="ITUT-L.1310" />
@@ -274,15 +279,15 @@
 	 </list></t>
 
      <t>Discussion:<list>
-                <t>T is the total weighted sum of all interface throughputs</t>
-				<t>P is the weighted power for different traffic loads</t>
+                <t>T is the total weighted sum of all interface throughputs.</t>
+				<t>P is the weighted power for different traffic loads.</t>
      </list></t>
     
 	 <t>Measurement units:<list><t>Gbps/Watt.</t></list></t>
 
      <t>Issues:<list>
       <t>The traffic loads and the weighted multipliers need to be clearly established a priori.</t>
-      <t>Optionally the total capacity of the interfaces (T) can be used in replacement of the total weighted capacity of the interfaces. The former is the sum of all interface throughputs and is not linked to traffic load levels. This result EER is a scaled value proportional to the EER using the total weighted capacity of the interfaces (T)</t>
+      <t>Optionally, the total capacity of the interfaces (T) can be used in replacement of the total weighted capacity of the interfaces. The former is the sum of all interface throughputs and is not linked to traffic load levels. This result EER is a scaled value proportional to the EER using the total weighted capacity of the interfaces (T).</t>
      </list></t>
 
      <t>See Also:<list><t><xref target="ETSI-ES-203-136" />,<xref target="ITUT-L.1310" />
@@ -291,7 +296,7 @@
     </section>
 
     <section title="Total Power">	
-    <t>The total power (Ptot) is the power of the entire equipment, measured as the sum the power drawn 
+    <t>The total power (Ptot) is the power of the entire equipment, measured as the sum of the power drawn
     by all of the equipment's power supply units.</t>
 
     <t>Definition:<list>
@@ -299,33 +304,33 @@
     </list></t>
 
      <t>Discussion:<list>
-		  <t>Pui is the power that is drawn by one power supply unit of the equipment</t>
-		  <t>n is the number of power supply units</t>
+		  <t>Pui is the power that is drawn by one power supply unit of the equipment.</t>
+		  <t>n is the number of power supply units.</t>
      </list></t>
 
     <t>Measurement units:<list><t>Watt.</t></list></t>
 
     <t>Issues:<list>
       <t>The total power depends on many different factors, including the running configuration,
-      the number and type of transceiver connected, the forward traffic volume and pattern, 
-      the version of the operating system, the room temperature and humidity/other environmental 
-      dimensions, the aging of parts, etc. This metric does not allow to compare two equipments against 
-      each over, but it MAY be enough to assess the effect of a change on the same equipment; e.g.,
+      the number and type of transceiver connected, the forwarded traffic volume and pattern,
+      the version of the operating system, the room temperature and humidity/other environmental
+      dimensions, the aging of parts, etc. This metric does not allow comparing two pieces of equipment
+      against each other, but it MAY be enough to assess the effect of a change on the same equipment; e.g.,
       for optimizing the power draw by changing the running configuration.</t>
 	  
-      <t>Importantly, the traffic MUST be forwarded of the correct port! 
-      It would be easy to cut power down by dropping all traffic, and we of course do not want that.
-      A tolerance on packet loss and/or forwarding error MUST be specified somehow. 
-      That tolerance could be zero for some benchmark problems, and non-zero for others.
-      Tolerating some errors MAY be interesting to navigate the design space of energy saving techniques, 
-      such as approximate computing/routing.</t>
+      <t>Importantly, the traffic MUST be forwarded out of the correct port!
+      It would be easy to cut power down by dropping all traffic, and, naturally, we do not want that.
+      The default requirement is zero packet loss, consistent with Non-Drop Rate (NDR) as defined in
+      <xref target="RFC2544" /> and as required by <xref target="ETSI-ES-203-136" /> and
+      <xref target="ATIS-0600015.03.2013" />. Any non-zero packet loss tolerance MUST be explicitly
+      declared and justified in the test report.</t>
     </list></t>
 
     </section>
 	
     </section>
 	
-    <section title="Energy Consumption Benchmarking">
+    <section anchor="ecb" title="Energy Consumption Benchmarking">
 	
    <t>The maximum power drawn by a device does not accurately 
    reflect the power under a normal workload.
@@ -335,18 +340,15 @@
    energy of the networking devices.</t>
 
    <t>A network device consists of many components, each of which
-   draws power (for example, it is possible to mention the power
-   draw of the CPU, data forwarding ASIC, memory, fan, etc.).
+   draws power (e.g., the CPU, data forwarding ASIC, memory, fans, etc.).
    Therefore, it is important to formulate a consistent benchmarking
    method for network devices and consider the workload variation 
    and test conditions.</t>
 
-   <t>Enforcing controlled conditions on test conditions (e.g.,
-   Temperature) is important for test procedure to make sure test conditions
-   repeatable <xref target="RFC6985" />. The measurement condition reported in <xref target="ATIS-0600015.2009" /> 
-   and <xref target="ITUT-L.1310" /> SHOULD be applied, e.g., the power measurements SHALL be 
-   performed in a laboratory environment under specific range of temperature, 
-   humidity and atmosphere pressure.</t>
+   <t>Enforcing controlled test conditions is important to ensure repeatable measurements. The measurement conditions reported in <xref target="ATIS-0600015.2009" />
+   and <xref target="ITUT-L.1310" /> SHOULD be applied. Power measurements SHALL be performed in a laboratory
+   environment under the following conditions, consistent with Section 6.1 of <xref target="ETSI-ES-203-136" />:
+   room temperature 23°C to 27°C, relative humidity 25% to 75%, and atmospheric pressure 812 hPa to 1060 hPa.</t>
 
     </section>
 
@@ -383,15 +385,15 @@
 ]]></artwork>
       </figure>
  
-   <t>It is worth mentioning that the DUT also dissipates significant heat.
+   <t>The DUT also dissipates significant heat.
    A part of the power is used for actual work while the rest
    is dissipated as heat. This heating can lead to more power drawn
-   by fans/compressor for cooling the devices. The benchmarking methodology
+   by fans or compressors for cooling the devices. The benchmarking methodology
    does not measure the power drawn by external cooling infrastructure.
    The Power Meter only measures the internal energy consumption of the device.
-   Anyway, the device's temperature change MUST be known. It is useful to know 
-   whether device's heat management plays a role in the observed differences in 
-   energy efficiency and can be correlated to the amount of external power drawn 
+   Nevertheless, the device's temperature change MUST be known. It is useful to know
+   whether the device's heat management plays a role in the observed differences in
+   energy efficiency and can be correlated to the amount of external power drawn
    to cool the device.</t>
 
      </section>  
@@ -401,13 +403,15 @@
     <t>The traffic load supported by a device affects its energy consumption.
     Therefore, the benchmark MUST include different traffic loads.</t>
     
-    <t>The traffic load MUST specify packet sizes, packet rates, and inter-packet 
-    delays, as all MAY affect the energy consumption of network devices <xref target="ATIS-0600015.2009" />.
-	To enable replicable and comparable results, the benchmark can specify a set of well-defined
-	traffic traces that MUST be used.</t>
+    <t>The traffic load MUST specify packet sizes and packet rates, as these MAY affect the energy
+    consumption of network devices <xref target="ATIS-0600015.2009" />.
+    To enable replicable and comparable results, the benchmark MUST use well-defined traffic traces.
+    A realistic mixture of packet sizes, such as the IMIX Genome distribution specified in
+    <xref target="RFC6985" />, satisfies this repeatability requirement and is consistent with
+    ATIS and ETSI traffic specifications.</t>
 
-    <t>There are different interface types on a network device and the power usage 
-    also depends on the kind of connector/transceiver used. 
+    <t>There are different interface types on a network device and the power usage
+    also depends on the kind of connector or transceiver used.
     The interface type used MUST also be specified.</t>
 
     <t> Power measurements SHOULD be performed only after the DUT and the applied traffic condition have reached a stable operating state. Stability in this context refers to the absence of transient effects associated with traffic changes, configuration updates, or device thermal and cooling behavior. </t>
@@ -432,7 +436,7 @@
   <list style="hanging">
 		  
     <t hangText="Network Device Hardware and Software versions:"><br />For the benchmarking tests,
-    it MUST be specified.</t>
+    the hardware and software versions MUST be specified.</t>
 
     <t hangText="Number and type of line cards:"><br />  For each test the total
     number of line cards and their types can be varied and MUST be specified.</t>
@@ -444,7 +448,7 @@
     inactive ports MUST be specified.</t>
 
     <t hangText="Port settings and interface types:"><br />  For each test the port configuration
-    and settings need to be specified.</t>
+    and settings MUST be specified.</t>
 
     <t hangText="Port Utilization:"><br />  For each test the port utilization of each port 
     MUST be specified.  The actual traffic load can use the information 
@@ -468,8 +472,8 @@
 
      <section title="Throughput">
 
-      <t>Objective:<list><t>To determine the DUT throughput according to <xref target="RFC2544" />.
-      And to characterize throughput under realistic traffic patterns using variable packet size distributions as specified in <xref target="RFC6985" />.</t></list></t>
+      <t>Objective:<list><t>To determine the DUT throughput according to <xref target="RFC2544" />,
+      and to characterize throughput under realistic traffic patterns using variable packet size distributions as specified in <xref target="RFC6985" />.</t></list></t>
 
       <t>Procedure:<list><t>The test is done using a multi-port setup as specified in Section 16 and Section 26.1 of <xref target="RFC2544" />. To assess throughput under realistic Internet traffic conditions, the test is performed using the IMIX Genome packet size distributions specified in <xref target="RFC6985" />.</t></list></t>
 
@@ -483,8 +487,8 @@
 	  <t>Objective:<list><t>To determine the base power drawn by the network device in its factory 
    settings.</t></list></t>
 	 
-	  <t>Procedure:<list><t>The measurement is done with the device in its factory settings, after 
-   it finished booting, and without any transceiver plugged in.</t></list></t>
+	  <t>Procedure:<list><t>The measurement is done with the device in its factory settings, after
+   it finished booting with all boards and components active, and without any transceiver plugged in.</t></list></t>
 
       <t>Reporting format:<list><t>The results of the power measurement SHOULD be
    reported according to <xref target="report" />.</t></list></t>
@@ -538,9 +542,29 @@
     reported according to <xref target="report" />.</t></list></t>
 	 
       <t>Note:<list><t>The "minimum" traffic trace creates a bidirectional flow of 1 pps on all active
-    interfaces. By comparison with the "Idle Power" measurement, this measurement captures the power 
-    cost of taking the device out of its "low-power mode."</t></list></t>
+    interfaces. The 1 pps rate is chosen to be the smallest non-zero traffic load that activates
+    the forwarding plane on all interfaces without introducing measurable dynamic power from
+    packet processing. By comparison with the "Idle Power" measurement, this measurement captures
+    the power cost of taking the device out of its "low-power mode."</t></list></t>
 	 
+  </section>
+
+	 <section title="Typical Power">
+
+	  <t>Objective:<list><t>To determine the power drawn by the network device under a
+    representative, realistic traffic load.</t></list></t>
+
+	  <t>Procedure:<list><t>The measurement is done with the device fully configured and
+    a bidirectional traffic load at a specified percentage of the maximum throughput
+    (e.g., 30%), using the packet size distribution specified in <xref target="RFC6985" />.</t></list></t>
+
+      <t>Reporting format:<list><t>The results of the power measurement SHOULD be
+    reported according to <xref target="report" />.</t></list></t>
+
+      <t>Note:<list><t>This measurement complements Base, Idle, and Idle+ Power by
+    capturing power at a representative operational point, and is useful for
+    comparing devices under realistic workloads.</t></list></t>
+
   </section>
 
 	 <section title="Power with Traffic Load">
@@ -550,8 +574,8 @@
 
 	  <t>Procedure:<list>
     
-    <t>A specific number of packets at a specific rate is sent to specific ports/linecards
-	  of the DUT. All DUT ports must operate under a specific traffic load, which is a percentage of the maximum throughput.</t>
+    <t>A specific number of packets at a specific rate are sent to specific ports or linecards
+	  of the DUT. All DUT ports MUST operate under a specific traffic load, which is a percentage of the maximum throughput.</t>
     
     <t>Power SHOULD be recorded only after the DUT and the offered load have reached a stable operating state. The stabilization interval and the measurement interval MUST be reported as described in <xref target="report" />.</t>
     
