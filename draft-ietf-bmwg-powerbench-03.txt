@@ -5,19 +5,19 @@
 Benchmarking Methodology Working Group                      C. Pignataro
 Internet-Draft                                       NC State University
 Intended status: Standards Track                                R. Jacob
-Expires: 1 January 2027                                       ETH Zürich
+Expires: 24 January 2027                                      ETH Zürich
                                                              G. Fioccola
                                                                    Q. Wu
                                                                  G. Chen
                                                                   Huawei
                                                                S. Prabhu
                                                                    Nokia
-                                                            30 June 2026
+                                                            23 July 2026
 
 
  Characterization and Benchmarking Methodology for Power in Networking
                                 Devices
-                     draft-ietf-bmwg-powerbench-02
+                     draft-ietf-bmwg-powerbench-03
 
 Abstract
 
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 January 2027.
+   This Internet-Draft will expire on 24 January 2027.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Pignataro, et al.        Expires 1 January 2027                 [Page 1]
+Pignataro, et al.        Expires 24 January 2027                [Page 1]
 
-Internet-Draft                 PowerBench                      June 2026
+Internet-Draft                 PowerBench                      July 2026
 
 
    Please review these documents carefully, as they describe your rights
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Pignataro, et al.        Expires 1 January 2027                 [Page 2]
+Pignataro, et al.        Expires 24 January 2027                [Page 2]
 
-Internet-Draft                 PowerBench                      June 2026
+Internet-Draft                 PowerBench                      July 2026
 
 
    The benchmarking methodology defined here will help operators to get
@@ -165,9 +165,9 @@ Internet-Draft                 PowerBench                      June 2026
 
 
 
-Pignataro, et al.        Expires 1 January 2027                 [Page 3]
+Pignataro, et al.        Expires 24 January 2027                [Page 3]
 
-Internet-Draft                 PowerBench                      June 2026
+Internet-Draft                 PowerBench                      July 2026
 
 
    The benchmark aims to compare the energy efficiency for individual
@@ -221,9 +221,9 @@ Internet-Draft                 PowerBench                      June 2026
 
 
 
-Pignataro, et al.        Expires 1 January 2027                 [Page 4]
+Pignataro, et al.        Expires 24 January 2027                [Page 4]
 
-Internet-Draft                 PowerBench                      June 2026
+Internet-Draft                 PowerBench                      July 2026
 
 
 4.  Terminology
@@ -277,9 +277,9 @@ Internet-Draft                 PowerBench                      June 2026
 
 
 
-Pignataro, et al.        Expires 1 January 2027                 [Page 5]
+Pignataro, et al.        Expires 24 January 2027                [Page 5]
 
-Internet-Draft                 PowerBench                      June 2026
+Internet-Draft                 PowerBench                      July 2026
 
 
 4.2.  Total Weighted Power
@@ -333,9 +333,9 @@ Internet-Draft                 PowerBench                      June 2026
 
 
 
-Pignataro, et al.        Expires 1 January 2027                 [Page 6]
+Pignataro, et al.        Expires 24 January 2027                [Page 6]
 
-Internet-Draft                 PowerBench                      June 2026
+Internet-Draft                 PowerBench                      July 2026
 
 
 4.3.  Energy Efficiency Ratio
@@ -389,9 +389,9 @@ Internet-Draft                 PowerBench                      June 2026
 
 
 
-Pignataro, et al.        Expires 1 January 2027                 [Page 7]
+Pignataro, et al.        Expires 24 January 2027                [Page 7]
 
-Internet-Draft                 PowerBench                      June 2026
+Internet-Draft                 PowerBench                      July 2026
 
 
       Pui is the power that is drawn by one power supply unit of the
@@ -445,9 +445,9 @@ Internet-Draft                 PowerBench                      June 2026
 
 
 
-Pignataro, et al.        Expires 1 January 2027                 [Page 8]
+Pignataro, et al.        Expires 24 January 2027                [Page 8]
 
-Internet-Draft                 PowerBench                      June 2026
+Internet-Draft                 PowerBench                      July 2026
 
 
    Enforcing controlled test conditions is important to ensure
@@ -501,9 +501,9 @@ Internet-Draft                 PowerBench                      June 2026
 
 
 
-Pignataro, et al.        Expires 1 January 2027                 [Page 9]
+Pignataro, et al.        Expires 24 January 2027                [Page 9]
 
-Internet-Draft                 PowerBench                      June 2026
+Internet-Draft                 PowerBench                      July 2026
 
 
    Nevertheless, the device's temperature change MUST be known.  It is
@@ -557,9 +557,9 @@ Internet-Draft                 PowerBench                      June 2026
 
 
 
-Pignataro, et al.        Expires 1 January 2027                [Page 10]
+Pignataro, et al.        Expires 24 January 2027               [Page 10]
 
-Internet-Draft                 PowerBench                      June 2026
+Internet-Draft                 PowerBench                      July 2026
 
 
    Network Device Hardware and Software versions:
@@ -613,9 +613,9 @@ Internet-Draft                 PowerBench                      June 2026
 
 
 
-Pignataro, et al.        Expires 1 January 2027                [Page 11]
+Pignataro, et al.        Expires 24 January 2027               [Page 11]
 
-Internet-Draft                 PowerBench                      June 2026
+Internet-Draft                 PowerBench                      July 2026
 
 
 8.1.  Throughput
@@ -669,9 +669,9 @@ Internet-Draft                 PowerBench                      June 2026
 
 
 
-Pignataro, et al.        Expires 1 January 2027                [Page 12]
+Pignataro, et al.        Expires 24 January 2027               [Page 12]
 
-Internet-Draft                 PowerBench                      June 2026
+Internet-Draft                 PowerBench                      July 2026
 
 
       To determine the power drawn by the network device in normal
@@ -725,9 +725,9 @@ Internet-Draft                 PowerBench                      June 2026
 
 
 
-Pignataro, et al.        Expires 1 January 2027                [Page 13]
+Pignataro, et al.        Expires 24 January 2027               [Page 13]
 
-Internet-Draft                 PowerBench                      June 2026
+Internet-Draft                 PowerBench                      July 2026
 
 
    Reporting format:
@@ -781,9 +781,9 @@ Internet-Draft                 PowerBench                      June 2026
 
 
 
-Pignataro, et al.        Expires 1 January 2027                [Page 14]
+Pignataro, et al.        Expires 24 January 2027               [Page 14]
 
-Internet-Draft                 PowerBench                      June 2026
+Internet-Draft                 PowerBench                      July 2026
 
 
    Procedure:
@@ -837,9 +837,9 @@ Internet-Draft                 PowerBench                      June 2026
 
 
 
-Pignataro, et al.        Expires 1 January 2027                [Page 15]
+Pignataro, et al.        Expires 24 January 2027               [Page 15]
 
-Internet-Draft                 PowerBench                      June 2026
+Internet-Draft                 PowerBench                      July 2026
 
 
    Beyond these, there are no specific security considerations within
@@ -854,6 +854,9 @@ Internet-Draft                 PowerBench                      June 2026
    We wish to thank the authors of [I-D.manral-bmwg-power-usage] for
    their analysis and start on this topic.
 
+   The authors would like to thank Marisol Palmero and members of the
+   GREEN Working Group for their review and feedback.
+
 12.  References
 
 12.1.  Normative References
@@ -862,11 +865,6 @@ Internet-Draft                 PowerBench                      June 2026
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
-
-   [RFC7460]  Chandramouli, M., Claise, B., Schoening, B., Quittek, J.,
-              and T. Dietz, "Monitoring and Control MIB for Power and
-              Energy", RFC 7460, DOI 10.17487/RFC7460, March 2015,
-              <https://www.rfc-editor.org/info/rfc7460>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -885,25 +883,20 @@ Internet-Draft                 PowerBench                      June 2026
               Telecommunication Equipment: Methodology for Measurement
               and Reporting - General Requirements", 2009.
 
-
-
-
-
-
-
-
-
-Pignataro, et al.        Expires 1 January 2027                [Page 16]
-
-Internet-Draft                 PowerBench                      June 2026
-
-
    [ETSI-ES-203-136]
               ETSI, "ETSI ES 203 136: Environmental Engineering (EE);
               Measurement methods for energy efficiency of router and
               switch equipment", 2017, <https://www.etsi.org/deliver/
               etsi_es/203100_203199/203136/01.02.00_50/
               es_203136v010200m.pdf>.
+
+
+
+
+Pignataro, et al.        Expires 24 January 2027               [Page 16]
+
+Internet-Draft                 PowerBench                      July 2026
+
 
    [I-D.manral-bmwg-power-usage]
               Manral, V., Sharma, P., Banerjee, S., and Y. Ping,
@@ -932,6 +925,11 @@ Internet-Draft                 PowerBench                      June 2026
               RFC 6988, DOI 10.17487/RFC6988, September 2013,
               <https://www.rfc-editor.org/info/rfc6988>.
 
+   [RFC7460]  Chandramouli, M., Claise, B., Schoening, B., Quittek, J.,
+              and T. Dietz, "Monitoring and Control MIB for Power and
+              Energy", RFC 7460, DOI 10.17487/RFC7460, March 2015,
+              <https://www.rfc-editor.org/info/rfc7460>.
+
 Authors' Addresses
 
    Carlos Pignataro
@@ -949,9 +947,11 @@ Authors' Addresses
 
 
 
-Pignataro, et al.        Expires 1 January 2027                [Page 17]
+
+
+Pignataro, et al.        Expires 24 January 2027               [Page 17]
 
-Internet-Draft                 PowerBench                      June 2026
+Internet-Draft                 PowerBench                      July 2026
 
 
    Giuseppe Fioccola
@@ -1005,4 +1005,4 @@ Internet-Draft                 PowerBench                      June 2026
 
 
 
-Pignataro, et al.        Expires 1 January 2027                [Page 18]
+Pignataro, et al.        Expires 24 January 2027               [Page 18]
