@@ -854,8 +854,8 @@ Internet-Draft                 PowerBench                      July 2026
    We wish to thank the authors of [I-D.manral-bmwg-power-usage] for
    their analysis and start on this topic.
 
-   The authors would like to thank Marisol Palmero and members of the
-   GREEN Working Group for their review and feedback.
+   The authors would like to thank Marisol Palmero, Genchen, and members
+   of the GREEN Working Group for their review and feedback.
 
 12.  References
 
