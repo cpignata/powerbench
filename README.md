@@ -1,16 +1,10 @@
-# powerbench
-[Benchmarking Methodology for Power](https://datatracker.ietf.org/doc/draft-ietf-bmwg-powerbench/)
+# Characterization and Benchmarking Methodology for Power in Networking Devices
 
-## Current Working Version
+**draft-ietf-bmwg-powerbench**
 
-`draft-ietf-bmwg-powerbench-03` (in progress)
+[IETF Datatracker](https://datatracker.ietf.org/doc/draft-ietf-bmwg-powerbench/)
 
-## Published Versions
+## Repository Structure
 
-| Version | Links |
-|---------|-------|
-| -02 | [TXT](https://www.ietf.org/archive/id/draft-ietf-bmwg-powerbench-02.txt) / [XML](https://www.ietf.org/archive/id/draft-ietf-bmwg-powerbench-02.xml) |
-| -01 | [TXT](https://www.ietf.org/archive/id/draft-ietf-bmwg-powerbench-01.txt) / [XML](https://www.ietf.org/archive/id/draft-ietf-bmwg-powerbench-01.xml) |
-| -00 | [TXT](https://www.ietf.org/archive/id/draft-ietf-bmwg-powerbench-00.txt) |
-
-Published versions are also archived in the [releases/](releases/) directory.
+- The current working XML source is `draft-ietf-bmwg-powerbench-NN.xml` at the root.
+- Officially published versions are archived in the [releases/](releases/) directory.
