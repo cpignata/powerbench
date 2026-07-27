@@ -864,6 +864,9 @@ Internet-Draft                 PowerBench                      July 2026
    The authors would like to thank Marisol Palmero, Chen Gen, and
    members of the GREEN Working Group for their review and feedback.
 
+   The authors would like to thank Longlong Zhu for their suggestion on
+   reporting items for programmable data-plane devices.
+
 12.  References
 
 12.1.  Normative References
@@ -885,10 +888,7 @@ Internet-Draft                 PowerBench                      July 2026
               and Reporting for Router and Ethernet Switch Products",
               2013.
 
-   [ATIS-0600015.2009]
-              ATIS, "ATIS-0600015.2009: Energy Efficiency for
-              Telecommunication Equipment: Methodology for Measurement
-              and Reporting - General Requirements", 2009.
+
 
 
 
@@ -897,6 +897,11 @@ Pignataro, et al.        Expires 28 January 2027               [Page 16]
 
 Internet-Draft                 PowerBench                      July 2026
 
+
+   [ATIS-0600015.2009]
+              ATIS, "ATIS-0600015.2009: Energy Efficiency for
+              Telecommunication Equipment: Methodology for Measurement
+              and Reporting - General Requirements", 2009.
 
    [ETSI-ES-203-136]
               ETSI, "ETSI ES 203 136: Environmental Engineering (EE);
@@ -939,11 +944,6 @@ Internet-Draft                 PowerBench                      July 2026
 
 Authors' Addresses
 
-   Carlos Pignataro
-   North Carolina State University
-   United States of America
-   Email: cpignata@gmail.com, cmpignat@ncsu.edu
-
 
 
 
@@ -952,6 +952,12 @@ Authors' Addresses
 Pignataro, et al.        Expires 28 January 2027               [Page 17]
 
 Internet-Draft                 PowerBench                      July 2026
+
+
+   Carlos Pignataro
+   North Carolina State University
+   United States of America
+   Email: cpignata@gmail.com, cmpignat@ncsu.edu
 
 
    Romain Jacob
@@ -982,12 +988,6 @@ Internet-Draft                 PowerBench                      July 2026
    Nokia
    India
    Email: shailesh.prabhu@nokia.com
-
-
-
-
-
-
 
 
 
