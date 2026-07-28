@@ -5,14 +5,14 @@
 Benchmarking Methodology Working Group                      C. Pignataro
 Internet-Draft                                       NC State University
 Intended status: Standards Track                                R. Jacob
-Expires: 24 January 2027                                      ETH Zürich
+Expires: 28 January 2027                                      ETH Zürich
                                                              G. Fioccola
                                                                    Q. Wu
                                                                  G. Chen
                                                                   Huawei
                                                                S. Prabhu
                                                                    Nokia
-                                                            23 July 2026
+                                                            27 July 2026
 
 
  Characterization and Benchmarking Methodology for Power in Networking
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 January 2027.
+   This Internet-Draft will expire on 28 January 2027.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Pignataro, et al.        Expires 24 January 2027                [Page 1]
+Pignataro, et al.        Expires 28 January 2027                [Page 1]
 
 Internet-Draft                 PowerBench                      July 2026
 
@@ -80,15 +80,15 @@ Table of Contents
      6.1.  Test Setup  . . . . . . . . . . . . . . . . . . . . . . .   9
      6.2.  Traffic and Device Characterization . . . . . . . . . . .  10
    7.  Reporting Format  . . . . . . . . . . . . . . . . . . . . . .  10
-   8.  Benchmarking Tests  . . . . . . . . . . . . . . . . . . . . .  11
+   8.  Benchmarking Tests  . . . . . . . . . . . . . . . . . . . . .  12
      8.1.  Throughput  . . . . . . . . . . . . . . . . . . . . . . .  12
      8.2.  Base Power  . . . . . . . . . . . . . . . . . . . . . . .  12
-     8.3.  Idle Power  . . . . . . . . . . . . . . . . . . . . . . .  12
+     8.3.  Idle Power  . . . . . . . . . . . . . . . . . . . . . . .  13
      8.4.  Idle+ Power . . . . . . . . . . . . . . . . . . . . . . .  13
      8.5.  Typical Power . . . . . . . . . . . . . . . . . . . . . .  14
-     8.6.  Power with Traffic Load . . . . . . . . . . . . . . . . .  14
+     8.6.  Power with Traffic Load . . . . . . . . . . . . . . . . .  15
      8.7.  Energy Efficiency Ratio . . . . . . . . . . . . . . . . .  15
-   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  15
+   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  16
    10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  16
    11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  16
    12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  16
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Pignataro, et al.        Expires 24 January 2027                [Page 2]
+Pignataro, et al.        Expires 28 January 2027                [Page 2]
 
 Internet-Draft                 PowerBench                      July 2026
 
@@ -165,7 +165,7 @@ Internet-Draft                 PowerBench                      July 2026
 
 
 
-Pignataro, et al.        Expires 24 January 2027                [Page 3]
+Pignataro, et al.        Expires 28 January 2027                [Page 3]
 
 Internet-Draft                 PowerBench                      July 2026
 
@@ -221,7 +221,7 @@ Internet-Draft                 PowerBench                      July 2026
 
 
 
-Pignataro, et al.        Expires 24 January 2027                [Page 4]
+Pignataro, et al.        Expires 28 January 2027                [Page 4]
 
 Internet-Draft                 PowerBench                      July 2026
 
@@ -277,7 +277,7 @@ Internet-Draft                 PowerBench                      July 2026
 
 
 
-Pignataro, et al.        Expires 24 January 2027                [Page 5]
+Pignataro, et al.        Expires 28 January 2027                [Page 5]
 
 Internet-Draft                 PowerBench                      July 2026
 
@@ -333,7 +333,7 @@ Internet-Draft                 PowerBench                      July 2026
 
 
 
-Pignataro, et al.        Expires 24 January 2027                [Page 6]
+Pignataro, et al.        Expires 28 January 2027                [Page 6]
 
 Internet-Draft                 PowerBench                      July 2026
 
@@ -389,7 +389,7 @@ Internet-Draft                 PowerBench                      July 2026
 
 
 
-Pignataro, et al.        Expires 24 January 2027                [Page 7]
+Pignataro, et al.        Expires 28 January 2027                [Page 7]
 
 Internet-Draft                 PowerBench                      July 2026
 
@@ -445,7 +445,7 @@ Internet-Draft                 PowerBench                      July 2026
 
 
 
-Pignataro, et al.        Expires 24 January 2027                [Page 8]
+Pignataro, et al.        Expires 28 January 2027                [Page 8]
 
 Internet-Draft                 PowerBench                      July 2026
 
@@ -501,7 +501,7 @@ Internet-Draft                 PowerBench                      July 2026
 
 
 
-Pignataro, et al.        Expires 24 January 2027                [Page 9]
+Pignataro, et al.        Expires 28 January 2027                [Page 9]
 
 Internet-Draft                 PowerBench                      July 2026
 
@@ -557,7 +557,7 @@ Internet-Draft                 PowerBench                      July 2026
 
 
 
-Pignataro, et al.        Expires 24 January 2027               [Page 10]
+Pignataro, et al.        Expires 28 January 2027               [Page 10]
 
 Internet-Draft                 PowerBench                      July 2026
 
@@ -606,17 +606,25 @@ Internet-Draft                 PowerBench                      July 2026
       reported power value MUST also be specified.  If these intervals
       differ by load level, the values per load level MUST be reported.
 
-8.  Benchmarking Tests
+   Programmable data-plane configuration (if applicable):
 
 
 
 
 
 
-Pignataro, et al.        Expires 24 January 2027               [Page 11]
+Pignataro, et al.        Expires 28 January 2027               [Page 11]
 
 Internet-Draft                 PowerBench                      July 2026
 
+
+      For devices with a programmable data plane (e.g., P4-based or
+      FPGA-based switches), the following SHOULD be reported, as they
+      can influence observed power consumption: the installed program or
+      workload under test, the compiler or toolchain version, and a
+      high-level description of the tables or stateful operations used.
+
+8.  Benchmarking Tests
 
 8.1.  Throughput
 
@@ -659,20 +667,19 @@ Internet-Draft                 PowerBench                      July 2026
 
    Note:
 
+
+
+Pignataro, et al.        Expires 28 January 2027               [Page 12]
+
+Internet-Draft                 PowerBench                      July 2026
+
+
       This measurement is useful to assess the energy efficiency of
       default settings.
 
 8.3.  Idle Power
 
    Objective:
-
-
-
-
-Pignataro, et al.        Expires 24 January 2027               [Page 12]
-
-Internet-Draft                 PowerBench                      July 2026
-
 
       To determine the power drawn by the network device in normal
       operation but without forwarding traffic.
@@ -715,6 +722,14 @@ Internet-Draft                 PowerBench                      July 2026
       The measurement is done with the device fully configured and the
       "minimum" traffic trace.
 
+
+
+
+Pignataro, et al.        Expires 28 January 2027               [Page 13]
+
+Internet-Draft                 PowerBench                      July 2026
+
+
       Control-plane, management-plane, and background system functions
       MAY remain active during this measurement unless explicitly
       disabled for the purpose of the test.  Examples include routing
@@ -722,13 +737,6 @@ Internet-Draft                 PowerBench                      July 2026
       thermal management mechanisms.  The operational state of these
       functions during the measurement MUST be reported, as they can
       influence the observed power consumption.
-
-
-
-Pignataro, et al.        Expires 24 January 2027               [Page 13]
-
-Internet-Draft                 PowerBench                      July 2026
-
 
    Reporting format:
 
@@ -770,6 +778,14 @@ Internet-Draft                 PowerBench                      July 2026
       capturing power at a representative operational point, and is
       useful for comparing devices under realistic workloads.
 
+
+
+
+Pignataro, et al.        Expires 28 January 2027               [Page 14]
+
+Internet-Draft                 PowerBench                      July 2026
+
+
 8.6.  Power with Traffic Load
 
    Objective:
@@ -777,14 +793,6 @@ Internet-Draft                 PowerBench                      July 2026
       To determine the power drawn by a device.  The dynamic power,
       which is added to the idle+ power, SHOULD be proportional to its
       traffic load.
-
-
-
-
-Pignataro, et al.        Expires 24 January 2027               [Page 14]
-
-Internet-Draft                 PowerBench                      July 2026
-
 
    Procedure:
 
@@ -826,21 +834,20 @@ Internet-Draft                 PowerBench                      July 2026
       The results of the energy efficiency ratio SHOULD be reported
       according to Section 7.
 
+
+
+
+Pignataro, et al.        Expires 28 January 2027               [Page 15]
+
+Internet-Draft                 PowerBench                      July 2026
+
+
 9.  Security Considerations
 
    The benchmarking characterization described in this document is
    constrained to a controlled environment (as a laboratory) and
    includes controlled stimuli.  The network under benchmarking MUST NOT
    be connected to production networks.
-
-
-
-
-
-Pignataro, et al.        Expires 24 January 2027               [Page 15]
-
-Internet-Draft                 PowerBench                      July 2026
-
 
    Beyond these, there are no specific security considerations within
    the scope of this document.
@@ -856,6 +863,9 @@ Internet-Draft                 PowerBench                      July 2026
 
    The authors would like to thank Marisol Palmero, Chen Gen, and
    members of the GREEN Working Group for their review and feedback.
+
+   The authors would like to thank Longlong Zhu for their suggestion on
+   reporting items for programmable data-plane devices.
 
 12.  References
 
@@ -878,6 +888,16 @@ Internet-Draft                 PowerBench                      July 2026
               and Reporting for Router and Ethernet Switch Products",
               2013.
 
+
+
+
+
+
+Pignataro, et al.        Expires 28 January 2027               [Page 16]
+
+Internet-Draft                 PowerBench                      July 2026
+
+
    [ATIS-0600015.2009]
               ATIS, "ATIS-0600015.2009: Energy Efficiency for
               Telecommunication Equipment: Methodology for Measurement
@@ -889,14 +909,6 @@ Internet-Draft                 PowerBench                      July 2026
               switch equipment", 2017, <https://www.etsi.org/deliver/
               etsi_es/203100_203199/203136/01.02.00_50/
               es_203136v010200m.pdf>.
-
-
-
-
-Pignataro, et al.        Expires 24 January 2027               [Page 16]
-
-Internet-Draft                 PowerBench                      July 2026
-
 
    [I-D.manral-bmwg-power-usage]
               Manral, V., Sharma, P., Banerjee, S., and Y. Ping,
@@ -932,6 +944,16 @@ Internet-Draft                 PowerBench                      July 2026
 
 Authors' Addresses
 
+
+
+
+
+
+Pignataro, et al.        Expires 28 January 2027               [Page 17]
+
+Internet-Draft                 PowerBench                      July 2026
+
+
    Carlos Pignataro
    North Carolina State University
    United States of America
@@ -942,16 +964,6 @@ Authors' Addresses
    ETH Zürich
    Switzerland
    Email: jacobr@ethz.ch
-
-
-
-
-
-
-
-Pignataro, et al.        Expires 24 January 2027               [Page 17]
-
-Internet-Draft                 PowerBench                      July 2026
 
 
    Giuseppe Fioccola
@@ -993,16 +1005,4 @@ Internet-Draft                 PowerBench                      July 2026
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-Pignataro, et al.        Expires 24 January 2027               [Page 18]
+Pignataro, et al.        Expires 28 January 2027               [Page 18]

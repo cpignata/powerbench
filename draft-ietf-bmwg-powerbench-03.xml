@@ -464,6 +464,8 @@
 
     <t hangText="Stabilization and measurement intervals:"><br /> For each power measurement, the stabilization interval and the measurement interval (averaging window) MUST be reported. The stabilization interval is the time between applying a traffic load or configuration and the start of power measurement. The measurement interval and the averaging method used to obtain the reported power value MUST also be specified. If these intervals differ by load level, the values per load level MUST be reported. </t>
 
+    <t hangText="Programmable data-plane configuration (if applicable):"><br /> For devices with a programmable data plane (e.g., P4-based or FPGA-based switches), the following SHOULD be reported, as they can influence observed power consumption: the installed program or workload under test, the compiler or toolchain version, and a high-level description of the tables or stateful operations used.</t>
+
 	  </list>
 
   </section>
@@ -627,6 +629,8 @@
 	  for their analysis and start on this topic.</t>
       <t>The authors would like to thank Marisol Palmero, Chen Gen, and members of the GREEN
       Working Group for their review and feedback.</t>
+      <t>The authors would like to thank Longlong Zhu for their suggestion on
+      reporting items for programmable data-plane devices.</t>
     </section>
   </middle>
 
