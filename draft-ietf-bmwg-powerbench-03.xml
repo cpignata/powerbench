@@ -483,9 +483,7 @@
     <t hangText="Power measurement:"><br />  For each test it MUST be specified.
     All power measurements are done in Watts.</t>
 
-    <t hangText="Power Meter accuracy:"><br /> For each benchmarking test,
-    the applicable measurement accuracy of the Power Meter MUST be reported.
-    <t hangText="Power Meter accuracy:"><br /> For each benchmarking test,
+    <t hangText="Power Meter Accuracy:"><br /> For each benchmarking test,
     the applicable measurement accuracy of the Power Meter MUST be reported.</t>
 
     <t hangText="Stabilization and measurement intervals:"><br /> For each power measurement, the stabilization interval and the measurement interval (averaging window) MUST be reported. The stabilization interval is the time between applying a traffic load or configuration and the start of power measurement. The measurement interval and the averaging method used to obtain the reported power value MUST also be specified. If these intervals differ by load level, the values per load level MUST be reported. </t>
