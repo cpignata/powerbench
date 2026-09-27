@@ -386,11 +386,6 @@
    for the power range being measured. The applicable accuracy specification
    of the Power Meter MUST be recorded as part of the test setup.</t>
 
-   <t>The relationship between the Power Meter and the DUT is consistent with
-   the Metering Relationship defined in
-   <xref target="I-D.ietf-green-framework"/>, in which a metering entity
-   measures power or energy attributes of another entity.</t>
-   
       <figure title="Test Setup" align="center">
         <artwork><![CDATA[
         +----------+
