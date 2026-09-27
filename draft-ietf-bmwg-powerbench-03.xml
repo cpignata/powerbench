@@ -693,8 +693,6 @@
     &I-D.manral-bmwg-power-usage;
     &I-D.ietf-green-terminology;
     &I-D.ietf-green-power-and-energy-yang;
-    &I-D.ietf-green-framework;
-    &I-D.claise-green-capability-discovery;
 
       <reference anchor='ETSI-ES-203-136' target="https://www.etsi.org/deliver/etsi_es/203100_203199/203136/01.02.00_50/es_203136v010200m.pdf">
        <front>
