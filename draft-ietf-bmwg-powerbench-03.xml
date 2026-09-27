@@ -317,10 +317,6 @@
     <t>The total power (Ptot) is the power of the entire equipment, measured as the sum of the power drawn
     by all of the equipment's power supply units.</t>
 
-    <t>At the device level, Total Power corresponds to the aggregate power
-    input of the device. This is consistent with the total power input
-    concept represented in <xref target="I-D.ietf-green-power-and-energy-yang"/>.</t>
-
     <t>Definition:<list>
           <t>Ptot = Pu1 +...+ Pui +...+ Pun</t>
     </list></t>
