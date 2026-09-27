@@ -514,16 +514,6 @@
 
      <t>Where a PowerBench measurement is performed while the DUT or a
      component is maintained in a known Power State, the resulting benchmark
-     measurement can provide additional characterization of the power
-     consumption associated with that state. Such measurements may complement
-     the static Power State capability information defined in
-     <xref target="I-D.claise-green-capability-discovery"/> with measurements
-     obtained under specified benchmark conditions. The interpretation
-     of PowerBench measurement conditions as Power States is outside the scope
-     of this document.</t>
-
-     <section title="Throughput">
-
       <t>Objective:<list><t>To determine the DUT throughput according to <xref target="RFC2544" />,
       and to characterize throughput under realistic traffic patterns using variable packet size distributions as specified in <xref target="RFC6985" />.</t></list></t>
 
