@@ -496,13 +496,6 @@
 
 	  </list>
 
-  <t>Where applicable, information reported for a PowerBench measurement
-  may also be represented using the operational data model defined in
-  <xref target="I-D.ietf-green-power-and-energy-yang"/>. This can facilitate
-  correlation between laboratory benchmark results and operational power and
-  energy measurements. The reporting requirements defined in this section
-  remain applicable independently of whether the GREEN YANG data model is used.</t>
-
   </section>
 
 	<section title="Benchmarking Tests">
