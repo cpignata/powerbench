@@ -508,8 +508,7 @@
      corresponding power measurement. Power State terminology, when used, SHOULD
      be consistent with <xref target="I-D.ietf-green-power-and-energy-yang"/>.</t>
 
-     <t>Where a PowerBench measurement is performed while the DUT or a
-     component is maintained in a known Power State, the resulting benchmark
+     <section title="Throughput">
       <t>Objective:<list><t>To determine the DUT throughput according to <xref target="RFC2544" />,
       and to characterize throughput under realistic traffic patterns using variable packet size distributions as specified in <xref target="RFC6985" />.</t></list></t>
 
