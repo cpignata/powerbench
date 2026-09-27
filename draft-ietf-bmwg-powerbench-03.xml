@@ -10,8 +10,6 @@
 <!ENTITY I-D.manral-bmwg-power-usage SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.manral-bmwg-power-usage.xml">
 <!ENTITY I-D.ietf-green-terminology SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-green-terminology.xml">
 <!ENTITY I-D.ietf-green-power-and-energy-yang SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-green-power-and-energy-yang.xml">
-<!ENTITY I-D.ietf-green-framework SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-green-framework.xml">
-<!ENTITY I-D.claise-green-capability-discovery SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.claise-green-capability-discovery.xml">
 
 ]>
 <?rfc toc="yes"?>
