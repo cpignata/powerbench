@@ -9,7 +9,6 @@
 <!ENTITY RFC.6985 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6985.xml">
 <!ENTITY I-D.manral-bmwg-power-usage SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.manral-bmwg-power-usage.xml">
 <!ENTITY I-D.ietf-green-terminology SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-green-terminology.xml">
-<!ENTITY I-D.ietf-green-power-and-energy-yang SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-green-power-and-energy-yang.xml">
 
 ]>
 <?rfc toc="yes"?>
@@ -506,7 +505,7 @@
      State of the DUT or relevant components is externally observable or
      explicitly configured, it SHOULD be reported as additional context for the
      corresponding power measurement. Power State terminology, when used, SHOULD
-     be consistent with <xref target="I-D.ietf-green-power-and-energy-yang"/>.</t>
+     be consistent with <xref target="I-D.ietf-green-terminology"/>.</t>
 
      <t>Different devices may define different Power States, and the power
      consumption measured under a given measurement condition may vary depending
@@ -697,7 +696,6 @@
     &RFC.6988;
     &I-D.manral-bmwg-power-usage;
     &I-D.ietf-green-terminology;
-    &I-D.ietf-green-power-and-energy-yang;
 
       <reference anchor='ETSI-ES-203-136' target="https://www.etsi.org/deliver/etsi_es/203100_203199/203136/01.02.00_50/es_203136v010200m.pdf">
        <front>
