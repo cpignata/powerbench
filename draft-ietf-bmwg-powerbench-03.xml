@@ -8,6 +8,8 @@
 <!ENTITY RFC.7460 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7460.xml">
 <!ENTITY RFC.6985 SYSTEM "https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6985.xml">
 <!ENTITY I-D.manral-bmwg-power-usage SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.manral-bmwg-power-usage.xml">
+<!ENTITY I-D.ietf-green-terminology SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-green-terminology.xml">
+<!ENTITY I-D.ietf-green-power-and-energy-yang SYSTEM "https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-green-power-and-energy-yang.xml">
 
 ]>
 <?rfc toc="yes"?>
@@ -167,6 +169,14 @@
     In addition, it aims to showcase the effectiveness of various energy optimization 
     techniques for a given device and load type, with the objective of fostering
     improvements in the energy efficiency of future generations of devices.</t>
+
+    <t>This document defines a methodology for power benchmarking of networking devices
+    under controlled laboratory conditions. Power and energy measurements are obtained
+    using an external Power Meter while the DUT is subjected to defined device, traffic,
+    and environmental conditions. This methodology is not intended to define an
+    operational energy monitoring or energy management framework. The benchmark
+    results may, however, provide reproducible reference measurements that complement
+    operational power and energy measurements.</t>
      </section>
   
      <section title="Replicability and Comparability">
@@ -273,6 +283,12 @@
      <t>Energy Efficiency Ratio (EER) is defined as the throughput forwarded by 1 watt
 	 and it is introduced in <xref target="ETSI-ES-203-136" />. A higher EER corresponds
 	 to a better energy efficiency.</t>
+
+     <t>The EER defined in this document is consistent with the general Energy
+	 Efficiency Ratio terminology defined in
+	 <xref target="I-D.ietf-green-terminology"/>, while this document specifies
+	 the throughput, traffic-load weighting, and measurement methodology used
+	 for laboratory benchmarking of networking devices.</t>
 	 
 	 <t>Definition:<list>
                 <t>EER = T/P</t>
@@ -363,7 +379,11 @@
    which are crafted to test different power-intensive tasks related to packet processing.
    The Tester is also a traffic generator that enables changing traffic conditions.    
    It is OPTIONAL to choose a non-equal proportion for upstream and downstream traffic.</t>
-   
+
+   <t>The Power Meter MUST have a documented measurement accuracy appropriate
+   for the power range being measured. The applicable accuracy specification
+   of the Power Meter MUST be recorded as part of the test setup.</t>
+
       <figure title="Test Setup" align="center">
         <artwork><![CDATA[
         +----------+
@@ -390,7 +410,8 @@
    is dissipated as heat. This heating can lead to more power drawn
    by fans or compressors for cooling the devices. The benchmarking methodology
    does not measure the power drawn by external cooling infrastructure.
-   The Power Meter only measures the internal energy consumption of the device.
+   The Power Meter measures the electrical power drawn by the DUT at its
+   power input.
    Nevertheless, the device's temperature change MUST be known. It is useful to know
    whether the device's heat management plays a role in the observed differences in
    energy efficiency and can be correlated to the amount of external power drawn
@@ -462,6 +483,9 @@
     <t hangText="Power measurement:"><br />  For each test it MUST be specified.
     All power measurements are done in Watts.</t>
 
+    <t hangText="Power Meter Accuracy:"><br /> For each benchmarking test,
+    the applicable measurement accuracy of the Power Meter MUST be reported.</t>
+
     <t hangText="Stabilization and measurement intervals:"><br /> For each power measurement, the stabilization interval and the measurement interval (averaging window) MUST be reported. The stabilization interval is the time between applying a traffic load or configuration and the start of power measurement. The measurement interval and the averaging method used to obtain the reported power value MUST also be specified. If these intervals differ by load level, the values per load level MUST be reported. </t>
 
     <t hangText="Programmable data-plane configuration (if applicable):"><br /> For devices with a programmable data plane (e.g., P4-based or FPGA-based switches), the following SHOULD be reported, as they can influence observed power consumption: the installed program or workload under test, the compiler or toolchain version, and a high-level description of the tables or stateful operations used.</t>
@@ -472,8 +496,27 @@
 
 	<section title="Benchmarking Tests">
 
-     <section title="Throughput">
+     <t>The power benchmarking tests defined in this section characterize the
+     DUT under different measurement conditions, including device configuration
+     and offered traffic load. These measurement conditions, such as Base Power,
+     Idle Power, Idle+ Power, Typical Power, and Power with Traffic Load, are
+     distinct from the Power States of the DUT or its components. A DUT may
+     remain in the same Power State, or transition between Power States, while
+     different benchmark measurement conditions are applied. Where the Power
+     State of the DUT or relevant components is externally observable or
+     explicitly configured, it SHOULD be reported as additional context for the
+     corresponding power measurement. Power State terminology, when used, SHOULD
+     be consistent with <xref target="I-D.ietf-green-power-and-energy-yang"/>.</t>
 
+     <t>Different devices may define different Power States, and the power
+     consumption measured under a given measurement condition may vary depending
+     on the Power State in which the DUT operates. Where a measurement is
+     performed under a specified Power State, the Power State and the mechanism
+     used to configure or verify it SHOULD be reported as additional measurement
+     context. Such measurements are supplementary to the standardized benchmarking
+     procedures defined in this document.</t>
+
+     <section title="Throughput">
       <t>Objective:<list><t>To determine the DUT throughput according to <xref target="RFC2544" />,
       and to characterize throughput under realistic traffic patterns using variable packet size distributions as specified in <xref target="RFC6985" />.</t></list></t>
 
@@ -519,8 +562,9 @@
     reported according to <xref target="report" />.</t></list></t>
 	 
       <t>Note:<list><t>This measurement is useful to assess the energy used to activate the internal
-    components used by the device to forward traffic. It also captures the efficiency of the device
-    at activating some "low-power mode" when there is no traffic to forward.</t></list></t>
+    components used by the device to forward traffic. It may also capture power-saving behavior
+    in which the DUT or some of its components transition to a lower-power operational state
+    when there is no traffic to forward.</t></list></t>
 	 
   </section>
   
@@ -546,8 +590,9 @@
       <t>Note:<list><t>The "minimum" traffic trace creates a bidirectional flow of 1 pps on all active
     interfaces. The 1 pps rate is chosen to be the smallest non-zero traffic load that activates
     the forwarding plane on all interfaces without introducing measurable dynamic power from
-    packet processing. By comparison with the "Idle Power" measurement, this measurement captures
-    the power cost of taking the device out of its "low-power mode."</t></list></t>
+    packet processing. By comparison with the "Idle Power" measurement, this measurement may
+    capture the additional power associated with activating the forwarding plane and, where
+    applicable, transitioning the DUT or its components from a lower-power operational state.</t></list></t>
 	 
   </section>
 
@@ -651,6 +696,8 @@
     &RFC.2544;
     &RFC.6988;
     &I-D.manral-bmwg-power-usage;
+    &I-D.ietf-green-terminology;
+    &I-D.ietf-green-power-and-energy-yang;
 
       <reference anchor='ETSI-ES-203-136' target="https://www.etsi.org/deliver/etsi_es/203100_203199/203136/01.02.00_50/es_203136v010200m.pdf">
        <front>
