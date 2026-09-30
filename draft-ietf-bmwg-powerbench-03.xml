@@ -508,6 +508,14 @@
      corresponding power measurement. Power State terminology, when used, SHOULD
      be consistent with <xref target="I-D.ietf-green-power-and-energy-yang"/>.</t>
 
+     <t>Different devices may define different Power States, and the power
+     consumption measured under a given measurement condition may vary depending
+     on the Power State in which the DUT operates. Where a measurement is
+     performed under a specified Power State, the Power State and the mechanism
+     used to configure or verify it SHOULD be reported as additional measurement
+     context. Such measurements are supplementary to the standardized benchmarking
+     procedures defined in this document.</t>
+
      <section title="Throughput">
       <t>Objective:<list><t>To determine the DUT throughput according to <xref target="RFC2544" />,
       and to characterize throughput under realistic traffic patterns using variable packet size distributions as specified in <xref target="RFC6985" />.</t></list></t>
